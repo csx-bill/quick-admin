@@ -34,10 +34,21 @@ export default [
     icon: 'crown',
     //access: 'canAdmin',
     routes: [
-      {path: '/system/user', name: '系统用户', component: './Admin'},
-      {path: '/system/role', name: '系统角色', component: './Admin'},
-      {path: '/system/menu', name: '系统菜单', component: './Admin'},
-      {path: '/system/dict', name: '数据字典', component: './Admin'},
+      { path: '/system/user', name: '系统用户', component: './Admin' },
+      { path: '/system/role', name: '系统角色', component: './Admin' },
+      { path: '/system/menu', name: '系统菜单', component: './Admin' },
+      { path: '/system/dict', name: '数据字典', component: './Admin' },
+    ],
+  },
+  {
+    path: '/online',
+    name: 'online',
+    icon: 'crown',
+    //access: 'canAdmin',
+    routes: [
+      { path: '/online/access', name: '表权限配置', component: './Admin' },
+      { path: '/online/request', name: '请求参数校验配置', component: './Admin' },
+      { path: '/online/function', name: '远程函数', component: './Admin' },
     ],
   },
 
@@ -45,7 +56,12 @@ export default [
     path: '/',
     redirect: '/welcome',
   },
-  {layout: false, path: '/system/schemaeditor/:menuId', name: '页面配置', component: './SchemaEditor'},
+  {
+    layout: false,
+    path: '/system/schemaeditor/:menuId',
+    name: '页面配置',
+    component: './SchemaEditor',
+  },
   {
     path: '*',
     layout: false,
