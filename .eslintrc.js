@@ -4,4 +4,9 @@ module.exports = {
     page: true,
     REACT_APP_ENV: true,
   },
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['off'],
+    'no-param-reassign': ['off'],
+    '@typescript-eslint/no-unused-expressions': ['off'],
+  },
 };
