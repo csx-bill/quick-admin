@@ -58,7 +58,7 @@ export default [
   },
   {
     layout: false,
-    path: '/system/schemaeditor/:menuId',
+    path: '/system/schemaeditor/:id',
     name: '页面配置',
     component: './SchemaEditor',
   },

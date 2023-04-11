@@ -23,9 +23,9 @@ declare namespace API {
     phone?: string;
   };
 
-  type SysMenuSchema ={
+  type SysMenuSchema = {
     schemaJson: string;
-    menuId: string;
+    id: string;
   };
 
   type LoginResult = {
