@@ -1,15 +1,15 @@
 import Footer from '@/components/Footer';
 import { SelectLang } from '@/components/RightContent';
-import { SmileOutlined, HeartOutlined } from '@ant-design/icons'
+import { HeartOutlined, SmileOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
+import { flushSync } from 'react-dom';
 import defaultSettings from '../config/defaultSettings';
+import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './services/quick-admin-api/api';
-import React from 'react';
-import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 import { getUserMenu } from './services/quick-admin-api/menu';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -21,6 +21,7 @@ const loginPath = '/user/login';
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
+  permsCode?: [];
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
@@ -61,9 +62,20 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // 每当 initialState?.currentUser?.userId 发生修改时重新执行 request
       params: initialState,
       request: async () => {
-      // 登录
+        // 登录
         const result = await getUserMenu({});
         const menus = loopMenuItem(result.data.menu);
+
+        // 按钮权限 permsCode
+        if (result.data.permsCode) {
+          flushSync(() => {
+            setInitialState((s) => ({
+              ...s,
+              permsCode: result.data.permsCode,
+            }));
+          });
+        }
+
         return menus;
       },
     },
@@ -107,9 +119,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         width: '331px',
       },
     ],
-    links: isDev
-      ? []
-      : [],
+    links: isDev ? [] : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
@@ -152,8 +162,8 @@ const IconMap = {
   heart: <HeartOutlined />,
 };
 const loopMenuItem = (menus: MenuDataItem[]): MenuDataItem[] =>
-menus.map(({ icon, children, ...item }) => ({
-  ...item,
-  icon: icon && IconMap[icon as string],
-  children: children && loopMenuItem(children),
-}));
+  menus.map(({ icon, children, ...item }) => ({
+    ...item,
+    icon: icon && IconMap[icon as string],
+    children: children && loopMenuItem(children),
+  }));

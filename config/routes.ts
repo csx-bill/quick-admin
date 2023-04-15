@@ -32,7 +32,6 @@ export default [
     path: '/system',
     name: 'system',
     icon: 'crown',
-    //access: 'canAdmin',
     routes: [
       { path: '/system/user', name: '系统用户', component: './Admin' },
       { path: '/system/role', name: '系统角色', component: './Admin' },
@@ -44,7 +43,6 @@ export default [
     path: '/online',
     name: 'online',
     icon: 'crown',
-    //access: 'canAdmin',
     routes: [
       { path: '/online/access', name: '表权限配置', component: './Admin' },
       { path: '/online/request', name: '请求参数校验配置', component: './Admin' },

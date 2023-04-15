@@ -9,7 +9,7 @@ import 'amis/lib/helper.css';
 import 'amis/lib/themes/cxd.css';
 import 'amis/sdk/iconfont.css';
 
-import { getLocale } from 'umi';
+import { getLocale, useAccess } from 'umi';
 
 interface RendererProps {
   schema?: any;
@@ -19,6 +19,9 @@ const AMISRenderer: React.FC<RendererProps> = (props) => {
   let amisScoped;
   let theme = 'cxd';
   let locale = getLocale();
+
+  // 传递按钮权限
+  const access = useAccess();
 
   const schema = props.schema;
 
@@ -32,6 +35,10 @@ const AMISRenderer: React.FC<RendererProps> = (props) => {
           // props...
           locale: locale, // 请参考「多语言」的文档
           scopeRef: (ref: any) => (amisScoped = ref), // 功能和前面 SDK 的 amisScoped 一样
+          // 传递按钮权限
+          data: {
+            permsCode: access.permsCode,
+          },
         },
         {
           // 下面三个接口必须实现
