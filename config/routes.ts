@@ -37,6 +37,7 @@ export default [
       { path: '/system/role', name: '系统角色', component: './Admin' },
       { path: '/system/menu', name: '系统菜单', component: './Admin' },
       { path: '/system/dict', name: '数据字典', component: './Admin' },
+      { path: '/system/dept', name: '部门管理', component: './Admin' },
     ],
   },
   {

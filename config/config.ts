@@ -160,6 +160,6 @@ export default defineConfig({
     });
   },
   // 多标签
-  keepalive: [/./],
-  tabsLayout: {}
+  //keepalive: [/./],
+  //tabsLayout: {}
 });
