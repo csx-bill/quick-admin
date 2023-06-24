@@ -1,0 +1,14 @@
+/public
+/node_modules
+/gh-pages
+/dist
+.idea/
+*.iml
+build/dist/
+dist.tar.gz
+/deploy.sh
+/deploy-docs.sh
+/docs.tar.gz
+.DS_Store
+stats.html
+stats
