@@ -50,7 +50,7 @@ APIJSON 是一种基于 JSON 数据格式的 API 定义语言。它可以根据 
 ## 安装
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
 
 ### 启动
