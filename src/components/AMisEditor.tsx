@@ -6,6 +6,8 @@ import {toast, Select} from 'amis';
 import {currentLocale} from 'i18n-runtime';
 import {IMainStore} from '../stores';
 import { request } from "@/utils/requestInterceptor";
+import {Icon} from '@/icons/index';
+
 
 
 // css
@@ -94,7 +96,7 @@ export default inject('store')(
                   store.setIsMobile(false);
                 }}
               >
-                PC
+                <Icon icon="pc-preview" title="PC模式" />
               </div>
               <div
                 className={`Editor-view-mode-btn editor-header-icon ${
@@ -104,7 +106,7 @@ export default inject('store')(
                   store.setIsMobile(true);
                 }}
               >
-                H5
+                <Icon icon="h5-preview" title="移动模式" />
               </div>
             </div>
           </div>

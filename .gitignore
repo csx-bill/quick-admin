@@ -12,3 +12,4 @@ dist.tar.gz
 .DS_Store
 stats.html
 stats
+package-lock.json
