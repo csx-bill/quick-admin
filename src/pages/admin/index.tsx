@@ -65,15 +65,18 @@ export interface AdminProps extends RouteComponentProps<any> {
 @observer
 export default class Admin extends React.Component<AdminProps, any> {
 
-  state = {
-    pathname: "",
-    hasLoadMenu: false,
-    // 菜单
-    navigations: [],
-    //权限
-    permsCode: []
-  };
-
+  constructor(props: AdminProps) {
+    super(props);
+    this.state = {
+      pathname: "",
+      hasLoadMenu: false,
+      // 菜单
+      navigations: [],
+      // 权限
+      permsCode: [],
+    };
+  }
+  
   logout = () => {
     appStore.userStore.logout();
     const history = this.props.history;
@@ -85,15 +88,12 @@ export default class Admin extends React.Component<AdminProps, any> {
     if (!appStore.userStore.isAuthenticated) {
       toast["error"]("用户未登陆，请先登陆！", "消息");
       history.replace(`/login`);
-    }
-    this.refreshMenu();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    }else{
       this.refreshMenu();
     }
   }
+
+
 
   refreshMenu = () => {
     let pathname = this.props.location.pathname;
@@ -152,7 +152,7 @@ export default class Admin extends React.Component<AdminProps, any> {
           <div className="m-l-auto hidden-xs pull-right pt-2" >
             <Dropdown menu={{ items }} placement="bottomLeft" trigger={['click', 'hover']}>
               <Button>
-                admin
+                {appStore.userStore.name}
               </Button>
             </Dropdown>
           </div>
@@ -259,55 +259,58 @@ export default class Admin extends React.Component<AdminProps, any> {
     );
   }
 
-  render() {
-    const store = this.props.store;
-    let pathname = this.props.location.pathname;
-    store.setPermsCode(this.state.permsCode)
 
-    // 递归获取当前路由的 navItem.schema
-    function findSchema(children: NavItem[], pathname: string): any {
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i];
-        if (child.path === pathname) {
-          return child.schema;
+  renderRoutes() {
+    const { navigations, permsCode } = this.state;
+    const render = (routes) => {
+      return routes.map((item, index) => {
+        if (item.children && item.children.length > 0) {
+          return render(item.children);
         }
-        if (child.children) {
-          const schema = findSchema(child.children, pathname);
-          if (schema) {
-            return schema;
-          }
-        }
-      }
-      return null;
-    }
 
-    // 获取当前路由的 navItem.schema
-    const schema = findSchema(this.state.navigations[0]?.children || [], pathname);
-  
-    const router = (
+        if (item.schema) {
+          return (
+            <Route
+              key={index}
+              path={item.path}
+              render={(props) => (
+                <RouterGuard
+                  {...props}
+                  permsCode={permsCode}
+                  schema={item.schema}
+                />
+              )}
+            />
+          );
+        }
+
+        return null;
+      });
+    };
+
+    return (
       <Switch>
-        <Route
-          key={"/"}
-          path={"/"}
-          component={Login}
-          exact
-        />
-        <RouterGuard schema={schema}/>
+        {render(navigations)}
+        <Route key="login" path="/login" component={Login} />
       </Switch>
     );
-    if (pathname == "login" || pathname == "/") {
-      return router;
-    } else {
-      return (
-        <Layout
-          aside={this.renderAside()}
-          header={this.renderHeader()}
-          folded={store.asideFolded}
-          offScreen={store.offScreen}
-        >
-          {router}
-        </Layout>
-      );
-    }
   }
+
+
+  render() {
+    const store = this.props.store;
+    const { hasLoadMenu } = this.state;
+
+    return (
+      <Layout
+        header={this.renderHeader()}
+        aside={this.renderAside()}
+        folded={store.asideFolded}
+        offScreen={store.offScreen}
+      >
+        {hasLoadMenu ? this.renderRoutes() : null}
+      </Layout>
+    );
+  }
+
 }
