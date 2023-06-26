@@ -24,7 +24,7 @@ export default class RouterGuard extends React.Component<any, any> {
         if (this.state.pathname !== pathname) {
             this.setState({
                 'pathname': pathname,
-                'component': () => <AMisRenderer schema={this.props.schema || {}} />,
+                'component': () => <AMisRenderer schema={this.props.schema || {}} permsCode={this.props.permsCode} />,
             });
         }
     }

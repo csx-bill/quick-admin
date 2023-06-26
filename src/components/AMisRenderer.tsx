@@ -134,7 +134,6 @@ export default class AMisRenderer extends React.Component<RendererProps, any> {
     
 
     render() {
-        console.log("permsCode-this",this.props.store.permsCode.slice())
         const {
             schema,
             store,
@@ -144,9 +143,9 @@ export default class AMisRenderer extends React.Component<RendererProps, any> {
         return renderSchema(schema, {
             onAction: onAction || this.handleAction,
             theme: store && store.theme,
-            // 待修复bug 读取不到这个 permsCode
+            //按钮权限 permsCode
             data: {
-                permsCode: this.props.store.permsCode.slice()
+                permsCode: this.props.permsCode.slice()
             },
             ...rest
         }, this.env);

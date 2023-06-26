@@ -12,7 +12,6 @@ const MainStore = types
         offScreen: false,
         preview: false,
         isMobile: false,
-        permsCode: types.array(types.string)
     })
     .views((self) => ({
         get fetcher() {
@@ -27,9 +26,6 @@ const MainStore = types
         get copy() {
             return getEnv(self).copy
         },
-        get hasPerms() {
-            return getEnv(self).hasPerms
-        }
     }))
     .actions((self) => {
         function toggleAsideFolded() {
@@ -53,9 +49,6 @@ const MainStore = types
             self.isMobile = value;
         }
 
-        function setPermsCode(perms: string[]) {
-            self.permsCode = perms;
-        }
 
         return {
             toggleAsideFolded,
@@ -63,7 +56,6 @@ const MainStore = types
             toggleOffScreen,
             setPreview,
             setIsMobile,
-            setPermsCode,
             afterCreate: function() {
                 self.asideFolded = !!localStorage.getItem('asideFolded');
             }
