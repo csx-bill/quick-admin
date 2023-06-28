@@ -96,8 +96,8 @@ export default class Admin extends React.Component<AdminProps, any> {
 
 
   refreshMenu = () => {
+    const history = this.props.history;
     let pathname = this.props.location.pathname;
-
     if (
       pathname != "login" &&
       pathname != "/" &&
@@ -121,6 +121,8 @@ export default class Admin extends React.Component<AdminProps, any> {
           permsCode: res.data.data.permsCode
         });
       });
+    }else{
+      history.replace(`/login`);
     }
   };
 
