@@ -151,6 +151,20 @@ export default class Admin extends React.Component<AdminProps, any> {
           </div>
         </div>
         <div className={`cxd-Layout-headerBar`}>
+        <div className="nav navbar-nav hidden-xs pull-left">
+            <Button
+              level="link"
+              className="no-shadow navbar-btn"
+              onClick={store.toggleAsideFolded}
+              tooltip="展开或收起侧边栏"
+              placement="bottom"
+              iconOnly
+            >
+              <i
+                className={store.asideFolded ? "fa fa-indent" : "fa fa-outdent"}
+              />
+            </Button>
+          </div>
           <div className="m-l-auto hidden-xs pull-right pt-2" >
             <Dropdown menu={{ items }} placement="bottomLeft" trigger={['click', 'hover']}>
               <Button>
@@ -245,18 +259,6 @@ export default class Admin extends React.Component<AdminProps, any> {
           }}
           isActive={(link: any) => isActive(link.path, location)}
         />
-        <div className="aside-nav-toggle">
-          <Button
-            level="link"
-            className="no-shadow navbar-btn"
-            onClick={store.toggleAsideFolded}
-            tooltip="展开或收起侧边栏"
-            placement="bottom"
-            iconOnly
-          >
-            <i className={store.asideFolded ? "fa fa-indent" : "fa fa-outdent"} />
-          </Button>
-        </div>
       </div>
     );
   }
