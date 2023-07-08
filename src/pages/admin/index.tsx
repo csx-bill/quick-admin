@@ -49,11 +49,25 @@ type NavItem = {
 };
 
 function isActive(link: any, location: any) {
+  let path = link.path;
   const ret = matchPath(location.pathname, {
-    path: link ? link.replace(/\?.*$/, "") : "",
+    path: path ? path.replace(/\?.*$/, "") : "",
     exact: true,
     strict: true,
   });
+
+  if (link != null && link.children != null) {
+    let items = link.children;
+    for (const item of items) {
+      let flag = isActive(item, location)
+      if (flag) {
+        return true;
+      } else {
+        continue;
+      }
+    }
+  }
+  
   return !!ret;
 }
 
@@ -257,7 +271,7 @@ export default class Admin extends React.Component<AdminProps, any> {
               </a>
             );
           }}
-          isActive={(link: any) => isActive(link.path, location)}
+          isActive={(link: any) => isActive(link, location)}
         />
       </div>
     );
