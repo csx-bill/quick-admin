@@ -45,7 +45,7 @@ export default inject('store')(
       async function fetchSchema() {
         await request({
           method: "get",
-          url: `/api/system/SysMenu/getSchema?id=${id}`,
+          url: `/api/system/SysAccessSchema/getSchema?accessId=${id}`,
         }).then((res: any) => {     
           setSchema(res.data.data.schema !== null ? JSON.parse(res.data.data.schema) : {});
         });
@@ -57,9 +57,9 @@ export default inject('store')(
       async function fetchSchema() {
         await request({
           method: "put",
-          url: `/api/system/SysMenu/updateSchemaById`,
+          url: `/api/system/SysAccessSchema/updateSchemaByAccessId`,
           data: {
-            id: id,
+            accessId: id,
             schema: JSON.stringify(schema)
           },
         }).then((res: any) => {     
