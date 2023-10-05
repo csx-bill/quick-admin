@@ -51,8 +51,7 @@ export default defineConfig({
         open: "/",
         proxy: {
             "/api": {
-              //target: 'http://localhost:9999',
-              target: 'https://347948e2k8.goho.co',
+              target: 'http://localhost:9999',
               changeOrigin: true,
               rewrite: (path) => path,
             },
