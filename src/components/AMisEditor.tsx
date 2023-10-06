@@ -142,7 +142,7 @@ export default inject('store')(
         </div>
         <div className="Editor-inner">
           <Editor
-            theme={'cxd'}
+            theme={store.theme}
             preview={store.preview}
             isMobile={store.isMobile}
             value={schema}
