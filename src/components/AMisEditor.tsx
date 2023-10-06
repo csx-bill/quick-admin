@@ -36,6 +36,7 @@ export default inject('store')(
   }: {store: IMainStore} & RouteComponentProps<{id: string}>) {
     
     const [schema, setSchema] = useState(null);
+    const [permsCode, setPermsCode] = useState(null);
 
     const id = match.params.id;
     const curLanguage = currentLocale(); // 获取当前语料类型
@@ -48,6 +49,8 @@ export default inject('store')(
           url: `/api/system/SysAccessSchema/getSchema?accessId=${id}`,
         }).then((res: any) => {     
           setSchema(res.data.data.schema !== null ? JSON.parse(res.data.data.schema) : {});
+          // 按钮权限
+          setPermsCode(localStorage.getItem('permsCode')?.split(","));
         });
       }
       fetchSchema();
@@ -156,6 +159,7 @@ export default inject('store')(
               alert: store.alert,
               copy: store.copy
             }}
+            data={{permsCode:permsCode}}
           />
         </div>
       </div>

@@ -134,6 +134,7 @@ export default class Admin extends React.Component<AdminProps, any> {
           hasLoadMenu: true,
           permsCode: res.data.data.permsCode
         });
+        localStorage.setItem('permsCode', res.data.data.permsCode);
       });
     }else{
       history.replace(`/login`);
