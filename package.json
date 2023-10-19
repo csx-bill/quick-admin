@@ -51,7 +51,7 @@
     "@ant-design/use-emotion-css": "1.0.4",
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@umijs/route-utils": "^2.2.2",
-    "amis": "^3.4.2",
+    "amis": "^3.4.3",
     "amis-editor": "^5.6.1",
     "antd": "^5.2.2",
     "classnames": "^2.3.2",

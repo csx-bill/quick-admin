@@ -195,7 +195,7 @@ function traverseMenu(data) {
       },
     );
 
-    if (item.menuType === "dir") {
+    if (item.menuType === "DIR") {
       return {
         name: item.name,
         path: item.path,
@@ -203,7 +203,7 @@ function traverseMenu(data) {
         //element: <AMISRenderer />,
         children: traverseMenu(item.children),
       };
-    } else if (item.menuType === "menu") {
+    } else if (item.menuType === "MENU") {
       // 待实现 动态加载 组件
       return {
         name: item.name,

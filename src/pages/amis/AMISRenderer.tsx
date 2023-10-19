@@ -6,7 +6,7 @@ import axios from 'axios';
 import copy from 'copy-to-clipboard';
 import { render as renderAmis } from 'amis';
 import { ToastComponent, AlertComponent, toast } from 'amis-ui';
-import 'amis/lib/themes/antd.css';
+import 'amis/lib/themes/cxd.css';
 import 'amis/lib/helper.css';
 import 'amis/sdk/iconfont.css';
 import { fetcher,theme } from '@/utils/amisEnvUtils';

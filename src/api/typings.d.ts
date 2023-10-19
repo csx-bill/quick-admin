@@ -48,14 +48,13 @@ declare namespace API {
   type RoutesNodeResult = {
     id?: string;
     parentId?: string,
-    chineseName?: string,
-    englishName?: string,
+    name?: string,
     perms?: string,
     icon?: string,
     path?: string,
     orderNo?: string,
     menuType?: string,
-    hideInMenu?: boolean,
+    hideInMenu?: string,
     status?: string,
     component?: string,
     children?: Routes[];
@@ -63,14 +62,13 @@ declare namespace API {
   type Routes = {
     id?: string;
     parentId?: string,
-    chineseName?: string,
-    englishName?: string,
+    name?: string,
     perms?: string,
     icon?: string,
     path?: string,
     orderNo?: string,
     menuType?: string,
-    hideInMenu?: boolean,
+    hideInMenu?: string,
     status?: string,
     component?: string,
   };

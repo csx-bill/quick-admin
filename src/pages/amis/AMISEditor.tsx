@@ -12,7 +12,7 @@ import { alert, AlertComponent, confirm, toast, ToastComponent } from 'amis-ui';
 import copy from 'copy-to-clipboard';
 import 'amis-editor-core/lib/style.css';
 import 'amis/lib/helper.css';
-import 'amis/lib/themes/antd.css';
+import 'amis/lib/themes/cxd.css';
 import 'amis/sdk/iconfont.css';
 
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -29,7 +29,7 @@ const AMISEditor: React.FC = () => {
   useEffect(() => {
     //localStorage.setItem('suda-i18n-locale', getLocale());
     async function fetchSchema() {
-      const res = await getSchema({accessId: params.id})
+      const res = await getSchema({id: params.id})
       setSchema(res?.data?.schema !== null ? JSON.parse(res?.data?.schema) : {});
     }
     fetchSchema();
@@ -42,7 +42,7 @@ const curLanguage = getLocale();
 
 async function save() {
     // 调用保存接口
-    const res = await updateSchema({ accessId: params.id, schema: JSON.stringify(schema) })
+    const res = await updateSchema({ id: params.id, schema: JSON.stringify(schema) })
 
     toast.success('保存成功', '提示');
   }
