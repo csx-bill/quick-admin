@@ -63,3 +63,6 @@ npm run dev
 ```bash
 npm run build
 ```
+
+### 效果图
+![image](https://github.com/csx-bill/quick-admin/assets/31872268/2ddce8c9-e534-4af0-8db8-bb8396ecf502)
