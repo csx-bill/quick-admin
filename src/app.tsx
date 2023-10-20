@@ -12,7 +12,7 @@ import { getRoutes } from '@/api/routes';
 import React from 'react';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 const isDev = process.env.NODE_ENV === 'development';
-const loginPath = '/user/login';
+const loginPath = '/login';
 
 import AMISRenderer from '@/pages/amis/AMISRenderer';
 import { addLocale,getLocale } from 'umi';
