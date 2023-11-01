@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import {getLocale } from 'umi';
+import {getLocale,history } from 'umi';
 import { useModel } from '@umijs/max';
 
 import axios from 'axios';
@@ -69,7 +69,33 @@ const AMISRenderer: React.FC = () => {
               copy(content);
               toast.success('内容已复制到粘贴板');
             },
-            theme
+            theme,
+            // 默认是地址跳转
+            jumpTo: (
+              location: string /*目标地址*/,
+              action: any /* action对象*/
+            ) => {
+              // 实现 amis 触发 多页签打开
+              // 用来实现页面跳转, actionType:link、url 都会进来。
+              console.log(action)
+              if (action && action.actionType === 'url') {
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                action.blank === false
+                  ? (window.location.href = location)
+                  : window.open(location, '_blank');
+                return;
+              } else if (action && action.blank) {
+                window.open(location, '_blank');
+                return;
+              }
+
+              if (/^https?:\/\//.test(location)) {
+                window.location.href = location;
+              } else {
+                history.push(location);
+              }
+            },
+
           }
         )}
 
