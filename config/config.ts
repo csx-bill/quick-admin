@@ -139,7 +139,9 @@ export default defineConfig({
   requestRecord: {},
   // 多标签
   keepalive: [/./],
-  tabsLayout: {},
+  tabsLayout: {
+    hasDropdown: true
+  },
   chainWebpack: (memo) => {
     memo.plugin('monaco-editor').use(MonacoWebpackPlugin)
     return memo;
