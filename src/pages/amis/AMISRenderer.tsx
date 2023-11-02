@@ -77,21 +77,13 @@ const AMISRenderer: React.FC = () => {
             ) => {
               // 实现 amis 触发 多页签打开
               // 用来实现页面跳转, actionType:link、url 都会进来。
-              console.log(action)
-              if (action && action.actionType === 'url') {
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                action.blank === false
-                  ? (window.location.href = location)
-                  : window.open(location, '_blank');
+              if (action && action.actionType === 'url' && action.blank ===false) {
+                history.push(location);
                 return;
               } else if (action && action.blank) {
                 window.open(location, '_blank');
                 return;
-              }
-
-              if (/^https?:\/\//.test(location)) {
-                window.location.href = location;
-              } else {
+              }else{
                 history.push(location);
               }
             },

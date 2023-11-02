@@ -88,10 +88,10 @@ export default defineConfig({
    * @description 将项目中的 moment 替换为 dayjs
    * @doc https://umijs.org/docs/max/moment2dayjs
    */
-  moment2dayjs: {
-    preset: 'antd',
-    plugins: ['duration'],
-  },
+  // moment2dayjs: {
+  //   preset: 'antd',
+  //   plugins: ['duration'],
+  // },
   /**
    * @name 国际化插件
    * @doc https://umijs.org/docs/max/i18n
