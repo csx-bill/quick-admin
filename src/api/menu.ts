@@ -9,7 +9,7 @@ export async function getSchema(
   },
   options?: { [key: string]: any },
 ) {
-  return request<Record<string, any>>('/api/system/SysMenu/getSchemaById', {
+  return request<Record<string, any>>('/api/system/menu/getSchemaById', {
     method: 'GET',
     params: {
       ...params,
@@ -20,7 +20,7 @@ export async function getSchema(
 
 /** 更新接口 PUT */
 export async function updateSchema(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request('/api/system/SysMenu/updateSchemaById', {
+  return request('/api/system/menu/updateSchemaById', {
     method: 'PUT',
     data: body,
     ...(options || {}),
