@@ -2,8 +2,7 @@ import Footer from '@/components/Footer';
 import { Question, SelectLang } from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history } from '@umijs/max';
+import type { RunTimeLayoutConfig,history ,KeepAliveContext } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './api/user';
@@ -57,6 +56,7 @@ export async function getInitialState(): Promise<{
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  const { dropByCacheKey,keepElements } = React.useContext<any>(KeepAliveContext);
   return {
     // 从服务端请求当前登录用户的菜单
     menu: {
@@ -85,6 +85,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);
+      }
+
+      // 同一个页签 搜索参数变更时 更新路由
+      const cacheEle=keepElements?.current[location.pathname]
+      if(cacheEle && cacheEle?.location?.search !== location.search){
+        dropByCacheKey(location.pathname)
       }
     },
     layoutBgImgList: [
