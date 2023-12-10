@@ -54,8 +54,6 @@
     "amis": "^3.6.3",
     "amis-editor": "^5.7.0",
     "amis-editor-core": "^5.7.0",
-    "amis-formula": "^3.6.3",
-    "amis-theme-editor": "^2.0.22-beta.2",
     "amis-theme-editor-helper": "^2.0.22-beta.6",
     "amis-ui": "^3.6.3",
     "antd": "^5.2.2",
