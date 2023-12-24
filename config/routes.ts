@@ -22,7 +22,12 @@ export default [
     redirect: '/dashboard',
   },
   {
-    name: 'AMISEditor',
+    name: '表单预览',
+    path: '/online/formList/:id',
+    component: './amis/OnlineRenderer',
+  },
+  {
+    name: '表单编辑器',
     path: '/AMISEditor/:id',
     component: './amis/AMISEditor',
     layout: false,

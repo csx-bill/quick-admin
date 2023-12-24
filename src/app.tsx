@@ -15,6 +15,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/login';
 
 import AMISRenderer from '@/pages/amis/AMISRenderer';
+import OnlineRenderer from '@/pages/amis/OnlineRenderer';
 import { addLocale,getLocale } from 'umi';
 import zhCN from '@/locales/zh-CN/menu';
 import enUS from '@/locales/en-US/menu';
@@ -211,13 +212,24 @@ function traverseMenu(data) {
         children: traverseMenu(item.children),
       };
     } else if (item.menuType === "MENU") {
-      // 待实现 动态加载 组件
-      return {
-        name: item.name,
-        path: item.path,
+      if(item.path.startsWith('/online/formList/')){
+        return {
+          name: item.name,
+          path: item.path,
         //icon: 'smile',
-        element: <AMISRenderer/>,
-      };
+        element: <OnlineRenderer />,
+        };
+      }else{
+        // 待实现 动态加载 组件
+        return {
+          name: item.name,
+          path: item.path,
+          //icon: 'smile',
+          element: <AMISRenderer/>,
+        };
+
+      }
+
     }
   });
 }

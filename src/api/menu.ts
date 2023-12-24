@@ -26,3 +26,20 @@ export async function updateSchema(body: Record<string, any>, options?: { [key: 
     ...(options || {}),
   });
 }
+
+
+/** 获取菜单 amis schema GET */
+export async function getOnlineSchema(
+  params: {
+    id?: string;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<Record<string, any>>('/api/online/access/generatorAmisJson', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
