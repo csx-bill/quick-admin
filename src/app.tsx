@@ -206,7 +206,7 @@ function traverseMenu(data) {
     if (item.menuType === "DIR") {
       return {
         name: item.name,
-        path: item.path,
+        //path: item.path,
         //icon: 'smile',
         //element: <AMISRenderer />,
         children: traverseMenu(item.children),
