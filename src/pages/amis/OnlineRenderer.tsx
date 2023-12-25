@@ -21,8 +21,6 @@ const OnlineRenderer: React.FC = () => {
 
 
     useEffect(() => {
-      console.log("7777",location.pathname.split('/online/formList/')[1])
-
     // 接口获取
     async function findCurrentMenu(id) {
       const res = await getOnlineSchema({id: id})
