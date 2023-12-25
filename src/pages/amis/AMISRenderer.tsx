@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import {getLocale,history } from 'umi';
+import {getLocale,history,useLocation } from 'umi';
 import { useModel } from '@umijs/max';
 
 import axios from 'axios';
@@ -11,32 +11,22 @@ import 'amis/lib/helper.css';
 import 'amis/sdk/iconfont.css';
 import { fetcher,theme } from '@/utils/amisEnvUtils';
 
+import { getSchemaByPath } from '@/api/menu';
+
 const AMISRenderer: React.FC = () => {
     const { initialState } = useModel('@@initialState');
     const [schema, setSchema] = useState(null);
+    const location = useLocation();
 
     useEffect(() => {
-    // 使用递归方式来查找当前打开页面的菜单项
-    function findCurrentMenu(menuData, targetPath) {
-      for (const menuItem of menuData) {
-        if (menuItem.path === targetPath) {
-          return menuItem; // 找到匹配的菜单项
-        }
-        if (menuItem.children) {
-          const foundItem = findCurrentMenu(menuItem.children, targetPath);
-          if (foundItem) {
-            return foundItem; // 在子菜单中找到匹配的菜单项
-          }
-        }
-      }
-      return null; // 未找到匹配的菜单项
+    // 接口获取
+    async function findCurrentMenu(path) {
+      const res = await getSchemaByPath({path: path})
+      setSchema(res.data===null?{}:res.data);
     }
 
     const pathname = location.pathname;
-    const menuData = initialState?.currentUser?.userMenuTree;
-    const currentMenu = findCurrentMenu(menuData,pathname);
-    setSchema(currentMenu?.schema !== null ? JSON.parse(currentMenu?.schema) : {});
-
+    findCurrentMenu(pathname);
     }, []);
 
     //let amisScoped;

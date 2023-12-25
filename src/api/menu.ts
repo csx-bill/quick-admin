@@ -43,3 +43,20 @@ export async function getOnlineSchema(
     ...(options || {}),
   });
 }
+
+
+/** 获取菜单 amis schema GET */
+export async function getSchemaByPath(
+  params: {
+    path?: string;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<Record<string, any>>('/api/system/menu/getSchemaByPath', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
