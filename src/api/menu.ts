@@ -35,7 +35,7 @@ export async function getOnlineSchema(
   },
   options?: { [key: string]: any },
 ) {
-  return request<Record<string, any>>('/api/online/access/generatorAmisJson', {
+  return request<Record<string, any>>('/api/online/access/getAccessSchemaById', {
     method: 'GET',
     params: {
       ...params,
