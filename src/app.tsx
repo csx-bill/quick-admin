@@ -211,25 +211,20 @@ function traverseMenu(data) {
         //element: <AMISRenderer />,
         children: traverseMenu(item.children),
       };
-    } else if (item.menuType === "MENU") {
-      if(item.path.startsWith('/online/formList/')){
-        return {
-          name: item.name,
-          path: item.path,
+    } else if (item.menuType === "ONLINE_FORM") {
+      return {
+        name: item.name,
+        path: item.path,
+      //icon: 'smile',
+      element: <OnlineRenderer />,
+      };
+    }else {
+      return {
+        name: item.name,
+        path: item.path,
         //icon: 'smile',
-        element: <OnlineRenderer />,
-        };
-      }else{
-        // 待实现 动态加载 组件
-        return {
-          name: item.name,
-          path: item.path,
-          //icon: 'smile',
-          element: <AMISRenderer/>,
-        };
-
-      }
-
+        element: <AMISRenderer/>,
+      };
     }
   });
 }
