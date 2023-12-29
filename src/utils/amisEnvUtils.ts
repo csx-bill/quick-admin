@@ -44,4 +44,4 @@ export const fetcher = ({
     return (axios as any)[method](url, data, config);
 }
 
-export const theme='cxd'
+export const theme='antd'

@@ -12,7 +12,7 @@ import { alert, AlertComponent, confirm, toast, ToastComponent } from 'amis-ui';
 import copy from 'copy-to-clipboard';
 import 'amis-editor-core/lib/style.css';
 import 'amis/lib/helper.css';
-import 'amis/lib/themes/cxd.css';
+import 'amis/lib/themes/antd.css';
 import 'amis/sdk/iconfont.css';
 
 import '@fortawesome/fontawesome-free/css/all.css';
