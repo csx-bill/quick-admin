@@ -13,6 +13,8 @@ import { fetcher,theme } from '@/utils/amisEnvUtils';
 
 import { getOnlineSchema } from '@/api/menu';
 
+import './common.scss';
+
 const OnlineRenderer: React.FC = () => {
     const { initialState } = useModel('@@initialState');
     const [schema, setSchema] = useState(null);
@@ -27,7 +29,7 @@ const OnlineRenderer: React.FC = () => {
       setSchema(res.data===null?{}:res.data);
     }
 
-    const id = location.pathname.split('/online/formList/')[1];
+    const id = location.pathname.split('/online/formList/')[1]??location.pathname.split('/online/formlist/')[1];
     findCurrentMenu(id);
     }, []);
 
@@ -37,7 +39,7 @@ const OnlineRenderer: React.FC = () => {
     const curLanguage = getLocale();
   return (
 
-      <div>
+      <div className="runtime-keep-alive-layout">
       <ToastComponent theme={theme} key="toast" position={'top-center'} locale={curLanguage} />
       <AlertComponent theme={theme} key="alert" locale={curLanguage} />
 
