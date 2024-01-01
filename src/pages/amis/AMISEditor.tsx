@@ -13,6 +13,8 @@ import copy from 'copy-to-clipboard';
 import 'amis-editor-core/lib/style.css';
 import 'amis/lib/helper.css';
 import 'amis/lib/themes/antd.css';
+// 编辑器 这里要引入 cxd 否则鼠标右键显示UI 异常
+import 'amis/lib/themes/cxd.css';
 import 'amis/sdk/iconfont.css';
 
 import '@fortawesome/fontawesome-free/css/all.css';
