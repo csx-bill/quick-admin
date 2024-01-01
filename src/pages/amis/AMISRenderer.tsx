@@ -13,6 +13,8 @@ import { fetcher,theme } from '@/utils/amisEnvUtils';
 
 import { getSchemaByPath } from '@/api/menu';
 
+import './common.scss';
+
 const AMISRenderer: React.FC = () => {
     const { initialState } = useModel('@@initialState');
     const [schema, setSchema] = useState(null);
