@@ -16,10 +16,11 @@ import {
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
-import { Alert, message, Tabs } from 'antd';
+import { Alert, message, Tabs, Select } from 'antd';
 import Settings from '../../../../config/defaultSettings';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { flushSync } from 'react-dom';
+import { getTenantList } from '@/api/tenant';
 
 const ActionIcons = () => {
   const langClassName = useEmotionCss(({ token }) => {
@@ -48,7 +49,7 @@ const ActionIcons = () => {
 const Lang = () => {
   const langClassName = useEmotionCss(({ token }) => {
     return {
-      width: 42,
+      //width: 42,
       height: 42,
       lineHeight: '42px',
       position: 'fixed',
@@ -66,6 +67,44 @@ const Lang = () => {
     </div>
   );
 };
+
+
+/**
+ *
+ * @returns 租户列表
+ */
+const Tenant = ({ tenantList,selectedTenant,onChangeTenant }) => {
+  const tenantClassName = useEmotionCss(({ token }) => {
+    return {
+      height: 42,
+      lineHeight: '42px',
+      position: 'fixed',
+      right: 50,
+      borderRadius: token.borderRadius,
+      ':hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    };
+  });
+
+  const filterOption = (input: string, option?: { label: string; value: string }) =>
+  (option?.label ?? '').includes(input);
+
+  return (
+    <div className={tenantClassName}>
+      <Select
+      showSearch
+      variant="borderless"
+      style={{ flex: 1 }}
+      options={tenantList}
+      value={selectedTenant}
+      filterOption={filterOption}
+      onChange={onChangeTenant}
+      />
+    </div>
+  );
+};
+
 
 const LoginMessage: React.FC<{
   content: string;
@@ -86,6 +125,31 @@ const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
+  const [tenantList, setTenantList] = useState(null);
+  // 初始化
+  const [selectedTenant, setSelectedTenant] = useState("1");
+
+  useEffect(() => {
+    // 接口获取
+    async function tenantList() {
+      const res = await getTenantList({})
+      const options = res.data.map(tenant => ({
+        value: tenant.id,
+        label: tenant.name
+      }));
+      setTenantList(options);
+    }
+    tenantList();
+    }, []);
+
+  /**
+   *
+   * @param value 切换租户
+   */
+  const onChangeTenant = (value: string) => {
+    localStorage.setItem("Tenant",value)
+    setSelectedTenant(value)
+  };
 
   const containerClassName = useEmotionCss(() => {
     return {
@@ -115,6 +179,8 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: API.LoginParams) => {
     try {
+        // 缓存 Tenant 选择的值
+      localStorage.setItem("Tenant", selectedTenant);
       // 登录
       const msg = await login({ ...values, type });
       console.log("msg",msg)
@@ -154,6 +220,7 @@ const Login: React.FC = () => {
           - {Settings.title}
         </title>
       </Helmet>
+      <Tenant tenantList={tenantList} selectedTenant={selectedTenant} onChangeTenant={onChangeTenant}/>
       <Lang />
       <div
         style={{
@@ -166,20 +233,20 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
+          // logo={<img alt="logo" src="/logo.svg" />}
+          title="Quick Boot"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,
           }}
-          actions={[
-            <FormattedMessage
-              key="loginWith"
-              id="pages.login.loginWith"
-              defaultMessage="其他登录方式"
-            />,
-            <ActionIcons key="icons" />,
-          ]}
+          // actions={[
+          //   <FormattedMessage
+          //     key="loginWith"
+          //     id="pages.login.loginWith"
+          //     defaultMessage="其他登录方式"
+          //   />,
+          //   <ActionIcons key="icons" />,
+          // ]}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
@@ -196,13 +263,13 @@ const Login: React.FC = () => {
                   defaultMessage: '账户密码登录',
                 }),
               },
-              {
-                key: 'mobile',
-                label: intl.formatMessage({
-                  id: 'pages.login.phoneLogin.tab',
-                  defaultMessage: '手机号登录',
-                }),
-              },
+              // {
+              //   key: 'mobile',
+              //   label: intl.formatMessage({
+              //     id: 'pages.login.phoneLogin.tab',
+              //     defaultMessage: '手机号登录',
+              //   }),
+              // },
             ]}
           />
 
@@ -210,7 +277,7 @@ const Login: React.FC = () => {
             <LoginMessage
               content={intl.formatMessage({
                 id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/ant.design)',
+                defaultMessage: '账户或密码错误(admin/123456)',
               })}
             />
           )}
