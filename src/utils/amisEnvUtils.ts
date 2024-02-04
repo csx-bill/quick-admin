@@ -1,47 +1,37 @@
-import axios from 'axios';
-
+import { request } from '@umijs/max';
 // amis 公共配置
 export const fetcher = ({
-    url, // 接口地址
-    method, // 请求方法 get、post、put、delete
-    data, // 请求数据
-    responseType,
-    config, // 其他配置
-    headers // 请求头
-  }: any) => {
-    config = config || {};
-    config.withCredentials = true;
-    responseType && (config.responseType = responseType);
+  url, // 接口地址
+  method, // 请求方法 get、post、put、delete
+  data, // 请求数据
+  responseType,
+  config, // 其他配置
+  headers, // 请求头
+}: any) => {
+  let newData = data;
+  let newConfig = config || {};
+  newConfig.withCredentials = true;
+  newConfig.getResponse = true;
+  if (responseType) {
+    newConfig.responseType = responseType;
+  }
 
-    if (config.cancelExecutor) {
-      config.cancelToken = new (axios as any).CancelToken(
-        config.cancelExecutor
-      );
-    }
+  newConfig.headers = headers || {};
+  if (newData && newData instanceof FormData) {
+    newConfig.headers = newConfig.headers || {};
+    newConfig.headers['Content-Type'] = 'multipart/form-data';
+  } else if (
+    newData &&
+    typeof newData !== 'string' &&
+    !(newData instanceof Blob) &&
+    !(newData instanceof ArrayBuffer)
+  ) {
+    newData = JSON.stringify(newData);
+    newConfig.headers = config.headers || {};
+    newConfig.headers['Content-Type'] = 'application/json';
+  }
 
-    config.headers = headers || {};
-
-    if (method !== 'post' && method !== 'put' && method !== 'patch') {
-      if (data) {
-        config.params = data;
-      }
-
-      return (axios as any)[method](url, config);
-    } else if (data && data instanceof FormData) {
-      config.headers = config.headers || {};
-      config.headers['Content-Type'] = 'multipart/form-data';
-    } else if (
-      data &&
-      typeof data !== 'string' &&
-      !(data instanceof Blob) &&
-      !(data instanceof ArrayBuffer)
-    ) {
-      data = JSON.stringify(data);
-      config.headers = config.headers || {};
-      config.headers['Content-Type'] = 'application/json';
-    }
-
-    return (axios as any)[method](url, data, config);
-}
+  return request(url, { method, data: newData, ...newConfig });
+};
 
 export const theme='antd'

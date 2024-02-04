@@ -91,7 +91,9 @@ export const errorConfig: RequestConfig = {
       // 拦截请求配置，进行个性化处理。
       const url = config?.url;
       const tenant = localStorage.getItem("Tenant")
+      const token = localStorage.getItem('Authorization');
       config.headers = { ...config?.headers, "Tenant": tenant };
+      config.headers = { ...config?.headers, "Authorization": token };
       return { ...config, url };
     },
   ],
