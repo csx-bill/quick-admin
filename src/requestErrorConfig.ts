@@ -90,6 +90,8 @@ export const errorConfig: RequestConfig = {
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
       const url = config?.url;
+      const tenant = localStorage.getItem("Tenant")
+      config.headers = { ...config?.headers, "Tenant": tenant };
       return { ...config, url };
     },
   ],
