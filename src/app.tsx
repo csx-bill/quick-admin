@@ -203,6 +203,10 @@ function traverseMenu(data) {
       },
     );
 
+    if(item.path){
+      item.path
+    }
+
     if (item.menuType === "DIR") {
       return {
         name: item.name,
