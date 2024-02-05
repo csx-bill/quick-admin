@@ -12,6 +12,7 @@ export const fetcher = ({
   let newConfig = config || {};
   newConfig.withCredentials = true;
   newConfig.getResponse = true;
+  newConfig.method = method;
   if (responseType) {
     newConfig.responseType = responseType;
   }
