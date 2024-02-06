@@ -90,10 +90,10 @@ export const errorConfig: RequestConfig = {
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
       const url = config?.url;
-      const tenant = localStorage.getItem("Tenant")
-      const token = localStorage.getItem('Authorization');
-      config.headers = { ...config?.headers, "Tenant": tenant };
-      config.headers = { ...config?.headers, "Authorization": token };
+      const tenant = localStorage.getItem("X-Tenant-Id")
+      const token = localStorage.getItem('X-Access-Token');
+      config.headers = { ...config?.headers, "X-Tenant-Id": tenant??"1" };
+      config.headers = { ...config?.headers, "X-Access-Token": token };
       return { ...config, url };
     },
   ],
