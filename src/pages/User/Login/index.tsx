@@ -148,7 +148,6 @@ const Login: React.FC = () => {
    */
   const onChangeTenant = (value: string) => {
     localStorage.setItem("X-Tenant-Id",value)
-    localStorage.setItem("X_Tenant_Id",value)
     setSelectedTenant(value)
   };
 
@@ -182,7 +181,6 @@ const Login: React.FC = () => {
     try {
         // 缓存 Tenant 选择的值
       localStorage.setItem("X-Tenant-Id", selectedTenant);
-      localStorage.setItem("X_Tenant_Id", selectedTenant);
       // 登录
       const msg = await login({ ...values, type });
       console.log("msg",msg)
@@ -194,7 +192,6 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         // 缓存token
         localStorage.setItem('X-Access-Token',msg.data.tokenValue);
-        localStorage.setItem('X_Access_Token',msg.data.tokenValue);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
