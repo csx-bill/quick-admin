@@ -27,6 +27,11 @@ export default [
     component: './amis/OnlineRenderer',
   },
   {
+    name: '流程设计',
+    path: '/flow/design/:id',
+    component: './flow/Design',
+  },
+  {
     name: '表单编辑器',
     path: '/AMISEditor/:id',
     component: './amis/AMISEditor',
