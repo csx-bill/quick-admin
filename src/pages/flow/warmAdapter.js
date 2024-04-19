@@ -378,7 +378,7 @@ export const parseXml2Dom = (xml) => {
 
 class WarmAdapter {
   static pluginName = 'warmAdapter'
-  constructor({ lf }) {
+  constructor({ lf,params }) {
     lf.adapterIn = this.adapterIn;
     lf.adapterOut = this.adapterOut;
   }
