@@ -9,7 +9,7 @@ export async function getById(
     },
     options?: { [key: string]: any },
   ) {
-    return request<Record<string, any>>('/api/flow/flow/definition/getById', {
+    return request<Record<string, any>>('/api/flow/definition/getById', {
       method: 'GET',
       params: {
         ...params,
@@ -25,7 +25,7 @@ export async function getByIdXml(
   },
   options?: { [key: string]: any },
 ) {
-  return request<Record<string, any>>('/api/flow/flow/definition/xmlString', {
+  return request<Record<string, any>>('/api/flow/definition/xmlString', {
     method: 'GET',
     params: {
       ...params,
@@ -38,7 +38,7 @@ export async function getByIdXml(
 
 /** 保存流程定义接口 */
 export async function saveXml(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request('/api/flow/flow/definition/saveXml', {
+  return request('/api/flow/definition/saveXml', {
     method: 'POST',
     data: body,
     ...(options || {}),
