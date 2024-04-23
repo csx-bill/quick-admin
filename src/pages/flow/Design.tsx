@@ -15,7 +15,7 @@ import { getById, getByIdXml, saveXml } from '@/api/flow';
 
 import warmAdapter from './warmAdapter';
 
-export const FlowChart: React.FC = () => {
+export const Design: React.FC = () => {
   // This ref will provide direct access to the DOM element
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +105,7 @@ export const FlowChart: React.FC = () => {
       title: '',
       text: '保存',
       onClick: (lf, ev) => {
-        saveXml({ id: params.id, xmlString: lf.getGraphData() }).then((res) => {
+        saveXml({ id: params.id, xmlString: lf.getGraphData(definition) }).then((res) => {
           if (res.status === 0) {
             toast.success('保存成功！', '提示');
           } else {
@@ -129,4 +129,4 @@ export const FlowChart: React.FC = () => {
   );
 };
 
-export default FlowChart;
+export default Design;

@@ -58,7 +58,7 @@ const SKIP_ATTR_KEYS = ['skipName', 'skipType', 'coordinate', 'skipCondition']
  * @param {*} data(...definitionInfo,nodes,edges)
  * @returns
  */
-export const logicFlowJsonToFlowXml = (data) => {
+export const logicFlowJsonToFlowXml = (data,definition) => {
   // node 转换
   data.nodes = data.nodes.map(node => {
     return convertLogicFlowElementToWarmFlowElement(node);
@@ -78,11 +78,11 @@ export const logicFlowJsonToFlowXml = (data) => {
   }
 
 
-  data.flowCode = "test" // 流程定义编码
-  data.flowName = "测试" // 流程定义名称
-  data.version = "1" // 流程定义版本号
-  data.fromCustom = "" // 表单自定义
-  data.fromPath = "" // 表单自定义路径
+  data.flowCode = definition.flowCode // 流程定义编码
+  data.flowName = definition.flowName // 流程定义名称
+  data.version = definition.version // 流程定义版本号
+  data.fromCustom = definition.fromCustom // 表单自定义
+  data.fromPath = definition.fromPath // 表单自定义路径
 
   let xml = ''
   // data的数据由流程定义文件信息+logicFlow数据构成
@@ -378,13 +378,13 @@ export const parseXml2Dom = (xml) => {
 
 class WarmAdapter {
   static pluginName = 'warmAdapter'
-  constructor({ lf,params }) {
+  constructor({ lf }) {
     lf.adapterIn = this.adapterIn;
     lf.adapterOut = this.adapterOut;
   }
-  adapterOut(logicflowData) {
-    if (logicflowData) {
-      return logicFlowJsonToFlowXml(logicflowData)
+  adapterOut(logicFlowData,definition) {
+    if (logicFlowData) {
+      return logicFlowJsonToFlowXml(logicFlowData,definition)
     }
   }
   adapterIn(warmData) {
