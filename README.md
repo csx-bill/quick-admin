@@ -6,7 +6,7 @@
 | ---------------- | --------------------------------------- |
 | 后台源码 JAVA    | https://github.com/csx-bill/quick-boot  |
 | 前端源码 `React` | https://github.com/csx-bill/quick-admin |
-| 登录账号         | http://118.89.55.165 admin/123456                            |
+| 登录账号         | http://118.89.55.165 admin/123456       |
 
 ## 概述
 
@@ -49,20 +49,29 @@ APIJSON 是一种基于 JSON 数据格式的 API 定义语言。它可以根据 
 ## 安装
 
 ```bash
-npm install --legacy-peer-deps
+pnpm install
 ```
 
 ### 启动
 
 ```bash
-npm run dev
+pnpm run serve
 ```
 
 ### 编译
 
 ```bash
-npm run build
+pnpm run build
 ```
 
-### 效果图
-![image](https://github.com/csx-bill/quick-admin/assets/31872268/2ddce8c9-e534-4af0-8db8-bb8396ecf502)
+## Git 贡献提交规范
+
+- `feat` 增加新功能
+- `fix` 修复问题/BUG
+- `style` 代码风格相关无影响运行结果的
+- `perf` 优化/性能提升
+- `refactor` 重构
+- `revert` 撤销修改
+- `test` 测试相关
+- `docs` 文档/注释
+- `chore` 依赖更新/脚手架配置修改等
