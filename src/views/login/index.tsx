@@ -5,18 +5,12 @@ import { Form, Input, Checkbox, Button, message, Select, Modal } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAppSelector, useAppDispatch } from '@/stores'
 import { setToken, setUserInfo, setSessionTimeout } from '@/stores/modules/user'
-import { setTenantRouter } from '@/stores/modules/tenant-router'
 import { getAuthCache } from '@/utils/auth'
 import { TOKEN_KEY } from '@/enums/cacheEnum'
-import { loginApi, getUserInfo, getUserTenantList, getRoutesList } from '@/api'
+import { loginApi, getUserInfo, getUserTenantList } from '@/api'
 import logoIcon from '@/assets/images/logo_name.png'
 import classNames from 'classnames'
 import styles from './index.module.less'
-
-import { genFullPath } from '../../router/helpers'
-import { LazyLoad } from '@/components/LazyLoad'
-import { lazy } from '@loadable/component'
-import { LayoutGuard } from '../../router/guard'
 
 /**
  *
@@ -139,9 +133,6 @@ const LoginPage: FC = () => {
   const getUserInfoAction = async (): Promise<UserInfo | null> => {
     if (!getToken()) return null
 
-    // 合并路由
-    await fetchAndMergeRoutes()
-
     const userInfo = await getUserInfo()
 
     dispatch(setUserInfo(userInfo))
@@ -178,55 +169,6 @@ const LoginPage: FC = () => {
   // 切换租户
   const onChangeTenant = (value: string) => {
     setSelectedTenant(value)
-  }
-
-  // 定义一个函数用于从API获取路由并合并到routeList中
-  async function fetchAndMergeRoutes() {
-    try {
-      const apiRoutes = await getRoutesList() // 假设这会返回一个RouteObject[]类型的响应
-      console.log('apiRoutes res:', apiRoutes)
-      // 根据实际返回结构可能需要适当地调整
-      if (apiRoutes && Array.isArray(apiRoutes)) {
-        traverse(apiRoutes)
-
-        // 处理apiRoutes，如有必要生成完整路径
-        genFullPath(apiRoutes)
-
-        console.log('apiRoutes:', apiRoutes)
-        // 合并路由
-        dispatch(setTenantRouter(apiRoutes))
-      }
-    } catch (error) {
-      console.error('Failed to fetch routes: ', error)
-    }
-  }
-
-  // 递归遍历
-  function traverse(routes: any) {
-    routes.forEach(route => {
-      if (route.menuType === 'DIR') {
-        route.element = <LayoutGuard />
-        route.meta = {
-          title: route.name,
-          icon: route.icon,
-          orderNo: route.orderNo
-        }
-      }
-
-      if (route.menuType === 'MENU') {
-        route.key = route.id
-        route.element = LazyLoad(lazy(() => import(/* @vite-ignore */ route.component)))
-        route.meta = {
-          title: route.name,
-          key: route.id,
-          orderNo: route.orderNo
-        }
-      }
-
-      if (route.children && route.children.length > 0) {
-        traverse(route.children)
-      }
-    })
   }
 
   return (
