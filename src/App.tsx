@@ -1,14 +1,19 @@
-import { RouterProvider } from 'react-router-dom'
-import router from '@/router'
-import { setupProdMockServer } from '../mock/_createProductionServer'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
+import { rootRoutes } from '@/router'
+import { createContext } from 'react'
+import { useAppSelector } from '@/stores'
+import { setTenantRouter } from '@/stores/modules/tenant-router'
 
+export const AppContext = createContext({})
+const FormProvider = AppContext.Provider
 function App() {
-  const isBuild = process.env.NODE_ENV === 'production'
-  if (isBuild) {
-    setupProdMockServer()
-  }
-
-  return <RouterProvider router={router} />
+  const { tenantRouter } = useAppSelector(state => state.tenantRouter)
+  const router = createHashRouter([...rootRoutes, ...tenantRouter])
+  return (
+    <FormProvider value={{ setTenantRouter }}>
+      <RouterProvider router={router} />
+    </FormProvider>
+  )
 }
 
 export default App

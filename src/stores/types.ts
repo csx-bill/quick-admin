@@ -45,3 +45,7 @@ export interface AppState {
 
   appConfig: AppConfig | null
 }
+
+export interface TenantRouterState {
+  tenantRouter: RouteObject[]
+}

@@ -22,6 +22,8 @@ import classNames from 'classnames'
 import styles from './index.module.less'
 
 const LayoutTags: FC = () => {
+  const { tenantRouter } = useAppSelector(state => state.tenantRouter)
+
   const items: MenuProps['items'] = [
     { key: 'left', label: '关闭左侧' },
     { key: 'right', label: '关闭右侧' },
@@ -58,14 +60,16 @@ const LayoutTags: FC = () => {
   const [activeTag, setActiveTag] = useState(pathname)
 
   useEffect(() => {
-    const affixTags = initAffixTags(basicRoutes)
+    const routes = [...basicRoutes, ...tenantRouter]
+    const affixTags = initAffixTags(routes)
     for (const tag of affixTags) {
       dispatch(addVisitedTags(tag))
     }
   }, [])
 
   useEffect(() => {
-    const currRoute = searchRoute(pathname, basicRoutes)
+    const routes = [...basicRoutes, ...tenantRouter]
+    const currRoute = searchRoute(pathname, routes)
     if (currRoute) {
       dispatch(addVisitedTags(currRoute))
     }

@@ -8,7 +8,7 @@ interface LoginParams {
 // User login api
 export function loginApi(data: LoginParams): Promise<any> {
   return service({
-    url: '/login',
+    url: '/auth/doLogin',
     method: 'post',
     data
   })
@@ -17,7 +17,7 @@ export function loginApi(data: LoginParams): Promise<any> {
 // Get User info
 export function getUserInfo(): Promise<any> {
   return service({
-    url: '/getUserInfo',
+    url: '/system/user/getUserInfo',
     method: 'get'
   })
 }
@@ -25,7 +25,7 @@ export function getUserInfo(): Promise<any> {
 // User logout api
 export function logoutApi() {
   return service({
-    url: '/logout',
+    url: '/auth/logout',
     method: 'get'
   })
 }
@@ -34,6 +34,31 @@ export function logoutApi() {
 export function getTableList(params: any) {
   return service({
     url: '/table/getTableList',
+    method: 'get',
+    params
+  })
+}
+
+// 获取用户租户集合
+export function getUserTenantList() {
+  return service({
+    url: '/system/user/getUserTenantList',
+    method: 'get'
+  })
+}
+
+// 获取全局路由
+export function getRoutesList() {
+  return service({
+    url: '/system/menu/getRoutes',
+    method: 'get'
+  })
+}
+
+// 获取菜单 amis schema
+export function getSchemaByPath(params: any) {
+  return service({
+    url: '/system/menu/getSchemaByPath',
     method: 'get',
     params
   })

@@ -7,6 +7,7 @@ import appSlice from './modules/app'
 import menuSlice from './modules/menu'
 import tagsSlice from './modules/tags'
 import userSlice from './modules/user'
+import tenantRouterSlice from './modules/tenant-router'
 
 const persistConfig = {
   key: 'redux-persist',
@@ -18,7 +19,8 @@ export const store: Store = configureStore({
     app: persistReducer(persistConfig, appSlice),
     menu: persistReducer(persistConfig, menuSlice),
     tags: persistReducer(persistConfig, tagsSlice),
-    user: persistReducer(persistConfig, userSlice)
+    user: persistReducer(persistConfig, userSlice),
+    tenantRouter: persistReducer(persistConfig, tenantRouterSlice)
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

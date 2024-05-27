@@ -8,6 +8,8 @@ import type { AppMenu } from '@/router/types'
 import { setMenuList } from '@/stores/modules/menu'
 import { getOpenKeys } from '@/utils/helper/menuHelper'
 import SvgIcon from '@/components/SvgIcon'
+import { useAppSelector } from '@/stores'
+import { transformRouteToMenu } from '@/router/helpers'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -34,6 +36,7 @@ const LayoutMenu = (props: any) => {
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
+  const { tenantRouter } = useAppSelector(state => state.tenantRouter)
 
   useEffect(() => {
     setSelectedKeys([pathname])
@@ -64,6 +67,11 @@ const LayoutMenu = (props: any) => {
     setLoading(true)
     try {
       const menus = await getAsyncMenus()
+      console.log('menus', menus)
+      const tenantMenus = transformRouteToMenu(tenantRouter)
+      console.log('tenantMenus', tenantMenus)
+      menus.push(...tenantMenus)
+
       setMenuList(getMenuItem(menus))
       setMenuListAction(menus)
     } finally {

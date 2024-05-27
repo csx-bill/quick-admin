@@ -23,9 +23,11 @@ const handleError = (error: AxiosError): Promise<AxiosError> => {
 service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = getToken()
   if (token) {
-    ;(config as Recordable).headers['Authorization'] = `${token}`
+    ;(config as Recordable).headers['X-Access-Token'] = `${token}`
   }
   ;(config as Recordable).headers['Content-Type'] = 'application/json'
+  const tenantId = localStorage.getItem('X-Tenant-Id')
+  ;(config as Recordable).headers['X-Tenant-Id'] = tenantId
   return config
 }, handleError)
 
@@ -33,10 +35,10 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 service.interceptors.response.use((response: AxiosResponse) => {
   const data = response.data
 
-  if (data.code === 0) {
+  if (data.status === 0) {
     return data.data
   } else {
-    message.error(data.message)
+    message.error(data.msg)
 
     return Promise.reject('error')
   }

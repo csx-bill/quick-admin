@@ -10,7 +10,6 @@ import PageException from '@/views/exception'
 const metaRoutes = import.meta.glob('./routes/*.tsx', { eager: true }) as Recordable
 
 const routeList: RouteObject[] = []
-
 Object.keys(metaRoutes).forEach(key => {
   const module = metaRoutes[key].default || {}
   const moduleList = Array.isArray(module) ? [...module] : [module]
@@ -18,7 +17,7 @@ Object.keys(metaRoutes).forEach(key => {
   routeList.push(...moduleList)
 })
 
-const rootRoutes: RouteObject[] = [
+export const rootRoutes: RouteObject[] = [
   {
     path: '/',
     name: 'Root',
@@ -60,5 +59,3 @@ const rootRoutes: RouteObject[] = [
 ]
 
 export { routeList as basicRoutes }
-
-export default createHashRouter(rootRoutes)

@@ -2,7 +2,6 @@ import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { viteMockServe } from 'vite-plugin-mock'
 import { wrapperEnv } from './build/utils'
 // 需要安装 @typings/node 插件
 import { resolve } from 'path'
@@ -21,7 +20,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   return {
     base: './',
     server: {
-      // Listening on all local ips
+      // 自定义本地开发服务器
+      proxy: {
+        '/api': {
+          target: "http://127.0.0.1:9999",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, 'api'),
+        },
+      },
       host: true,
       open: true,
       port: VITE_PORT
@@ -32,17 +38,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
         symbolId: 'icon-[dir]-[name]'
       }),
-      viteMockServe({
-        mockPath: 'mock',
-        ignore: /^_/,
-        localEnabled: !isBuild,
-        prodEnabled: isBuild,
-        injectCode: `
-          import { setupProdMockServer } from 'mock/_createProductionServer';
-
-          setupProdMockServer()
-          `
-      })
     ],
 
     build: {
