@@ -139,9 +139,10 @@ const LoginPage: FC = () => {
   const getUserInfoAction = async (): Promise<UserInfo | null> => {
     if (!getToken()) return null
 
-    const userInfo = await getUserInfo()
     // 合并路由
-    fetchAndMergeRoutes()
+    await fetchAndMergeRoutes()
+
+    const userInfo = await getUserInfo()
 
     dispatch(setUserInfo(userInfo))
 
