@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken, clearAuthCache } from '@/utils/auth'
 // amis 公共配置
 export const fetcher = ({
   url, // 接口地址
@@ -32,7 +33,10 @@ export const fetcher = ({
     config.headers = config.headers || {}
     config.headers['Content-Type'] = 'application/json'
   }
-  config.headers['X-Tenant-Id'] = '1'
+  const token = getToken()
+  const tenantId = localStorage.getItem('X-Tenant-Id')
+  config.headers['X-Access-Token'] = `${token}`
+  config.headers['X-Tenant-Id'] = `${tenantId}`
   return (axios as any)[method](url, data, config)
 }
 

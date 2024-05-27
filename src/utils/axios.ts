@@ -27,7 +27,7 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   }
   ;(config as Recordable).headers['Content-Type'] = 'application/json'
   const tenantId = localStorage.getItem('X-Tenant-Id')
-  ;(config as Recordable).headers['X-Tenant-Id'] = tenantId
+  ;(config as Recordable).headers['X-Tenant-Id'] = `${tenantId}`
   return config
 }, handleError)
 
