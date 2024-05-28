@@ -10,9 +10,7 @@ import { getOpenKeys } from '@/utils/helper/menuHelper'
 import SvgIcon from '@/components/SvgIcon'
 import { transformRouteToMenu } from '@/router/helpers'
 
-import { useAppSelector, useAppDispatch } from '@/stores'
-import { getAsyncRoutes } from '@/router/dynamic-routing'
-import { setTenantRouter } from '@/stores/modules/tenant-router'
+import { useAppSelector } from '@/stores'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -41,7 +39,6 @@ const LayoutMenu = (props: any) => {
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
   const { tenantRouter } = useAppSelector(state => state.tenantRouter)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     setSelectedKeys([pathname])
@@ -88,21 +85,8 @@ const LayoutMenu = (props: any) => {
     }
   }
 
-  // 异步获取动态路由数据
-  const getRoutesList = async () => {
-    setLoading(true)
-    try {
-      const routes = await getAsyncRoutes()
-      // 添加动态路由
-      dispatch(setTenantRouter(routes))
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // 初始化时加载路由 & 菜单数据
+  // 初始化时菜单数据
   useEffect(() => {
-    getRoutesList()
     getMenuList()
   }, [])
 
