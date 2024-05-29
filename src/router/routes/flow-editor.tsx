@@ -5,8 +5,8 @@ import { LazyLoad } from '@/components/LazyLoad'
 
 // flow-editor module page
 const FlowEditorRoute: RouteObject = {
-  path: '/flow-editor',
-  name: 'FlowEditor',
+  path: '/flow',
+  name: 'Flow',
   element: <LayoutGuard />,
   meta: {
     title: '流程图编辑器',
@@ -15,12 +15,12 @@ const FlowEditorRoute: RouteObject = {
   },
   children: [
     {
-      path: 'flow-bpmn',
-      name: 'FlowBpmn',
-      element: LazyLoad(lazy(() => import('@/views/flow/flow-bpmn'))),
+      path: 'flow-editor',
+      name: 'FlowEditor',
+      element: LazyLoad(lazy(() => import('@/views/flow/flow-editor'))),
       meta: {
-        title: 'BPMN流程图',
-        key: 'flowBpmn'
+        title: '流程图',
+        key: 'FlowEditor'
       }
     }
   ]
