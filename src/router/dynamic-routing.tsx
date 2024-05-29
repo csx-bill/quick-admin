@@ -1,4 +1,4 @@
-import { getRoutesList } from '@/api'
+import { getRoutes } from '@/api'
 import { genFullPath } from '@/router/helpers'
 import { LazyLoad } from '@/components/LazyLoad'
 import { lazy } from '@loadable/component'
@@ -7,7 +7,7 @@ import { LayoutGuard } from '@/router/guard'
 // 定义一个函数用于从API获取路由
 export async function getAsyncRoutes() {
   try {
-    const apiRoutes = await getRoutesList()
+    const apiRoutes = await getRoutes()
     if (apiRoutes && Array.isArray(apiRoutes)) {
       traverse(apiRoutes)
       // 处理apiRoutes，如有必要生成完整路径
@@ -20,7 +20,7 @@ export async function getAsyncRoutes() {
 }
 
 // 递归遍历
-function traverse(routes: any) {
+export async function traverse(routes: any) {
   routes.forEach(route => {
     if (route.menuType === 'DIR') {
       route.element = <LayoutGuard />

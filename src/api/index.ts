@@ -30,15 +30,6 @@ export function logoutApi() {
   })
 }
 
-// Table list
-export function getTableList(params: any) {
-  return service({
-    url: '/table/getTableList',
-    method: 'get',
-    params
-  })
-}
-
 // 获取用户租户集合
 export function getUserTenantList() {
   return service({
@@ -47,8 +38,8 @@ export function getUserTenantList() {
   })
 }
 
-// 获取全局路由
-export function getRoutesList() {
+// 获取路由
+export function getRoutes() {
   return service({
     url: '/system/menu/getRoutes',
     method: 'get'

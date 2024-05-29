@@ -8,14 +8,14 @@ export default function () {
   const dispatch = useAppDispatch()
   const [loading, setLoading] = useState(true)
   // 异步获取动态路由数据
-  const getRoutesList = async () => {
+  const getRoutes = async () => {
     setLoading(true)
     try {
       const routes = await getAsyncRoutes()
       // 添加动态路由
       dispatch(setTenantRouter(routes))
     } catch (error) {
-      console.log('getRoutesList ~ error:', error)
+      console.log('getRoutes ~ error:', error)
       dispatch(setTenantRouter([]))
     } finally {
       setLoading(false)
@@ -23,6 +23,6 @@ export default function () {
   }
   return {
     loading,
-    loadMenuList: getRoutesList
+    loadRoutes: getRoutes
   }
 }

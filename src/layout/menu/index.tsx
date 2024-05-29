@@ -8,9 +8,6 @@ import type { AppMenu } from '@/router/types'
 import { setMenuList } from '@/stores/modules/menu'
 import { getOpenKeys } from '@/utils/helper/menuHelper'
 import SvgIcon from '@/components/SvgIcon'
-import { transformRouteToMenu } from '@/router/helpers'
-
-import { useAppSelector } from '@/stores'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -38,7 +35,6 @@ const LayoutMenu = (props: any) => {
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
-  const { tenantRouter } = useAppSelector(state => state.tenantRouter)
 
   useEffect(() => {
     setSelectedKeys([pathname])
@@ -71,15 +67,9 @@ const LayoutMenu = (props: any) => {
   const getMenuList = async () => {
     setLoading(true)
     try {
-      // 本地路由转menus
       const menus = await getAsyncMenus()
-      // 接口动态路由 转menus
-      const tenantMenus = transformRouteToMenu(tenantRouter)
-      // 合并menus
-      const mergeMenus = [...menus, ...tenantMenus]
-
-      setMenuList(getMenuItem(mergeMenus))
-      setMenuListAction(mergeMenus)
+      setMenuList(getMenuItem(menus))
+      setMenuListAction(menus)
     } finally {
       setLoading(false)
     }
