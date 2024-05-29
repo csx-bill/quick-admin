@@ -7,7 +7,7 @@ import { useAppSelector } from '@/stores'
 
 // 监听页面变化和动态改变网站标题
 export function useTitle() {
-  const [pageTitle, setPageTitle] = useState('react-admin-design')
+  const [pageTitle, setPageTitle] = useState('quick-admin')
   const { pathname } = useLocation()
   const { tenantRouter } = useAppSelector(state => state.tenantRouter)
 

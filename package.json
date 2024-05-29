@@ -4,8 +4,8 @@
   "type": "module",
   "author": {
     "name": "baimingxuan",
-    "email": "354372738@qq.com",
-    "url": "https://github.com/baimingxuan"
+    "email": "1594805355@qq.com",
+    "url": "https://github.com/csx-bill"
   },
   "scripts": {
     "serve": "vite",
@@ -117,13 +117,13 @@
     "react-admin-design"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/baimingxuan/react-admin-design",
+  "homepage": "https://github.com/csx-bill/quick-admin",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/baimingxuan/react-admin-design.git"
+    "url": "git+https://github.com/csx-bill/quick-admin.git"
   },
   "bugs": {
-    "url": "https://github.com/baimingxuan/react-admin-design/issues"
+    "url": "https://github.com/csx-bill/quick-admin/issues"
   },
   "engines": {
     "node": ">=16",

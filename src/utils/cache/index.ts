@@ -8,7 +8,7 @@ const createOptions = (storage: Storage, options: Options = {}): Options => {
     // No encryption in debug mode
     hasEncrypt: enableStorageEncryption,
     storage,
-    prefixKey: 'react-admin-design__',
+    prefixKey: 'quick-admin-design__',
     ...options
   }
 }

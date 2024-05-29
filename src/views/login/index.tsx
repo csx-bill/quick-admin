@@ -11,6 +11,7 @@ import { loginApi, getUserInfo, getUserTenantList } from '@/api'
 import logoIcon from '@/assets/images/logo_name.png'
 import classNames from 'classnames'
 import styles from './index.module.less'
+import useRoutes from '@/hooks/web/useRoutes'
 
 /**
  *
@@ -49,6 +50,8 @@ const LoginPage: FC = () => {
   const [tenantList, setTenantList] = useState(null)
   // 初始化
   const [selectedTenant, setSelectedTenant] = useState(null)
+
+  const { loadRoutes } = useRoutes()
 
   const dispatch = useAppDispatch()
 
@@ -113,8 +116,13 @@ const LoginPage: FC = () => {
       setModalPromise({ resolve })
     })
 
-    const userInfo = await promise.then(() => getUserInfoAction())
+    await promise.then(() => {
+      // 登录后加载路由
+      loadRoutes()
+    })
 
+    // 登录后加载用户信息
+    const userInfo = await getUserInfoAction()
     // 如果 session 超时，处理这些逻辑
     if (sessionTimeout) {
       dispatch(setSessionTimeout(false))
