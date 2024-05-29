@@ -15,15 +15,6 @@ const FlowEditorRoute: RouteObject = {
   },
   children: [
     {
-      path: 'flow-approve',
-      name: 'FlowApprove',
-      element: LazyLoad(lazy(() => import('@/views/flow/flow-approve'))),
-      meta: {
-        title: '审批流程图',
-        key: 'flowApprove'
-      }
-    },
-    {
       path: 'flow-bpmn',
       name: 'FlowBpmn',
       element: LazyLoad(lazy(() => import('@/views/flow/flow-bpmn'))),

@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
-//import {getLocale,history,useLocation } from 'umi';
-//import { useModel } from '@umijs/max';
-
 import { getSchemaByPath } from '@/api'
-
 import { useLocation } from 'react-router-dom'
-
 import axios from 'axios'
-//import copy from 'copy-to-clipboard'
+import copy from 'copy-to-clipboard'
 import { render as renderAmis } from 'amis'
 import { ToastComponent, AlertComponent, toast } from 'amis-ui'
 import 'amis/lib/themes/antd.css'
@@ -15,17 +10,9 @@ import 'amis/lib/helper.css'
 import 'amis/sdk/iconfont.css'
 import { fetcher, theme } from '@/utils/amisEnvUtils'
 
-// import { getSchemaByPath } from '@/api/menu'
-
-//import './common.scss'
-
-const AMISRenderer: React.FC = () => {
+const AmisRenderer: React.FC = () => {
   const location = useLocation()
-  console.log(location)
-
-  // const { initialState } = useModel('@@initialState')
   const [schema, setSchema] = useState({})
-  // const location = useLocation()
 
   useEffect(() => {
     // 接口获取
@@ -39,19 +26,10 @@ const AMISRenderer: React.FC = () => {
     findCurrentMenu(pathname)
   }, [])
 
-  //let amisScoped;
-
-  // 当前语言
-  //const curLanguage = getLocale()
-  // const schema = {
-  //   type: 'page',
-  //   title: '简单页面',
-  //   body: '内容'
-  // }
   return (
     <div>
-      {/* <ToastComponent theme={theme} key='toast' position={'top-center'} locale={curLanguage} />
-      <AlertComponent theme={theme} key='alert' locale={curLanguage} /> */}
+      <ToastComponent theme={theme} key='toast' position={'top-center'} />
+      <AlertComponent theme={theme} key='alert' />
 
       {renderAmis(
         schema,
@@ -70,7 +48,7 @@ const AMISRenderer: React.FC = () => {
           fetcher,
           isCancel: (value: any) => (axios as any).isCancel(value),
           copy: content => {
-            //copy(content)
+            copy(content)
             toast.success('内容已复制到粘贴板')
           },
           theme,
@@ -93,5 +71,4 @@ const AMISRenderer: React.FC = () => {
     </div>
   )
 }
-
-export default AMISRenderer
+export default AmisRenderer

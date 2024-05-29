@@ -54,3 +54,21 @@ export function getSchemaByPath(params: any) {
     params
   })
 }
+
+// 获取菜单 amis schema
+export function getSchema(params: any) {
+  return service({
+    url: '/system/menu/getSchemaById',
+    method: 'get',
+    params
+  })
+}
+
+// 更新菜单 amis schema
+export function updateSchema(data: any): Promise<any> {
+  return service({
+    url: '/api/system/menu/updateSchemaById',
+    method: 'put',
+    data
+  })
+}
