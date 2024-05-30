@@ -3,14 +3,11 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, Spin } from 'antd'
-import { getAsyncMenus } from '@/router/menus'
 import type { AppMenu } from '@/router/types'
 import { setMenuList } from '@/stores/modules/menu'
 import { getOpenKeys } from '@/utils/helper/menuHelper'
 import SvgIcon from '@/components/SvgIcon'
-
-import { transformRouteToMenu } from '@/router/helpers'
-import { useAppSelector, useAppDispatch } from '@/stores'
+import { getUserMenu } from '@/api'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -38,8 +35,6 @@ const LayoutMenu = (props: any) => {
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
-  const { tenantRouter } = useAppSelector(state => state.tenantRouter)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     setSelectedKeys([pathname])
@@ -72,14 +67,9 @@ const LayoutMenu = (props: any) => {
   const getMenuList = async () => {
     setLoading(true)
     try {
-      // 本地路由转menus
-      const menus = await getAsyncMenus()
-      // 接口动态路由 转menus
-      const tenantMenus = transformRouteToMenu(tenantRouter)
-      // 合并menus
-      const mergeMenus = [...menus, ...tenantMenus]
-      setMenuList(getMenuItem(mergeMenus))
-      setMenuListAction(mergeMenus)
+      const menus = await getUserMenu()
+      setMenuList(getMenuItem(menus))
+      setMenuListAction(menus)
     } finally {
       setLoading(false)
     }
@@ -88,7 +78,7 @@ const LayoutMenu = (props: any) => {
   // 初始化时菜单数据
   useEffect(() => {
     getMenuList()
-  }, [tenantRouter])
+  }, [])
 
   // 处理SubMenu的展开变化
   const handleOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {

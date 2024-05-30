@@ -11,6 +11,8 @@ export interface UserInfo {
   token: string
   desc?: string
   homePath?: string
+  permsCode: []
+  userTenant: []
 }
 
 export type ThemeMode = 'dark' | 'light'

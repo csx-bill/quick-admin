@@ -46,6 +46,14 @@ export function getRoutes() {
   })
 }
 
+// 获取菜单
+export function getUserMenu() {
+  return service({
+    url: '/system/menu/getUserMenu',
+    method: 'get'
+  })
+}
+
 // 获取菜单 amis schema
 export function getSchemaByPath(params: any) {
   return service({
