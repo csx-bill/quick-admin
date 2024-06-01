@@ -6,7 +6,7 @@ import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 
 // Create axios instance
 const service = axios.create({
-  baseURL: '/api',
+  //baseURL: '/api',
   timeout: 10 * 1000
 })
 
@@ -35,9 +35,8 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 // Respose interceptors configuration
 service.interceptors.response.use((response: AxiosResponse) => {
   const data = response.data
-
   if (data.status === 0) {
-    return data.data
+    return response
   } else {
     message.error(data.msg)
 

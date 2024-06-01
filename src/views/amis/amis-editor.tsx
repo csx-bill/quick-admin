@@ -32,7 +32,7 @@ const AmisEditor: React.FC = () => {
     async function fetchSchema() {
       //const res = await getSchema({ id: params.id })
       const res = await getSchema({ id: '1662841046100353026' })
-      setSchema(res?.schema !== null ? JSON.parse(res?.schema) : {})
+      setSchema(res.data.data?.schema !== null ? JSON.parse(res.data.data?.schema) : {})
     }
     fetchSchema()
   }, [])

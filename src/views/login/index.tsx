@@ -88,10 +88,10 @@ const LoginPage: FC = () => {
   ): Promise<UserInfo | null> => {
     try {
       const { goHome = true, ...loginParams } = params
-      const data = await loginApi(loginParams)
+      const res = await loginApi(loginParams)
 
       // 保存 Token
-      dispatch(setToken(data?.tokenValue))
+      dispatch(setToken(res.data.data?.tokenValue))
       return afterLoginAction(goHome)
     } catch (error) {
       return Promise.reject(error)
@@ -142,19 +142,19 @@ const LoginPage: FC = () => {
   const getUserInfoAction = async (): Promise<UserInfo | null> => {
     if (!getToken()) return null
 
-    const userInfo = await getUserInfo()
+    const res = await getUserInfo()
 
-    dispatch(setUserInfo(userInfo))
+    dispatch(setUserInfo(res.data.data))
 
-    return userInfo
+    return res.data.data
   }
 
   const getUserTenantListAction = async (): Promise<any | null> => {
     if (!getToken()) return null
 
-    const userTenantList = await getUserTenantList()
+    const res = await getUserTenantList()
 
-    const options = userTenantList.map(tenant => ({
+    const options = res.data.data.map(tenant => ({
       value: tenant.id,
       label: tenant.name
     }))

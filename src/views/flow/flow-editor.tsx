@@ -47,9 +47,9 @@ export const FlowEditor: React.FC = () => {
   useEffect(() => {
     async function fetchFlowDefinition() {
       const resXml = await getDefinitionXmlById({ id: searchParams.get('id') })
-      setDefinitionXml(resXml)
+      setDefinitionXml(resXml.data.data)
       const res = await getDefinitionById({ id: searchParams.get('id') })
-      setDefinition(res)
+      setDefinition(res.data.data)
     }
     fetchFlowDefinition()
   }, [])

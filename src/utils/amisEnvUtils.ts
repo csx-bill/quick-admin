@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { getToken, getAuthCache } from '@/utils/auth'
 import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
+import { service } from '@/utils/axios'
+
 // amis 公共配置
 export const fetcher = ({
   url, // 接口地址
@@ -11,21 +13,18 @@ export const fetcher = ({
   headers // 请求头
 }: any) => {
   config = config || {}
+  config.headers = config.headers || {}
   config.withCredentials = true
-  responseType && (config.responseType = responseType)
 
   if (config.cancelExecutor) {
-    config.cancelToken = new (axios as any).CancelToken(config.cancelExecutor)
+    config.cancelToken = new axios.CancelToken(config.cancelExecutor)
   }
 
   config.headers = headers || {}
+  config.method = method
 
-  if (method !== 'post' && method !== 'put' && method !== 'patch') {
-    if (data) {
-      config.params = data
-    }
-
-    return (axios as any)[method](url, config)
+  if (method === 'get' && data) {
+    config.params = data
   } else if (data && data instanceof FormData) {
     config.headers = config.headers || {}
     config.headers['Content-Type'] = 'multipart/form-data'
@@ -34,11 +33,10 @@ export const fetcher = ({
     config.headers = config.headers || {}
     config.headers['Content-Type'] = 'application/json'
   }
-  const token = getToken()
-  const tenantId = getAuthCache<string>(X_Tenant_Id_KEY)
-  config.headers['X-Access-Token'] = `${token}`
-  config.headers['X-Tenant-Id'] = `${tenantId}`
-  return (axios as any)[method](url, data, config)
+
+  data && (config.data = data)
+  config.url = url
+  return service(config)
 }
 
 export const theme = 'antd'

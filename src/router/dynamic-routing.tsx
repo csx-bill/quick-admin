@@ -7,7 +7,8 @@ import { LayoutGuard } from '@/router/guard'
 // 定义一个函数用于从API获取路由
 export async function getAsyncRoutes() {
   try {
-    const apiRoutes = await getRoutes()
+    const res = await getRoutes()
+    const apiRoutes = res.data.data
     if (apiRoutes && Array.isArray(apiRoutes)) {
       traverse(apiRoutes)
       // 处理apiRoutes，如有必要生成完整路径

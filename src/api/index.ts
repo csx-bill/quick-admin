@@ -8,7 +8,7 @@ interface LoginParams {
 // User login api
 export function loginApi(data: LoginParams): Promise<any> {
   return service({
-    url: '/auth/doLogin',
+    url: '/api/auth/doLogin',
     method: 'post',
     data
   })
@@ -17,7 +17,7 @@ export function loginApi(data: LoginParams): Promise<any> {
 // Get User info
 export function getUserInfo(): Promise<any> {
   return service({
-    url: '/system/user/getUserInfo',
+    url: '/api/system/user/getUserInfo',
     method: 'get'
   })
 }
@@ -25,7 +25,7 @@ export function getUserInfo(): Promise<any> {
 // User logout api
 export function logoutApi() {
   return service({
-    url: '/auth/logout',
+    url: '/api/auth/logout',
     method: 'get'
   })
 }
@@ -33,7 +33,7 @@ export function logoutApi() {
 // 获取用户租户集合
 export function getUserTenantList() {
   return service({
-    url: '/system/user/getUserTenantList',
+    url: '/api/system/user/getUserTenantList',
     method: 'get'
   })
 }
@@ -41,7 +41,7 @@ export function getUserTenantList() {
 // 获取路由
 export function getRoutes() {
   return service({
-    url: '/system/menu/getRoutes',
+    url: '/api/system/menu/getRoutes',
     method: 'get'
   })
 }
@@ -49,7 +49,7 @@ export function getRoutes() {
 // 获取菜单&权限
 export function getUserPermission() {
   return service({
-    url: '/system/user/getUserPermission',
+    url: '/api/system/user/getUserPermission',
     method: 'get'
   })
 }
@@ -57,7 +57,7 @@ export function getUserPermission() {
 // 获取菜单 amis schema
 export function getSchemaByPath(params: any) {
   return service({
-    url: '/system/menu/getSchemaByPath',
+    url: '/api/system/menu/getSchemaByPath',
     method: 'get',
     params
   })
@@ -66,7 +66,7 @@ export function getSchemaByPath(params: any) {
 // 获取菜单 amis schema
 export function getSchema(params: any) {
   return service({
-    url: '/system/menu/getSchemaById',
+    url: '/api/system/menu/getSchemaById',
     method: 'get',
     params
   })
@@ -84,7 +84,7 @@ export function updateSchema(data: any): Promise<any> {
 // 获取流程定义信息
 export function getDefinitionById(params: any) {
   return service({
-    url: '/flow/definition/getById',
+    url: '/api/flow/definition/getById',
     method: 'get',
     params
   })
@@ -93,7 +93,7 @@ export function getDefinitionById(params: any) {
 // 获取流程定义信息XML
 export function getDefinitionXmlById(params: any) {
   return service({
-    url: '/flow/definition/xmlString',
+    url: '/api/flow/definition/xmlString',
     method: 'get',
     params
   })
@@ -102,7 +102,7 @@ export function getDefinitionXmlById(params: any) {
 // 保存流程定义接口
 export function definitionSaveXml(data: any): Promise<any> {
   return service({
-    url: '/flow/definition/saveXml',
+    url: '/api/flow/definition/saveXml',
     method: 'post',
     data
   })

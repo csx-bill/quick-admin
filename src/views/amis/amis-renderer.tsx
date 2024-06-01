@@ -21,8 +21,7 @@ const AmisRenderer: React.FC = () => {
     // 接口获取
     async function findCurrentMenu(path: any) {
       const res = await getSchemaByPath({ path: path })
-      console.log('res', res)
-      setSchema(res)
+      setSchema(res.data.data)
     }
 
     const pathname = location.pathname

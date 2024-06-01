@@ -76,10 +76,10 @@ const LayoutMenu = (props: any) => {
   const getMenuList = async () => {
     setLoading(true)
     try {
-      const userPermission = await getUserPermission()
-      setMenuList(getMenuItem(userPermission.userMenuTree))
+      const res = await getUserPermission()
+      setMenuList(getMenuItem(res.data.data.userMenuTree))
       // 缓存 按钮权限
-      setAuthCache(PERMS_CODE_KEY, userPermission.permsCode)
+      setAuthCache(PERMS_CODE_KEY, res.data.data.permsCode)
     } finally {
       setLoading(false)
     }
