@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { getToken, clearAuthCache } from '@/utils/auth'
+import { getToken, getAuthCache } from '@/utils/auth'
+import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 // amis 公共配置
 export const fetcher = ({
   url, // 接口地址
@@ -34,7 +35,7 @@ export const fetcher = ({
     config.headers['Content-Type'] = 'application/json'
   }
   const token = getToken()
-  const tenantId = localStorage.getItem('X-Tenant-Id')
+  const tenantId = getAuthCache<string>(X_Tenant_Id_KEY)
   config.headers['X-Access-Token'] = `${token}`
   config.headers['X-Tenant-Id'] = `${tenantId}`
   return (axios as any)[method](url, data, config)

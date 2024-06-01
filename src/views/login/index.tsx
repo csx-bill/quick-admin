@@ -5,13 +5,14 @@ import { Form, Input, Checkbox, Button, message, Select, Modal } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAppSelector, useAppDispatch } from '@/stores'
 import { setToken, setUserInfo, setSessionTimeout } from '@/stores/modules/user'
-import { getAuthCache } from '@/utils/auth'
+import { getAuthCache, setAuthCache } from '@/utils/auth'
 import { TOKEN_KEY } from '@/enums/cacheEnum'
 import { loginApi, getUserInfo, getUserTenantList } from '@/api'
 import logoIcon from '@/assets/images/logo_name.png'
 import classNames from 'classnames'
 import styles from './index.module.less'
 import useRoutes from '@/hooks/web/useRoutes'
+import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 
 /**
  *
@@ -160,13 +161,13 @@ const LoginPage: FC = () => {
     // 默认选择第一个租户
     setSelectedTenant(options[0].value)
     // 缓存租户
-    localStorage.setItem('X-Tenant-Id', options[0].value)
+    setAuthCache(X_Tenant_Id_KEY, options[0].value)
     return options
   }
 
   // 确认已选择的租户
   const handleOk = () => {
-    localStorage.setItem('X-Tenant-Id', selectedTenant)
+    setAuthCache(X_Tenant_Id_KEY, selectedTenant)
     setIsModalOpen(false)
     // resolve promise，触发 afterLoginAction 中的 getUserInfoAction 执行
     if (modalPromise) {

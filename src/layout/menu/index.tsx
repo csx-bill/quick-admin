@@ -7,7 +7,9 @@ import type { AppMenu } from '@/router/types'
 import { setMenuList } from '@/stores/modules/menu'
 import { getOpenKeys } from '@/utils/helper/menuHelper'
 import SvgIcon from '@/components/SvgIcon'
-import { getUserMenu } from '@/api'
+import { getUserPermission } from '@/api'
+import { setAuthCache } from '@/utils/auth'
+import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -17,20 +19,22 @@ const getItem = (
   key: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
-  type?: 'group'
+  type?: 'group',
+  hideMenu?: boolean
 ): MenuItem => {
   return {
     label,
     key,
     icon,
     children,
-    type
+    type,
+    hideMenu
   } as MenuItem
 }
 
 const LayoutMenu = (props: any) => {
   const { pathname } = useLocation()
-  const { setMenuList: setMenuListAction } = props
+  //const { setMenuList: setMenuListAction } = props
   const [loading, setLoading] = useState(false)
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [openKeys, setOpenKeys] = useState<string[]>([])
@@ -55,6 +59,11 @@ const LayoutMenu = (props: any) => {
   // 遍历路由配置，生成菜单项
   const getMenuItem = (data: AppMenu[], list: MenuItem[] = []) => {
     data.forEach((item: AppMenu) => {
+      // 是否隐藏菜单
+      if (item.hideInMenu === 'Y') {
+        item.hideMenu = true
+        console.log('1111111', item)
+      }
       if (!item?.children?.length) {
         return list.push(getItem(item.name, item.path, addIcon(item.icon)))
       }
@@ -67,9 +76,10 @@ const LayoutMenu = (props: any) => {
   const getMenuList = async () => {
     setLoading(true)
     try {
-      const menus = await getUserMenu()
-      setMenuList(getMenuItem(menus))
-      setMenuListAction(menus)
+      const userPermission = await getUserPermission()
+      setMenuList(getMenuItem(userPermission.userMenuTree))
+      // 缓存 按钮权限
+      setAuthCache(PERMS_CODE_KEY, userPermission.permsCode)
     } finally {
       setLoading(false)
     }

@@ -46,10 +46,10 @@ export function getRoutes() {
   })
 }
 
-// 获取菜单
-export function getUserMenu() {
+// 获取菜单&权限
+export function getUserPermission() {
   return service({
-    url: '/system/menu/getUserMenu',
+    url: '/system/user/getUserPermission',
     method: 'get'
   })
 }

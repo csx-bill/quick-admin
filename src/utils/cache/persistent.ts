@@ -8,7 +8,9 @@ import {
   type APP_CONFIG_KEY,
   type APP_TAGS_KEY,
   APP_LOCAL_CACHE_KEY,
-  APP_SESSION_CACHE_KEY
+  APP_SESSION_CACHE_KEY,
+  type PERMS_CODE_KEY,
+  type X_Tenant_Id_KEY
 } from '@/enums/cacheEnum'
 import { createLocalStorage, createSessionStorage } from '@/utils/cache'
 import { DEFAULT_CACHE_TIME } from '@/settings/encryptionSetting'
@@ -19,6 +21,8 @@ interface BasicStore {
   [USER_INFO_KEY]: UserInfo
   [APP_CONFIG_KEY]: AppConfig
   [APP_TAGS_KEY]: RouteObject[]
+  [PERMS_CODE_KEY]: []
+  [X_Tenant_Id_KEY]: string
 }
 
 type LocalStore = BasicStore

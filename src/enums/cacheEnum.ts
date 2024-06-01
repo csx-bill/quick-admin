@@ -12,6 +12,10 @@ export const APP_LOCAL_CACHE_KEY = 'APP_LOCAL_CACHE_KEY'
 
 export const APP_SESSION_CACHE_KEY = 'APP_SESSION_CACHE_KEY'
 
+export const X_Tenant_Id_KEY = 'X_Tenant_Id_KEY'
+// 权限缓存code
+export const PERMS_CODE_KEY = 'PERMS_CODE_KEY'
+
 export enum CacheTypeEnum {
   SESSION,
   LOCAL

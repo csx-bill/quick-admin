@@ -33,6 +33,7 @@ export interface AppMenu {
   affix?: boolean
   orderNo?: number
   hideMenu?: boolean
+  hideInMenu?: string
   hideChildrenInMenu?: boolean
   hideBreadcrumb?: boolean
 }

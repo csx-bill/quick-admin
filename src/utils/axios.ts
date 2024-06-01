@@ -1,7 +1,8 @@
 import type { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import axios from 'axios'
 import { message } from 'antd'
-import { getToken, clearAuthCache } from '@/utils/auth'
+import { getToken, clearAuthCache, getAuthCache } from '@/utils/auth'
+import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 
 // Create axios instance
 const service = axios.create({
@@ -26,7 +27,7 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     ;(config as Recordable).headers['X-Access-Token'] = `${token}`
   }
   ;(config as Recordable).headers['Content-Type'] = 'application/json'
-  const tenantId = localStorage.getItem('X-Tenant-Id') || '0'
+  const tenantId = getAuthCache<string>(X_Tenant_Id_KEY) || '0'
   ;(config as Recordable).headers['X-Tenant-Id'] = `${tenantId}`
   return config
 }, handleError)

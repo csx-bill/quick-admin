@@ -49,3 +49,7 @@ export interface AppState {
 export interface TenantRouterState {
   tenantRouter: RouteObject[]
 }
+
+export interface TenantState {
+  XTenantId: string
+}
