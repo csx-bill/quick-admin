@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getSchemaByPath } from '@/api'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import copy from 'copy-to-clipboard'
 import { render as renderAmis } from 'amis'
@@ -9,9 +9,12 @@ import 'amis/lib/themes/antd.css'
 import 'amis/lib/helper.css'
 import 'amis/sdk/iconfont.css'
 import { fetcher, theme } from '@/utils/amisEnvUtils'
+import { getAuthCache } from '@/utils/auth'
+import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
 
 const AmisRenderer: React.FC = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const [schema, setSchema] = useState({})
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const AmisRenderer: React.FC = () => {
           context: {
             // 全局上下文数据, 非受控的数据，无论哪一层都能获取到，包括弹窗自定义数据映射后都能获取到。
             // 取值方式 ${permsCode}
-            //permsCode: initialState?.currentUser?.permsCode
+            permsCode: getAuthCache<string[]>(PERMS_CODE_KEY)
           }
         },
         {
@@ -57,13 +60,13 @@ const AmisRenderer: React.FC = () => {
             // 实现 amis 触发 多页签打开
             // 用来实现页面跳转, actionType:link、url 都会进来。
             if (action && action.actionType === 'url' && action.blank === false) {
-              history.push(location)
+              navigate(location)
               return
             } else if (action && action.blank) {
               window.open(location, '_blank')
               return
             } else {
-              history.push(location)
+              navigate(location)
             }
           }
         }

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import LogicFlow from '@logicflow/core'
 import { BPMNElements, Control, DndPanel, SelectionSelect } from '@logicflow/extension'
 import { toast, ToastComponent } from 'amis-ui'
+import { useSearchParams } from 'react-router-dom'
 //import { useParams } from 'umi';
 
 import { Drawer, Form, Input, Select } from 'antd'
@@ -14,7 +15,7 @@ import '@logicflow/extension/lib/style/index.css'
 
 import './common.css'
 
-//import { getById, getByIdXml, saveXml } from '@/api';
+import { getDefinitionById, getDefinitionXmlById, definitionSaveXml } from '@/api'
 
 import warmAdapter from '@/components/LogicFlow/warmAdapter'
 
@@ -31,8 +32,7 @@ export const FlowEditor: React.FC = () => {
   // This ref will provide direct access to the DOM element
   const containerRef = useRef<HTMLDivElement>(null)
 
-  //const params = useParams();
-  //const params.id = 1;
+  const [searchParams] = useSearchParams()
 
   const [definition, setDefinition] = useState({})
   const [definitionXml, setDefinitionXml] = useState({})
@@ -46,11 +46,10 @@ export const FlowEditor: React.FC = () => {
 
   useEffect(() => {
     async function fetchFlowDefinition() {
-      // const resXml = await getByIdXml({ id: params.id });
-      // setDefinitionXml(resXml.data);
-      // const res = await getById({ id: params.id });
-      // setDefinition(res.data);
-      setDefinition({})
+      const resXml = await getDefinitionXmlById({ id: searchParams.get('id') })
+      setDefinitionXml(resXml)
+      const res = await getDefinitionById({ id: searchParams.get('id') })
+      setDefinition(res)
     }
     fetchFlowDefinition()
   }, [])
@@ -126,13 +125,9 @@ export const FlowEditor: React.FC = () => {
       title: '',
       text: '保存',
       onClick: (lf, ev) => {
-        // saveXml({ id: params.id, xmlString: lf.getGraphData(definition) }).then(res => {
-        //   if (res.status === 0) {
-        //     toast.success('保存成功！', '提示')
-        //   } else {
-        //     toast.error('保存失败！', '提示')
-        //   }
-        // })
+        definitionSaveXml({ id: searchParams.get('id'), xmlString: lf.getGraphData(definition) }).then(res => {
+          toast.success('保存成功！', '提示')
+        })
       }
     })
 

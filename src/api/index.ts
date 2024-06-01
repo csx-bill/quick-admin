@@ -80,3 +80,30 @@ export function updateSchema(data: any): Promise<any> {
     data
   })
 }
+
+// 获取流程定义信息
+export function getDefinitionById(params: any) {
+  return service({
+    url: '/flow/definition/getById',
+    method: 'get',
+    params
+  })
+}
+
+// 获取流程定义信息XML
+export function getDefinitionXmlById(params: any) {
+  return service({
+    url: '/flow/definition/xmlString',
+    method: 'get',
+    params
+  })
+}
+
+// 保存流程定义接口
+export function definitionSaveXml(data: any): Promise<any> {
+  return service({
+    url: '/flow/definition/saveXml',
+    method: 'post',
+    data
+  })
+}
