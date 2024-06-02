@@ -62,7 +62,8 @@ const AmisRenderer: React.FC = () => {
               navigate(location)
               return
             } else if (action && action.blank) {
-              window.open(location, '_blank')
+              // hash 路由 新窗口打开
+              window.open(`#${location}`, '_blank')
               return
             } else {
               navigate(location)
