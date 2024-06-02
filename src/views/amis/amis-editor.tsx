@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-//import { useModel } from '@umijs/max'
-//import { SelectLang } from '@/components/RightContent';
-//import { getLocale, useParams } from 'umi'
+import { useSearchParams } from 'react-router-dom'
 import { DesktopOutlined, MobileOutlined } from '@ant-design/icons'
 import { getSchema, updateSchema } from '@/api'
 
 import { fetcher, theme } from '@/utils/amisEnvUtils'
-//import './editor.scss'
+import './editor.scss'
 import { Editor, ShortcutKey } from 'amis-editor'
 import { alert, AlertComponent, confirm, toast, ToastComponent } from 'amis-ui'
 import copy from 'copy-to-clipboard'
@@ -26,12 +24,12 @@ const AmisEditor: React.FC = () => {
   const [preview, setPreview] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [schema, setSchema] = useState({})
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     //localStorage.setItem('suda-i18n-locale', getLocale());
     async function fetchSchema() {
-      //const res = await getSchema({ id: params.id })
-      const res = await getSchema({ id: '1662841046100353026' })
+      const res = await getSchema({ id: searchParams.get('id') })
       setSchema(res.data.data?.schema !== null ? JSON.parse(res.data.data?.schema) : {})
     }
     fetchSchema()
@@ -42,7 +40,7 @@ const AmisEditor: React.FC = () => {
 
   async function save() {
     // 调用保存接口
-    const res = await updateSchema({ id: params.id, schema: JSON.stringify(schema) })
+    const res = await updateSchema({ id: searchParams.get('id'), schema: JSON.stringify(schema) })
 
     toast.success('保存成功', '提示')
   }
