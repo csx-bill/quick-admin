@@ -52,7 +52,7 @@ const LayoutTags: FC = () => {
   const [tagsContLeft, setTagsContLeft] = useState(0)
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(document.querySelector('#mainCont')!)
 
-  const { pathname } = useLocation()
+  const { pathname, search, hash } = useLocation()
   const navigate = useNavigate()
   const visitedTags = useAppSelector(state => state.tags.visitedTags)
   const dispatch = useAppDispatch()
@@ -71,7 +71,7 @@ const LayoutTags: FC = () => {
     const routes = [...basicRoutes, ...tenantRouter]
     const currRoute = searchRoute(pathname, routes)
     if (currRoute) {
-      dispatch(addVisitedTags(currRoute))
+      dispatch(addVisitedTags({ ...currRoute, search, hash }))
     }
     setActiveTag(pathname)
   }, [pathname])
@@ -181,9 +181,9 @@ const LayoutTags: FC = () => {
     })
   }
 
-  const handleClickTag = (path: string) => {
+  const handleClickTag = (path: string, search?: string, hash?: string) => {
     setActiveTag(path)
-    navigate(path)
+    navigate([path, search, hash].filter(Boolean).join(''))
   }
   const getKey = () => {
     return new Date().getTime().toString()
@@ -213,7 +213,7 @@ const LayoutTags: FC = () => {
                 name={item.meta?.title!}
                 active={activeTag === item.fullPath}
                 fixed={item.meta?.affix}
-                onClick={() => handleClickTag(item.fullPath!)}
+                onClick={() => handleClickTag(item.fullPath!, item.search, item.hash)}
                 closeTag={() => handleCloseTag(item.fullPath!)}
               />
             </span>

@@ -23,7 +23,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // 自定义本地开发服务器
       proxy: {
         '/api': {
-          target: "http://127.0.0.1:9999",
+          target: "http://118.89.55.165",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, 'api'),
         },

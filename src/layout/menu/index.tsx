@@ -62,14 +62,15 @@ const LayoutMenu = (props: any) => {
       // 是否隐藏菜单
       if (item.hideInMenu === 'Y') {
         item.hideMenu = true
-        console.log('1111111', item)
       }
       if (!item?.children?.length) {
-        return list.push(getItem(item.name, item.path, addIcon(item.icon)))
+        return list.push(getItem(item.name, item.path, addIcon(item.icon), void 0, void 0, item.hideMenu))
       }
-      list.push(getItem(item.name, item.path, addIcon(item.icon), getMenuItem(item.children)))
+      list.push(getItem(item.name, item.path, addIcon(item.icon), getMenuItem(item.children), void 0, item.hideMenu))
     })
-    return list
+    return list.filter(item => {
+      return !(item as unknown as AppMenu).hideMenu
+    })
   }
 
   // 异步获取菜单数据

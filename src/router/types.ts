@@ -22,6 +22,8 @@ export interface RouteObject {
   children?: RouteObject[]
   index?: false
   meta?: MetaProps
+  search?: string
+  hash?: string
 }
 
 export interface AppMenu {
