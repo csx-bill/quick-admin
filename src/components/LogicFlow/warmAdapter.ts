@@ -1,19 +1,15 @@
-const WarmType = {
-  // 开始
-  START: 'start',
-  // 中间节点
-  BETWEEN: 'between',
-  // 结束
-  END: 'end',
-  // 互斥网关 （排他网关）
-  SERIAL: 'serial',
-  // 并行网关
-  PARALLEL: 'parallel',
-  // 连接线
-  SKIP: 'skip'
+// 定义流程节点类型
+enum WarmType {
+  START = 'start', // 开始节点
+  BETWEEN = 'between', // 中间节点
+  END = 'end', // 结束节点
+  SERIAL = 'serial', // 互斥网关（排他网关）
+  PARALLEL = 'parallel', // 并行网关
+  SKIP = 'skip' // 连接线
 }
 
-const WarmTypeMap = {
+// 定义流程节点类型对应的 BPMN 类型
+const WarmTypeMap: { [key: string]: string } = {
   start: 'bpmn:startEvent',
   skip: 'bpmn:sequenceFlow',
   between: 'bpmn:userTask',
@@ -21,8 +17,9 @@ const WarmTypeMap = {
   serial: 'bpmn:exclusiveGateway',
   parallel: 'bpmn:parallelGateway'
 }
-// 转换warm-flow识别的类型
-function getWarmType(type) {
+
+// 根据 BPMN 类型获取流程节点类型
+function getWarmType(type: string): string {
   switch (type) {
     case 'bpmn:sequenceFlow':
       return WarmType.SKIP
@@ -41,12 +38,14 @@ function getWarmType(type) {
   }
 }
 
-// 节点标签
-const NODE_NAMES = ['start', 'between', 'serial', 'parallel', 'end']
-// 流程节点属性
-const DEFINITION_KEYS = ['flowCode', 'flowName', 'version', 'fromCustom', 'fromPath']
-// 节点属性
-const NODE_ATTR_KEYS = [
+// 特定的节点标签数组
+const NODE_NAMES: string[] = ['start', 'between', 'serial', 'parallel', 'end']
+
+// 流程定义中的属性键数组
+const DEFINITION_KEYS: string[] = ['flowCode', 'flowName', 'version', 'fromCustom', 'fromPath']
+
+// 节点属性键数组
+const NODE_ATTR_KEYS: string[] = [
   'nodeType',
   'nodeCode',
   'nodeName',
@@ -56,15 +55,58 @@ const NODE_ATTR_KEYS = [
   'listenerType',
   'listenerPath'
 ]
-// 变迁节点属性
-const SKIP_ATTR_KEYS = ['skipName', 'skipType', 'coordinate', 'skipCondition']
 
-/**
- * 将LogicFlow的数据转成warm-flow的定义文件
- * @param {*} data(...definitionInfo,nodes,edges)
- * @returns
- */
-export const logicFlowJsonToFlowXml = (data, definition) => {
+// 跳跃节点属性键数组
+const SKIP_ATTR_KEYS: string[] = ['skipName', 'skipType', 'coordinate', 'skipCondition']
+
+// 定义节点接口（类型）
+interface Node {
+  id: string
+  type: string
+  text: {
+    value?: string
+    x?: number
+    y?: number
+  }
+  properties: { [key: string]: any }
+  x?: number
+  y?: number
+}
+
+// 定义边接口（类型）
+interface Edge {
+  id: string
+  sourceNodeId: string
+  targetNodeId: string
+  type: string
+  properties: { [key: string]: any }
+  text: { [key: string]: any }
+  pointsList?: { x: number; y: number }[]
+  startPoint?: { x: number; y: number }
+  endPoint?: { x: number; y: number }
+}
+
+// 定义转换后的流程数据接口（类型）
+interface GraphData {
+  flowCode?: string
+  flowName?: string
+  version?: string
+  fromCustom?: string
+  fromPath?: string
+  nodes: Node[]
+  edges: Edge[]
+}
+
+// LogicFlow 转 WarmFlow 中间调度对象接口定义
+interface WarmAdapterOptions {
+  lf: {
+    adapterIn: Function
+    adapterOut: Function
+  }
+}
+
+// LogicFlow 数据转换成 WarmFlow XML 定义文件
+export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string => {
   // node 转换
   data.nodes = data.nodes.map(node => {
     return convertLogicFlowElementToWarmFlowElement(node)
@@ -247,12 +289,8 @@ export const logicFlowJsonToFlowXml = (data, definition) => {
   return xml
 }
 
-/**
- * 将warm-flow的定义文件转成LogicFlow支持的数据格式
- * @param {*} xml
- * @returns
- */
-export const snakerXml2LogicFlowJson = xml => {
+// WarmFlow XML 定义文件转换成 LogicFlow 支持的数据格式
+export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
   const graphData = {
     nodes: [],
     edges: []
@@ -360,12 +398,8 @@ export const snakerXml2LogicFlowJson = xml => {
   return graphData
 }
 
-/**
- * 解析xml成Dom对象
- * @param {} xml
- * @returns
- */
-export const parseXml2Dom = xml => {
+// 解析 XML 成 DOM 对象
+export const parseXml2Dom = (xml: string): Document => {
   let xmlDoc = null
   if (window.DOMParser) {
     const parser = new DOMParser()
@@ -380,21 +414,25 @@ export const parseXml2Dom = xml => {
   return xmlDoc
 }
 
+// LogicFlow 和 WarmFlow 适配器
 class WarmAdapter {
   static pluginName = 'warmAdapter'
-  constructor({ lf }) {
+
+  // 构造函数的参数类型使用了之前定义的接口类型
+  constructor({ lf }: WarmAdapterOptions) {
     lf.adapterIn = this.adapterIn
     lf.adapterOut = this.adapterOut
   }
-  adapterOut(logicFlowData, definition) {
+
+  adapterOut(logicFlowData: GraphData, definition: any): string {
     if (logicFlowData) {
       return logicFlowJsonToFlowXml(logicFlowData, definition)
     }
   }
-  adapterIn(warmData) {
+
+  adapterIn(warmData: string): GraphData {
     if (warmData) {
-      const d = snakerXml2LogicFlowJson(warmData)
-      return d
+      return snakerXml2LogicFlowJson(warmData)
     }
   }
 }
