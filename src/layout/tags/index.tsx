@@ -190,7 +190,7 @@ const LayoutTags: FC = () => {
   }
   const handleReload = () => {
     // 刷新当前路由，页面不刷新
-    const index = visitedTags.findIndex(tab => tab.fullPath === activeTag)
+    const index = visitedTags.findIndex((tab: RouteObject) => tab.fullPath === activeTag)
     if (index >= 0) {
       // 这个是react的特性，key变了，组件会卸载重新渲染
       navigate(activeTag, { replace: true, state: { key: getKey() } })

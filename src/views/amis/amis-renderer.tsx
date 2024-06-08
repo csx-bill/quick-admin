@@ -3,7 +3,7 @@ import { getSchemaByPath } from '@/api'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import copy from 'copy-to-clipboard'
-import { render as renderAmis } from 'amis'
+import { render as renderAmis, type SchemaObject } from 'amis'
 import { ToastComponent, AlertComponent, toast } from 'amis-ui'
 import 'amis/lib/themes/antd.css'
 import 'amis/lib/helper.css'
@@ -15,7 +15,7 @@ import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
 const AmisRenderer: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const [schema, setSchema] = useState({})
+  const [schema, setSchema] = useState<SchemaObject>({} as SchemaObject)
 
   useEffect(() => {
     // 接口获取

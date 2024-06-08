@@ -15,30 +15,30 @@ self.MonacoEnvironment = {
       case 'json': {
         // @ts-ignore
         const jsonWorker = (await import('monaco-editor/esm/vs/language/json/json.worker?worker')).default
-        return jsonWorker()
+        return (jsonWorker as Function)()
       }
       case 'css':
       case 'scss':
       case 'less': {
         // @ts-ignore
         const cssWorker = (await import('monaco-editor/esm/vs/language/css/css.worker?worker')).default
-        return cssWorker()
+        return (cssWorker as Function)()
       }
       case 'html': {
         // @ts-ignore
         const htmlWorker = (await import('monaco-editor/esm/vs/language/html/html.worker?worker')).default
-        return htmlWorker()
+        return (htmlWorker as Function)()
       }
       case 'typescript':
       case 'javascript': {
         // @ts-ignore
         const tsWorker = (await import('monaco-editor/esm/vs/language/typescript/ts.worker?worker')).default
-        return tsWorker()
+        return (tsWorker as Function)()
       }
       default: {
         // @ts-ignore
         const EditorWorker = (await import('monaco-editor/esm/vs/editor/editor.worker?worker')).default
-        return EditorWorker()
+        return (EditorWorker as Function)()
       }
     }
   }

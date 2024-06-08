@@ -18,7 +18,16 @@ import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
  *
  * @returns 租户列表
  */
-const Tenant = ({ tenantList, selectedTenant, onChangeTenant }) => {
+
+const Tenant = ({
+  tenantList,
+  selectedTenant,
+  onChangeTenant
+}: {
+  tenantList: { value: string; label: string }[]
+  selectedTenant?: string
+  onChangeTenant: (value: string) => void
+}) => {
   const filterOption = (input: string, option?: { label: string; value: string }) =>
     (option?.label ?? '').includes(input)
 
@@ -48,9 +57,9 @@ const LoginPage: FC = () => {
   // 用于处理模态框确认后的 Promise
   const [modalPromise, setModalPromise] = useState<{ resolve: Function } | null>(null)
 
-  const [tenantList, setTenantList] = useState(null)
+  const [tenantList, setTenantList] = useState<{ value: string; label: string }[]>([])
   // 初始化
-  const [selectedTenant, setSelectedTenant] = useState(null)
+  const [selectedTenant, setSelectedTenant] = useState<string>()
 
   const { loadRoutes } = useRoutes()
 
@@ -149,12 +158,12 @@ const LoginPage: FC = () => {
     return res.data.data
   }
 
-  const getUserTenantListAction = async (): Promise<any | null> => {
-    if (!getToken()) return null
+  const getUserTenantListAction = async (): Promise<{ value: string; label: string }[]> => {
+    if (!getToken()) return []
 
     const res = await getUserTenantList()
 
-    const options = res.data.data.map(tenant => ({
+    const options = res.data.data.map((tenant: { id: string; name: string }) => ({
       value: tenant.id,
       label: tenant.name
     }))

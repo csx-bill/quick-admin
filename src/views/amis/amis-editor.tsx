@@ -5,6 +5,7 @@ import { getSchema, updateSchema } from '@/api'
 
 import { fetcher, theme } from '@/utils/amisEnvUtils'
 import './editor.scss'
+import type { SchemaObject } from 'amis'
 import { Editor, ShortcutKey } from 'amis-editor'
 import { alert, AlertComponent, confirm, toast, ToastComponent } from 'amis-ui'
 import copy from 'copy-to-clipboard'
@@ -23,7 +24,7 @@ const AmisEditor: React.FC = () => {
 
   const [preview, setPreview] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [schema, setSchema] = useState({})
+  const [schema, setSchema] = useState<SchemaObject>({} as SchemaObject)
   const [searchParams] = useSearchParams()
 
   useEffect(() => {

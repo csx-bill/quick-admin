@@ -117,7 +117,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
   })
 
   // 将LogicFlow中的Node数据转换为warm-flow元素数据
-  function convertLogicFlowElementToWarmFlowElement(element) {
+  function convertLogicFlowElementToWarmFlowElement<T extends Node | Edge>(element: T): T {
     return {
       ...element, // 复制element中的所有属性
       type: getWarmType(element.type) // 只更新type属性
@@ -133,7 +133,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
   let xml = ''
   // data的数据由流程定义文件信息+logicFlow数据构成
   // 先构建成流程对象
-  const definitionObj = {
+  const definitionObj: Record<string, any> = {
     flowCode: data.flowCode, // 流程定义编码
     flowName: data.flowName, // 流程定义名称
     version: data.version, // 流程定义版本号
@@ -154,7 +154,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
    * @param {*} id 当前节点名称
    * @returns
    */
-  const getNextNodes = id => {
+  const getNextNodes = (id: string) => {
     return data.edges
       .filter(edge => {
         return edge.sourceNodeId === id
@@ -170,17 +170,22 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
    * @param {*} id
    * @returns
    */
-  const getSkip = id => {
+  const getSkip = (id: string) => {
     return data.edges
       .filter(edge => {
         return edge.sourceNodeId === id
       })
       .map(edge => {
         let coordinate = ''
-        for (let i = 0; i < edge.pointsList.length; i++) {
-          coordinate = coordinate + parseInt(edge.pointsList[i].x) + ',' + parseInt(edge.pointsList[i].y)
-          if (i !== edge.pointsList.length - 1) {
-            coordinate = coordinate + ';'
+        if (edge.pointsList) {
+          for (let i = 0; i < edge.pointsList.length; i++) {
+            const print = edge.pointsList[i]
+            if (print) {
+              coordinate = coordinate + parseInt(print.x + '') + ',' + parseInt(print.y + '')
+              if (i !== edge.pointsList.length - 1) {
+                coordinate = coordinate + ';'
+              }
+            }
           }
         }
         if (edge.text) {
@@ -200,7 +205,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
    * @param {} node
    * @returns
    */
-  const buildNode = node => {
+  const buildNode = (node: Node) => {
     let textXy = ''
     if (node.text) {
       textXy = '|' + node.text.x + ',' + node.text.y
@@ -222,7 +227,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
    * @param {*} text
    * @returns
    */
-  const textEncode = text => {
+  const textEncode = (text: string) => {
     text = text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     return text
   }
@@ -230,13 +235,13 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
    * 递归构建节点属性
    * @param {} node
    */
-  const recursionBuildNode = node => {
+  const recursionBuildNode = (node: Node) => {
     const nodeName = node.type
     if (!definitionObj[nodeName + '_' + node.id]) {
       definitionObj[nodeName + '_' + node.id] = buildNode(node)
       const nextNodes = getNextNodes(node.id)
       nextNodes.forEach(nextNode => {
-        recursionBuildNode(nextNode)
+        nextNode && recursionBuildNode(nextNode)
       })
     }
   }
@@ -270,7 +275,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
       xml += '>\n\t'
       // 构建skip
       if (value.skip) {
-        value.skip.forEach(skip => {
+        value.skip.forEach((skip: Record<string, any>) => {
           xml += '\t<skip'
           // skip属性
           Object.keys(skip).forEach(skipAttrKey => {
@@ -291,7 +296,7 @@ export const logicFlowJsonToFlowXml = (data: GraphData, definition: any): string
 
 // WarmFlow XML 定义文件转换成 LogicFlow 支持的数据格式
 export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
-  const graphData = {
+  const graphData: GraphData & Record<string, any> = {
     nodes: [],
     edges: []
   }
@@ -309,8 +314,8 @@ export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
     }
   })
   let nodeEles = null
-  let node = null
-  let lfNode = {}
+  let node: Element | null = null
+  let lfNode: Node = {} as Node
   // 解析节点
   nodeEles = definitionDom[0].getElementsByTagName('node')
   if (nodeEles.length) {
@@ -319,10 +324,10 @@ export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
       lfNode = {
         text: {},
         properties: {}
-      }
+      } as Node
       // 处理节点
       NODE_ATTR_KEYS.forEach(attrKey => {
-        value = node.getAttribute(attrKey)
+        value = node?.getAttribute(attrKey)
         if (value) {
           if (attrKey === 'nodeType') {
             lfNode.type = WarmTypeMap[value]
@@ -348,19 +353,19 @@ export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
       graphData.nodes.push(lfNode)
       // 处理边
       let skipEles = null
-      let skipEle = null
-      let edge = {}
+      let skipEle: Element | null = null
+      let edge: Edge = {} as Edge
       skipEles = node.getElementsByTagName('skip')
       for (let j = 0, lenn = skipEles.length; j < lenn; j++) {
         skipEle = skipEles[j]
         edge = {
           text: {},
           properties: {}
-        }
-        edge.id = skipEle.getAttribute('id')
+        } as Edge
+        edge.id = skipEle.getAttribute('id') ?? ''
         edge.type = WarmTypeMap['skip']
         edge.sourceNodeId = lfNode.id
-        edge.targetNodeId = skipEle.textContent
+        edge.targetNodeId = skipEle.textContent ?? ''
         edge.text = {
           value: skipEle.getAttribute('skipName')
         }
@@ -377,7 +382,7 @@ export const snakerXml2LogicFlowJson = (xml: string): GraphData => {
           edge.pointsList = []
           coordinateXy[0].split(';').forEach(item => {
             const pointArr = item.split(',')
-            edge.pointsList.push({
+            edge.pointsList!.push({
               x: parseInt(pointArr[0]),
               y: parseInt(pointArr[1])
             })
@@ -411,7 +416,7 @@ export const parseXml2Dom = (xml: string): Document => {
     xmlDoc.async = false
     xmlDoc.loadXML(xml)
   }
-  return xmlDoc
+  return xmlDoc as Document
 }
 
 // LogicFlow 和 WarmFlow 适配器
@@ -428,9 +433,10 @@ class WarmAdapter {
     if (logicFlowData) {
       return logicFlowJsonToFlowXml(logicFlowData, definition)
     }
+    return ''
   }
 
-  adapterIn(warmData: string): GraphData {
+  adapterIn(warmData: string): GraphData | undefined {
     if (warmData) {
       return snakerXml2LogicFlowJson(warmData)
     }

@@ -22,7 +22,7 @@ export async function getAsyncRoutes() {
 
 // 递归遍历
 export async function traverse(routes: any) {
-  routes.forEach(route => {
+  routes.forEach((route: any) => {
     if (route.menuType === 'DIR') {
       route.element = <LayoutGuard />
       route.meta = {
