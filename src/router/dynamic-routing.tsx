@@ -3,6 +3,13 @@ import { genFullPath } from '@/router/helpers'
 import { LazyLoad } from '@/components/LazyLoad'
 import { lazy } from '@loadable/component'
 import { LayoutGuard } from '@/router/guard'
+import React from 'react'
+const modules = import.meta.glob<false, 'default', React.FC>([
+  '../views/**/*.tsx',
+  '!../views/exception', // 排除
+  '!../views/flow', // 排除
+  '!../views/login' // 排除
+])
 
 // 定义一个函数用于从API获取路由
 export async function getAsyncRoutes() {
@@ -34,7 +41,8 @@ export async function traverse(routes: any) {
 
     if (route.menuType === 'MENU') {
       route.key = route.id
-      route.element = LazyLoad(lazy(() => import(/* @vite-ignore */ route.component)))
+      const key = ['../views/', route.component, '.tsx'].join('')
+      route.element = LazyLoad(lazy(modules[key]))
       route.meta = {
         title: route.name,
         key: route.id,
