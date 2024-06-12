@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { getToken, getAuthCache } from '@/utils/auth'
-import { X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 import { service } from '@/utils/axios'
 
 // amis 公共配置
