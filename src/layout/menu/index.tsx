@@ -1,5 +1,5 @@
 import type { MenuProps } from 'antd'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, Spin } from 'antd'
@@ -14,15 +14,25 @@ import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
 type MenuItem = Required<MenuProps>['items'][number]
 
 // 定义生成菜单项的函数
-const getItem = (
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group',
+const getItem = ({
+  label,
+  key,
+  icon,
+  path,
+  children,
+  type,
+  hideMenu
+}: {
+  label: React.ReactNode
+  key: React.Key
+  path: String
+  icon?: React.ReactNode
+  children?: MenuItem[]
+  type?: 'group'
   hideMenu?: boolean
-): MenuItem => {
+}): MenuItem => {
   return {
+    path,
     label,
     key,
     icon,
@@ -39,12 +49,27 @@ const LayoutMenu = (props: any) => {
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
-
+  const menuKeys = useMemo(() => {
+    const map: Record<string, string[]> = {}
+    const func = (arr: any[], keys: string[]) => {
+      ;(arr ?? []).reduce((map, item) => {
+        if (item) {
+          map[(item as any).path] = [...keys, item.key as string]
+          if (item.children) {
+            func(item.children, map[(item as any).path])
+          }
+        }
+        return map
+      }, map)
+    }
+    func(menuList, [])
+    return map
+  }, [menuList])
   useEffect(() => {
-    setSelectedKeys([pathname])
-
-    setOpenKeys(getOpenKeys(pathname))
-  }, [pathname])
+    const keys = menuKeys[pathname] ?? []
+    setSelectedKeys([keys[keys.length - 1]].filter(Boolean))
+    setOpenKeys(keys)
+  }, [pathname, menuKeys])
 
   // 定义添加图标的函数
   const addIcon = (icon?: string) => {
@@ -64,9 +89,29 @@ const LayoutMenu = (props: any) => {
         item.hideMenu = true
       }
       if (!item?.children?.length) {
-        return list.push(getItem(item.name, item.path, addIcon(item.icon), void 0, void 0, item.hideMenu))
+        return list.push(
+          getItem({
+            label: item.name,
+            path: item.path,
+            key: item.id,
+            icon: addIcon(item.icon),
+            children: void 0,
+            type: void 0,
+            hideMenu: item.hideMenu
+          })
+        )
       }
-      list.push(getItem(item.name, item.path, addIcon(item.icon), getMenuItem(item.children), void 0, item.hideMenu))
+      list.push(
+        getItem({
+          label: item.name,
+          path: item.path,
+          key: item.id,
+          icon: addIcon(item.icon),
+          children: getMenuItem(item.children),
+          type: void 0,
+          hideMenu: item.hideMenu
+        })
+      )
     })
     return list.filter(item => {
       return !(item as unknown as AppMenu).hideMenu
@@ -101,10 +146,9 @@ const LayoutMenu = (props: any) => {
 
   const navigate = useNavigate()
   // 处理菜单项的点击事件，进行页面跳转
-  const handleMenuClick: MenuProps['onClick'] = ({ key }: { key: string }) => {
-    navigate(key)
+  const handleMenuClick = ({ item, key }: { item: React.ReactElement; key: string }) => {
+    navigate(item.props.path + `?mid=${key}`)
   }
-
   return (
     <div className='layout_menu'>
       <Spin spinning={loading} tip='Loading...'>
@@ -117,7 +161,7 @@ const LayoutMenu = (props: any) => {
           openKeys={openKeys}
           selectedKeys={selectedKeys}
           items={menuList}
-          onClick={handleMenuClick}
+          onClick={handleMenuClick as unknown as MenuProps['onClick']}
           onOpenChange={handleOpenChange}
         />
       </Spin>

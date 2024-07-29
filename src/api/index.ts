@@ -63,6 +63,24 @@ export function getSchemaByPath(params: any) {
   })
 }
 
+// 获取表单详情
+export function getOnlCgformHeadDetails(params: any) {
+  return service({
+    url: '/api/online/onlCgformHead/getOnlCgformHeadDetails',
+    method: 'get',
+    params
+  })
+}
+
+// 获取表单模板schema
+export function getGenTemplateDetails(params: any) {
+  return service({
+    url: '/api/online/genTemplate/getGenTemplateById',
+    method: 'get',
+    params
+  })
+}
+
 // 获取菜单 amis schema
 export function getSchema(params: any) {
   return service({

@@ -27,6 +27,7 @@ export interface RouteObject {
 }
 
 export interface AppMenu {
+  id: string
   name: string
   path: string
   children?: AppMenu[]

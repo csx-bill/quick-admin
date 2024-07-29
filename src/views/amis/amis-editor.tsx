@@ -18,6 +18,9 @@ import 'amis/sdk/iconfont.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/css/v4-shims.css'
 
+import { getAuthCache } from '@/utils/auth'
+import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
+
 const AmisEditor: React.FC = () => {
   //const { initialState } = useModel('@@initialState')
   //const params = useParams()
@@ -132,7 +135,7 @@ const AmisEditor: React.FC = () => {
             copy: copy,
             confirm: confirm
           }}
-          //data={{ permsCode: initialState?.currentUser?.permsCode }}
+          data={{ permsCode: getAuthCache<string[]>(PERMS_CODE_KEY) }}
         />
       </div>
     </div>
