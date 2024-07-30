@@ -54,15 +54,6 @@ export function getUserPermission() {
   })
 }
 
-// 获取菜单 amis schema
-export function getSchemaByPath(params: any) {
-  return service({
-    url: '/api/system/menu/getSchemaByPath',
-    method: 'get',
-    params
-  })
-}
-
 // 获取表单详情
 export function getOnlCgformHeadDetails(params: any) {
   return service({

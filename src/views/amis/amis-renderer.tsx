@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { getSchemaByPath } from '@/api'
+import { useSearchParams } from 'react-router-dom'
+import { getSchema } from '@/api'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import copy from 'copy-to-clipboard'
@@ -16,12 +17,13 @@ const AmisRenderer: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [schema, setSchema] = useState<SchemaObject>({} as SchemaObject)
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     // 接口获取
     async function findCurrentMenu(path: any) {
-      const res = await getSchemaByPath({ path: path })
-      setSchema(res.data.data)
+      const res = await getSchema({ id: searchParams.get('mid') })
+      setSchema(res.data.data?.schema !== null ? JSON.parse(res.data.data?.schema) : {})
     }
 
     const pathname = location.pathname

@@ -176,7 +176,7 @@ const LayoutTags: FC = () => {
         } else {
           currTag = tagsList[tagLen - 1]
         }
-        navigate(currTag?.fullPath!)
+        navigate([currTag?.fullPath!, currTag?.search, currTag?.hash].filter(Boolean).join(''))
       }
     })
   }
