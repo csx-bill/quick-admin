@@ -10,7 +10,7 @@ import 'amis/lib/helper.css'
 import 'amis/sdk/iconfont.css'
 import { fetcher, theme } from '@/utils/amisEnvUtils'
 import { getAuthCache } from '@/utils/auth'
-import { PERMS_CODE_KEY } from '@/enums/cacheEnum'
+import { PERMS_CODE_KEY, TOKEN_KEY, X_Tenant_Id_KEY } from '@/enums/cacheEnum'
 
 const AmisRenderer: React.FC = () => {
   const location = useLocation()
@@ -79,7 +79,12 @@ const AmisRenderer: React.FC = () => {
           context: {
             // 全局上下文数据, 非受控的数据，无论哪一层都能获取到，包括弹窗自定义数据映射后都能获取到。
             // 取值方式 ${permsCode}
-            permsCode: getAuthCache<string[]>(PERMS_CODE_KEY)
+            permsCode: getAuthCache<string[]>(PERMS_CODE_KEY),
+            // 添加 X-Tenant-Id、token获取，解决在开启Storage加密时，无法直接通过ls标签获取token、租户信息
+            // X-Tenant-Id，取值方式 ${xTenantId}
+            xTenantId: getAuthCache<string>(X_Tenant_Id_KEY),
+            // X-Access-Token, 取值方式 ${xAccessToken}
+            xAccessToken: getAuthCache<string>(TOKEN_KEY)
           }
         },
         {
