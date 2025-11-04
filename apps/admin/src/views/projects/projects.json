@@ -1,0 +1,253 @@
+{
+    "type": "page",
+    "id": "u:30acbc1af6f1",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "regions": [
+        "body"
+    ],
+    "body": [{
+        "type": "crud",
+        "syncLocation": false,
+        "api": {
+            "method": "get",
+            "url": "/api/projects/page"
+        },
+        "bulkActions": [],
+        "itemActions": [],
+        "headerToolbar": [],
+        "id": "u:e7225c3d9bac",
+        "perPageAvailable": [
+            5,
+            10,
+            20,
+            50,
+            100
+        ],
+        "messages": {},
+        "mode": "cards",
+        "filterEnabledList": [{
+            "label": "projectName",
+            "value": "项目名称"
+        }],
+        "filter": {
+            "title": "",
+            "mode": "horizontal",
+            "body": [{
+                "type": "flex",
+                "items": [{
+                        "type": "container",
+                        "body": [{
+                                "type": "input-text",
+                                "label": false,
+                                "name": "projectName",
+                                "id": "u:cfd7e19b6307",
+                                "size": "md"
+                            },
+                            {
+                                "type": "submit",
+                                "label": "搜索",
+                                "primary": true,
+                                "id": "u:5f143768eb38",
+                                "disabledOnAction": false,
+                                "name": "text",
+                                "block": false,
+                                "themeCss": {
+                                    "className": {
+                                        "padding-and-margin:default": {
+                                            "marginLeft": "0.625rem"
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "size": "none",
+                        "style": {
+                            "position": "static",
+                            "display": "flex",
+                            "flex": "1 1 auto",
+                            "flexGrow": 1,
+                            "flexBasis": 0,
+                            "flexWrap": "nowrap"
+                        },
+                        "wrapperBody": false,
+                        "isFixedHeight": false,
+                        "isFixedWidth": false,
+                        "id": "u:66b302177146"
+                    },
+                    {
+                        "type": "container",
+                        "body": [{
+                            "label": "新建",
+                            "type": "button",
+                            "actionType": "dialog",
+                            "level": "primary",
+                            "editorSetting": {
+                                "behavior": "create"
+                            },
+                            "dialog": {
+                                "type": "dialog",
+                                "title": "新增",
+                                "body": [{
+                                    "type": "form",
+                                    "api": {
+                                        "method": "post",
+                                        "url": "/api/projects",
+                                        "requestAdaptor": "",
+                                        "adaptor": "",
+                                        "messages": {}
+                                    },
+                                    "body": [{
+                                            "type": "input-image",
+                                            "label": "LOGO",
+                                            "name": "logo",
+                                            "autoUpload": true,
+                                            "proxy": true,
+                                            "uploadType": "fileReceptor",
+                                            "imageClassName": "r w-full",
+                                            "id": "u:ef81eac787d6",
+                                            "accept": ".jpeg, .jpg, .png, .gif",
+                                            "hideUploadButton": false,
+                                            "bos": "default",
+                                            "multiple": false,
+                                            "crop": {
+                                                "viewMode": 1
+                                            },
+                                            "cropQuality": 0.7
+                                        },
+                                        {
+                                            "type": "input-text",
+                                            "name": "projectName",
+                                            "label": "项目名称",
+                                            "id": "u:d1dc690a3adc",
+                                            "required": true
+                                        },
+                                        {
+                                            "type": "textarea",
+                                            "label": "项目描述",
+                                            "name": "projectDescription",
+                                            "id": "u:a6b773c2520f",
+                                            "minRows": 3,
+                                            "maxRows": 20
+                                        }
+                                    ],
+                                    "id": "u:8751a82cff3c",
+                                    "actions": [{
+                                        "type": "submit",
+                                        "label": "提交",
+                                        "primary": true
+                                    }],
+                                    "feat": "Insert",
+                                    "dsType": "api",
+                                    "labelAlign": "left",
+                                    "mode": "horizontal"
+                                }],
+                                "actionType": "dialog",
+                                "id": "u:047f87b849cc",
+                                "actions": [{
+                                        "type": "button",
+                                        "actionType": "cancel",
+                                        "label": "取消",
+                                        "id": "u:b9e6bcc9f411"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "actionType": "confirm",
+                                        "label": "确定",
+                                        "primary": true,
+                                        "id": "u:fbab2b7a2bbd",
+                                        "disabledOnAction": false
+                                    }
+                                ],
+                                "showCloseButton": true,
+                                "closeOnOutside": false,
+                                "closeOnEsc": false,
+                                "showErrorMsg": true,
+                                "showLoading": true,
+                                "draggable": false,
+                                "allowFullscreen": false
+                            },
+                            "id": "u:242d31ed929a",
+                            "disabledOnAction": false,
+                            "name": "text"
+                        }],
+                        "size": "none",
+                        "style": {
+                            "position": "static",
+                            "display": "flex",
+                            "flex": "1 1 auto",
+                            "flexGrow": 1,
+                            "flexBasis": "0px",
+                            "flexWrap": "nowrap",
+                            "justifyContent": "flex-end"
+                        },
+                        "wrapperBody": false,
+                        "isFixedHeight": false,
+                        "isFixedWidth": false,
+                        "id": "u:d74dec0bad70"
+                    }
+                ],
+                "style": {
+                    "position": "relative",
+                    "rowGap": "10px",
+                    "columnGap": "10px",
+                    "flexWrap": "nowrap",
+                    "inset": "auto",
+                    "justifyContent": "flex-start"
+                },
+                "id": "u:4dbafdf5eb72",
+                "isFixedHeight": false,
+                "isFixedWidth": false
+            }],
+            "id": "u:2ce9142b5b69",
+            "actions": [],
+            "feat": "Insert",
+            "labelAlign": "left",
+            "wrapWithPanel": false
+        },
+        "card": {
+            "type": "card",
+            "header": {
+                "title": "${projectName}",
+                "subTitle": "${projectDescription}"
+            },
+            "body": [],
+            "actions": [{
+                    "type": "button",
+                    "label": "进入后台",
+                    "onEvent": {
+                        "click": {
+                            "actions": [{
+                                "ignoreError": false,
+                                "actionType": "url",
+                                "args": {
+                                    "url": "/project/${id}"
+                                }
+                            }]
+                        }
+                    },
+                    "id": "u:fe76f68ac8eb",
+                    "disabledOnAction": false,
+                    "level": "link"
+                },
+                {
+                    "type": "button",
+                    "label": "预览",
+                    "onEvent": {
+                        "click": {
+                            "actions": []
+                        }
+                    },
+                    "id": "u:a1f497722370",
+                    "disabledOnAction": false,
+                    "level": "link"
+                }
+            ],
+            "id": "u:9f4c3dcf003b"
+        },
+        "placeholder": "暂无数据",
+        "alwaysShowPagination": true
+    }]
+}

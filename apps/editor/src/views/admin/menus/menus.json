@@ -1,0 +1,1062 @@
+{
+    "type": "page",
+    "id": "u:755d92deebca",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "regions": [
+        "body"
+    ],
+    "body": [{
+        "id": "u:6cd163df6079",
+        "type": "crud2",
+        "mode": "table2",
+        "dsType": "api",
+        "syncLocation": true,
+        "selectable": true,
+        "multiple": true,
+        "primaryField": "id",
+        "loadType": "",
+        "api": {
+            "url": "/api/menus/tree",
+            "method": "get",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "messages": {},
+            "data": {
+                "projectId": "${params.projectId}"
+            }
+        },
+        "filter": {
+            "type": "form",
+            "title": "",
+            "mode": "inline",
+            "clearValueOnHidden": true,
+            "behavior": [
+                "SimpleQuery"
+            ],
+            "body": [{
+                    "name": "name",
+                    "label": "菜单名称",
+                    "type": "input-text",
+                    "size": "sm",
+                    "required": false,
+                    "behavior": "SimpleQuery",
+                    "id": "u:9515fbe05c9c"
+                },
+                {
+                    "type": "reset",
+                    "label": "重置",
+                    "id": "u:c84890dced19",
+                    "disabledOnAction": false,
+                    "name": "name"
+                },
+                {
+                    "type": "submit",
+                    "label": "查询",
+                    "level": "primary",
+                    "id": "u:839ce725a444",
+                    "disabledOnAction": false,
+                    "name": "name"
+                }
+            ],
+            "actions": [],
+            "id": "u:3e19ae4dbae3",
+            "feat": "Insert",
+            "labelAlign": "left",
+            "wrapWithPanel": false
+        },
+        "headerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "behavior": [
+                        "Insert",
+                        "BulkEdit",
+                        "BulkDelete",
+                        "Export"
+                    ],
+                    "body": [{
+                            "type": "button",
+                            "label": "新增",
+                            "level": "primary",
+                            "className": "m-r-xs",
+                            "behavior": "Insert",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                        "actionType": "dialog",
+                                        "dialog": {
+                                            "type": "dialog",
+                                            "body": [{
+                                                "id": "u:2b362819728b",
+                                                "type": "form",
+                                                "title": "新增数据",
+                                                "mode": "horizontal",
+                                                "labelAlign": "left",
+                                                "dsType": "api",
+                                                "feat": "Insert",
+                                                "body": [{
+                                                        "name": "projectId",
+                                                        "label": "项目id",
+                                                        "type": "input-text",
+                                                        "id": "u:207cec3e8797",
+                                                        "hidden": true
+                                                    },
+                                                    {
+                                                        "type": "radios",
+                                                        "label": "菜单类型",
+                                                        "name": "menuType",
+                                                        "options": [{
+                                                                "label": "目录",
+                                                                "value": "dir"
+                                                            },
+                                                            {
+                                                                "label": "菜单",
+                                                                "value": "menu"
+                                                            },
+                                                            {
+                                                                "label": "按钮",
+                                                                "value": "button"
+                                                            }
+                                                        ],
+                                                        "id": "u:ea0433ae6740",
+                                                        "optionType": "button",
+                                                        "value": "dir",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "type": "tree-select",
+                                                        "label": "上级菜单",
+                                                        "name": "parentId",
+                                                        "id": "u:4142eae7a572",
+                                                        "multiple": false,
+                                                        "nodeBehavior": [
+                                                            "check"
+                                                        ],
+                                                        "themeCss": {
+                                                            "actionControlClassName": {
+                                                                "marginLeft": ""
+                                                            }
+                                                        },
+                                                        "enableNodePath": false,
+                                                        "hideRoot": true,
+                                                        "showIcon": true,
+                                                        "initiallyOpen": true,
+                                                        "clearable": false,
+                                                        "source": {
+                                                            "url": "/api/menus/tree",
+                                                            "method": "get",
+                                                            "requestAdaptor": "",
+                                                            "adaptor": "",
+                                                            "messages": {},
+                                                            "dataType": "json",
+                                                            "data": {
+                                                                "projectId": "${projectId}"
+                                                            }
+                                                        },
+                                                        "labelField": "name",
+                                                        "valueField": "id"
+                                                    },
+                                                    {
+                                                        "name": "name",
+                                                        "label": "菜单名称",
+                                                        "type": "input-text",
+                                                        "id": "u:c6c9907d009a",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "type": "radios",
+                                                        "label": "状态",
+                                                        "name": "status",
+                                                        "options": [{
+                                                                "label": "启用",
+                                                                "value": "1"
+                                                            },
+                                                            {
+                                                                "label": "禁用",
+                                                                "value": "0"
+                                                            }
+                                                        ],
+                                                        "id": "u:7d006222f740",
+                                                        "optionType": "default",
+                                                        "required": true,
+                                                        "value": "1"
+                                                    },
+                                                    {
+                                                        "type": "input-text",
+                                                        "label": "图标",
+                                                        "name": "icon",
+                                                        "id": "u:94bb89baf181",
+                                                        "visibleOn": {
+                                                            "conjunction": "and",
+                                                            "children": [{
+                                                                "id": "769ab0df1212",
+                                                                "left": {
+                                                                    "type": "field",
+                                                                    "field": "menuType"
+                                                                },
+                                                                "op": "not_equal",
+                                                                "right": "button"
+                                                            }],
+                                                            "id": "ed75947d0e19"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "select",
+                                                        "label": "绑定页面",
+                                                        "name": "pageId",
+                                                        "id": "u:b17245ca1ac7",
+                                                        "multiple": false,
+                                                        "source": {
+                                                            "method": "get",
+                                                            "url": "/api/pages/list",
+                                                            "requestAdaptor": "",
+                                                            "adaptor": "",
+                                                            "messages": {},
+                                                            "data": {
+                                                                "projectId": "${projectId}"
+                                                            }
+                                                        },
+                                                        "labelField": "pageName",
+                                                        "valueField": "id",
+                                                        "visibleOn": {
+                                                            "conjunction": "and",
+                                                            "children": [{
+                                                                "id": "35892c8217ab",
+                                                                "left": {
+                                                                    "type": "field",
+                                                                    "field": "menuType"
+                                                                },
+                                                                "op": "equal",
+                                                                "right": "menu"
+                                                            }],
+                                                            "id": "48ae841a3dd6"
+                                                        },
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "permission",
+                                                        "label": "权限",
+                                                        "type": "input-text",
+                                                        "id": "u:c02ad4c02c7e",
+                                                        "visibleOn": {
+                                                            "conjunction": "and",
+                                                            "children": [{
+                                                                "id": "051b0109af6c",
+                                                                "left": {
+                                                                    "type": "field",
+                                                                    "field": "menuType"
+                                                                },
+                                                                "op": "equal",
+                                                                "right": "button"
+                                                            }],
+                                                            "id": "031440ac4e57"
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "sortOrder",
+                                                        "label": "排序",
+                                                        "type": "input-number",
+                                                        "id": "u:de1305885e94",
+                                                        "keyboard": true,
+                                                        "showSteps": true,
+                                                        "step": 1
+                                                    }
+                                                ],
+                                                "resetAfterSubmit": true,
+                                                "actions": [{
+                                                        "type": "button",
+                                                        "actionType": "cancel",
+                                                        "label": "取消"
+                                                    },
+                                                    {
+                                                        "type": "button",
+                                                        "actionType": "submit",
+                                                        "label": "提交",
+                                                        "level": "primary"
+                                                    }
+                                                ],
+                                                "onEvent": {
+                                                    "submitSucc": {
+                                                        "actions": [{
+                                                            "actionType": "search",
+                                                            "groupType": "component",
+                                                            "componentId": "u:6cd163df6079"
+                                                        }]
+                                                    }
+                                                },
+                                                "api": {
+                                                    "url": "/api/menus",
+                                                    "method": "post",
+                                                    "requestAdaptor": "",
+                                                    "adaptor": "",
+                                                    "messages": {},
+                                                    "dataType": "json"
+                                                }
+                                            }],
+                                            "title": "新增数据",
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消",
+                                                    "id": "u:fa34c6e66d7d"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary",
+                                                    "id": "u:44f9bc210db0"
+                                                }
+                                            ],
+                                            "actionType": "dialog",
+                                            "id": "u:85caf70888ce",
+                                            "showCloseButton": true,
+                                            "closeOnOutside": false,
+                                            "closeOnEsc": false,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "draggable": false,
+                                            "allowFullscreen": false,
+                                            "data": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "dataMap": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "withDefaultData": false,
+                                            "dataMapSwitch": true
+                                        }
+                                    }]
+                                }
+                            },
+                            "id": "u:52da8f1d1e1f"
+                        },
+                        {
+                            "type": "button",
+                            "label": "批量删除",
+                            "behavior": "BulkDelete",
+                            "level": "danger",
+                            "className": "m-r-xs",
+                            "confirmText": "确认要批量删除数据「${JOIN(ARRAYMAP(selectedItems, item => item.name), ',')}」",
+                            "disabledOn": "${selectedItems != null && selectedItems.length < 1}",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                            "actionType": "ajax",
+                                            "api": {
+                                                "method": "delete",
+                                                "url": "/api/menus",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "data": {
+                                                    "ids": "${ids}"
+                                                }
+                                            },
+                                            "outputVar": "responseResult",
+                                            "options": {},
+                                            "ignoreError": false
+                                        },
+                                        {
+                                            "actionType": "search",
+                                            "groupType": "component",
+                                            "componentId": "u:6cd163df6079"
+                                        }
+                                    ]
+                                }
+                            },
+                            "id": "u:8cf8cd0324f4",
+                            "disabledOnAction": false
+                        }
+                    ],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:9331fe4baa3a"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "behavior": [
+                        "FuzzyQuery"
+                    ],
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:159c2afc2aa6",
+                    "isFixedHeight": false
+                }
+            ],
+            "id": "u:110eaeafecf2"
+        }],
+        "footerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:61e2912203fa"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:284ba09d0c5d"
+                }
+            ],
+            "id": "u:9cce4823bde6"
+        }],
+        "columns": [{
+                "type": "tpl",
+                "title": "菜单名称",
+                "name": "name",
+                "id": "u:f0814a60801a"
+            },
+            {
+                "type": "mapping",
+                "map": {
+                    "menu": "菜单",
+                    "button": "按钮",
+                    "dir": "目录"
+                },
+                "name": "menuType",
+                "title": "菜单类型",
+                "id": "u:4086c157d599",
+                "placeholder": "-"
+            },
+            {
+                "type": "mapping",
+                "map": {
+                    "0": "禁用",
+                    "1": "启用"
+                },
+                "name": "status",
+                "title": "状态",
+                "id": "u:5cd1368d066f"
+            },
+            {
+                "type": "icon",
+                "icon": "",
+                "vendor": "",
+                "name": "icon",
+                "title": "图标",
+                "id": "u:52e216edb37c",
+                "value": 1,
+                "placeholder": ""
+            },
+            {
+                "type": "tpl",
+                "title": "绑定页面",
+                "name": "pageName",
+                "id": "u:8f92b8dee751",
+                "placeholder": ""
+            },
+            {
+                "type": "tpl",
+                "title": "权限标识",
+                "name": "permission",
+                "id": "u:2bb200777032"
+            },
+            {
+                "type": "tpl",
+                "title": "排序",
+                "name": "sortOrder",
+                "id": "u:686098440788"
+            },
+            {
+                "type": "tpl",
+                "title": "创建时间",
+                "name": "createTime",
+                "id": "u:cd80200b50d7"
+            },
+            {
+                "type": "operation",
+                "title": "操作",
+                "buttons": [{
+                        "type": "button",
+                        "label": "查看",
+                        "level": "link",
+                        "behavior": "View",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:c66d9bed6df8",
+                                            "type": "form",
+                                            "title": "查看数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "View",
+                                            "body": [{
+                                                    "name": "menuType",
+                                                    "label": "菜单类型",
+                                                    "type": "radios",
+                                                    "id": "u:c3ee21d8109b",
+                                                    "options": [{
+                                                            "label": "目录",
+                                                            "value": "dir"
+                                                        },
+                                                        {
+                                                            "label": "菜单",
+                                                            "value": "menu"
+                                                        },
+                                                        {
+                                                            "label": "按钮",
+                                                            "value": "button"
+                                                        }
+                                                    ],
+                                                    "value": "dir",
+                                                    "optionType": "button",
+                                                    "multiple": false,
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "parentId",
+                                                    "label": "上级菜单",
+                                                    "type": "tree-select",
+                                                    "id": "u:e6b5dd149d86",
+                                                    "multiple": false,
+                                                    "nodeBehavior": [
+                                                        "check"
+                                                    ],
+                                                    "themeCss": {
+                                                        "actionControlClassName": {
+                                                            "marginLeft": ""
+                                                        }
+                                                    },
+                                                    "enableNodePath": false,
+                                                    "hideRoot": true,
+                                                    "showIcon": true,
+                                                    "initiallyOpen": true,
+                                                    "clearable": false,
+                                                    "source": {
+                                                        "url": "/api/menus/tree",
+                                                        "method": "get",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json",
+                                                        "data": {
+                                                            "projectId": "${projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "name",
+                                                    "valueField": "id"
+                                                },
+                                                {
+                                                    "name": "name",
+                                                    "label": "菜单名称",
+                                                    "type": "input-text",
+                                                    "id": "u:ab218a063a1e",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "status",
+                                                    "label": "状态",
+                                                    "type": "radios",
+                                                    "id": "u:7d006222f740",
+                                                    "options": [{
+                                                            "label": "启用",
+                                                            "value": "1"
+                                                        },
+                                                        {
+                                                            "label": "禁用",
+                                                            "value": "0"
+                                                        }
+                                                    ],
+                                                    "optionType": "default",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "icon",
+                                                    "label": "图标",
+                                                    "type": "input-text",
+                                                    "id": "u:4b3a24439f17",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "99a1f8479410",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "not_equal",
+                                                            "right": "button"
+                                                        }],
+                                                        "id": "fdec9d417ea0"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "pageId",
+                                                    "label": "绑定页面",
+                                                    "type": "select",
+                                                    "id": "u:ddb2046ba1b1",
+                                                    "multiple": false,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/pages/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "data": {
+                                                            "projectId": "${projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "pageName",
+                                                    "valueField": "id",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "c187f10c2f70",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "menu"
+                                                        }],
+                                                        "id": "c962e34f0ed0"
+                                                    },
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "permission",
+                                                    "label": "权限",
+                                                    "type": "input-text",
+                                                    "id": "u:02e93f4656d2",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "da58717738ec",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "button"
+                                                        }],
+                                                        "id": "e69d55cbd535"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "sortOrder",
+                                                    "label": "排序",
+                                                    "type": "input-number",
+                                                    "id": "u:d4f45b399ea0"
+                                                },
+                                                {
+                                                    "name": "createTime",
+                                                    "label": "创建时间",
+                                                    "type": "input-text",
+                                                    "id": "u:d1959586d065"
+                                                }
+                                            ],
+                                            "static": true,
+                                            "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "关闭"
+                                            }],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:6cd163df6079"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/menus/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "查看数据",
+                                        "actions": [{
+                                            "type": "button",
+                                            "actionType": "cancel",
+                                            "label": "关闭",
+                                            "id": "u:fd61092e0d88"
+                                        }],
+                                        "actionType": "dialog",
+                                        "id": "u:e86fede2f6de",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:957a260cd92c"
+                    },
+                    {
+                        "type": "button",
+                        "label": "编辑",
+                        "level": "link",
+                        "behavior": "Edit",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:9c2de9886419",
+                                            "type": "form",
+                                            "title": "编辑数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "Edit",
+                                            "body": [{
+                                                    "name": "id",
+                                                    "label": "id",
+                                                    "type": "input-text",
+                                                    "id": "u:32de5b36144f",
+                                                    "hidden": true
+                                                },
+                                                {
+                                                    "name": "menuType",
+                                                    "label": "菜单类型",
+                                                    "type": "radios",
+                                                    "id": "u:3fd8ac57087d",
+                                                    "options": [{
+                                                            "label": "目录",
+                                                            "value": "dir"
+                                                        },
+                                                        {
+                                                            "label": "菜单",
+                                                            "value": "menu"
+                                                        },
+                                                        {
+                                                            "label": "按钮",
+                                                            "value": "button"
+                                                        }
+                                                    ],
+                                                    "value": "dir",
+                                                    "required": true,
+                                                    "optionType": "button",
+                                                    "multiple": false
+                                                },
+                                                {
+                                                    "name": "parentId",
+                                                    "label": "上级菜单",
+                                                    "type": "tree-select",
+                                                    "id": "u:7251397d1459",
+                                                    "multiple": false,
+                                                    "nodeBehavior": [
+                                                        "check"
+                                                    ],
+                                                    "themeCss": {
+                                                        "actionControlClassName": {
+                                                            "marginLeft": ""
+                                                        }
+                                                    },
+                                                    "enableNodePath": false,
+                                                    "hideRoot": true,
+                                                    "showIcon": true,
+                                                    "initiallyOpen": true,
+                                                    "clearable": false,
+                                                    "source": {
+                                                        "url": "/api/menus/tree",
+                                                        "method": "get",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json",
+                                                        "data": {
+                                                            "projectId": "${projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "name",
+                                                    "valueField": "id"
+                                                },
+                                                {
+                                                    "name": "name",
+                                                    "label": "菜单名称",
+                                                    "type": "input-text",
+                                                    "id": "u:d41bdf00a00a",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "status",
+                                                    "label": "状态",
+                                                    "type": "radios",
+                                                    "id": "u:7d006222f740",
+                                                    "options": [{
+                                                            "label": "启用",
+                                                            "value": "1"
+                                                        },
+                                                        {
+                                                            "label": "禁用",
+                                                            "value": "0"
+                                                        }
+                                                    ],
+                                                    "optionType": "default",
+                                                    "required": true,
+                                                    "value": ""
+                                                },
+                                                {
+                                                    "name": "icon",
+                                                    "label": "图标",
+                                                    "type": "input-text",
+                                                    "id": "u:4cc9e052f249",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "3740be2a521e",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "not_equal",
+                                                            "right": "button"
+                                                        }],
+                                                        "id": "f5dc36ab7ae4"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "pageId",
+                                                    "label": "绑定页面",
+                                                    "type": "select",
+                                                    "id": "u:b17245ca1ac7",
+                                                    "multiple": false,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/pages/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "data": {
+                                                            "projectId": "${projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "pageName",
+                                                    "valueField": "id",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "cba995029956",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "menu"
+                                                        }],
+                                                        "id": "51423ae671a8"
+                                                    },
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "permission",
+                                                    "label": "权限",
+                                                    "type": "input-text",
+                                                    "id": "u:2e54b49b3be7",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "c0123a636cc2",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "menuType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "button"
+                                                        }],
+                                                        "id": "5467a53854a4"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "sortOrder",
+                                                    "label": "排序",
+                                                    "type": "input-number",
+                                                    "id": "u:9bec4ac78bd2"
+                                                }
+                                            ],
+                                            "resetAfterSubmit": true,
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary"
+                                                }
+                                            ],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:6cd163df6079"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/menus/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            },
+                                            "api": {
+                                                "url": "/api/menus/${id}",
+                                                "method": "put",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "编辑数据",
+                                        "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "取消",
+                                                "id": "u:5f54557d195f"
+                                            },
+                                            {
+                                                "type": "button",
+                                                "actionType": "submit",
+                                                "label": "提交",
+                                                "level": "primary",
+                                                "id": "u:91e6601695b0"
+                                            }
+                                        ],
+                                        "actionType": "dialog",
+                                        "id": "u:8cba61d3c613",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:7299b03d0b93"
+                    },
+                    {
+                        "type": "button",
+                        "label": "删除",
+                        "behavior": "Delete",
+                        "className": "m-r-xs text-danger",
+                        "level": "link",
+                        "confirmText": "确认要删除数据",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                        "actionType": "ajax",
+                                        "api": {
+                                            "method": "delete",
+                                            "url": "/api/menus/${id}",
+                                            "requestAdaptor": "",
+                                            "adaptor": "",
+                                            "messages": {},
+                                            "dataType": "json"
+                                        },
+                                        "outputVar": "responseResult",
+                                        "options": {}
+                                    },
+                                    {
+                                        "actionType": "search",
+                                        "groupType": "component",
+                                        "componentId": "u:6cd163df6079"
+                                    }
+                                ]
+                            }
+                        },
+                        "id": "u:b2f0734978aa",
+                        "disabledOnAction": false
+                    }
+                ],
+                "id": "u:b219917844b7"
+            }
+        ],
+        "editorSetting": {
+            "mock": {
+                "enable": true,
+                "maxDisplayRows": 5
+            }
+        },
+        "showHeader": true
+    }],
+    "definitions": {}
+}

@@ -1,0 +1,641 @@
+{
+    "type": "page",
+    "id": "u:455ce46a5753",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "body": [{
+        "id": "u:2b93067cfdc7",
+        "type": "crud2",
+        "mode": "table2",
+        "dsType": "api",
+        "syncLocation": true,
+        "selectable": true,
+        "multiple": true,
+        "primaryField": "id",
+        "loadType": "pagination",
+        "api": {
+            "url": "/api/roles/page",
+            "method": "get",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "messages": {},
+            "data": {
+                "projectId": "${params.projectId}",
+                "roleName": "${roleName}"
+            }
+        },
+        "filter": {
+            "type": "form",
+            "title": "",
+            "mode": "inline",
+            "clearValueOnHidden": true,
+            "behavior": [
+                "SimpleQuery"
+            ],
+            "body": [{
+                    "name": "roleName",
+                    "label": "角色名称",
+                    "type": "input-text",
+                    "size": "sm",
+                    "required": false,
+                    "behavior": "SimpleQuery",
+                    "id": "u:983119417f97",
+                    "clearable": false
+                },
+                {
+                    "type": "reset",
+                    "label": "重置",
+                    "id": "u:a2ffad2535f4",
+                    "disabledOnAction": false,
+                    "name": "roleName"
+                },
+                {
+                    "type": "submit",
+                    "label": "查询",
+                    "level": "primary",
+                    "id": "u:51a36a53a0dd",
+                    "disabledOnAction": false,
+                    "name": "roleName"
+                }
+            ],
+            "actions": [],
+            "id": "u:8a1f9d6494ee",
+            "feat": "Insert",
+            "wrapWithPanel": false
+        },
+        "headerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "behavior": [
+                        "Insert",
+                        "BulkEdit",
+                        "BulkDelete",
+                        "Export"
+                    ],
+                    "body": [{
+                            "type": "button",
+                            "label": "新增",
+                            "level": "primary",
+                            "className": "m-r-xs",
+                            "behavior": "Insert",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                        "actionType": "dialog",
+                                        "dialog": {
+                                            "type": "dialog",
+                                            "body": [{
+                                                "id": "u:a82721e5ee89",
+                                                "type": "form",
+                                                "title": "新增数据",
+                                                "mode": "horizontal",
+                                                "labelAlign": "left",
+                                                "dsType": "api",
+                                                "feat": "Insert",
+                                                "body": [{
+                                                        "name": "projectId",
+                                                        "label": "项目id",
+                                                        "type": "input-text",
+                                                        "id": "u:371bf9a0d1d2",
+                                                        "hidden": true,
+                                                        "value": ""
+                                                    },
+                                                    {
+                                                        "name": "roleName",
+                                                        "label": "角色名称",
+                                                        "type": "input-text",
+                                                        "id": "u:cec25bfe289f",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "type": "textarea",
+                                                        "label": "角色描述",
+                                                        "name": "roleDescription",
+                                                        "id": "u:5a729189f8ee",
+                                                        "minRows": 3,
+                                                        "maxRows": 20
+                                                    }
+                                                ],
+                                                "resetAfterSubmit": true,
+                                                "actions": [{
+                                                        "type": "button",
+                                                        "actionType": "cancel",
+                                                        "label": "取消"
+                                                    },
+                                                    {
+                                                        "type": "button",
+                                                        "actionType": "submit",
+                                                        "label": "提交",
+                                                        "level": "primary"
+                                                    }
+                                                ],
+                                                "onEvent": {
+                                                    "submitSucc": {
+                                                        "actions": [{
+                                                            "actionType": "search",
+                                                            "groupType": "component",
+                                                            "componentId": "u:2b93067cfdc7"
+                                                        }]
+                                                    }
+                                                },
+                                                "api": {
+                                                    "url": "/api/roles",
+                                                    "method": "post",
+                                                    "requestAdaptor": "",
+                                                    "adaptor": "",
+                                                    "messages": {},
+                                                    "dataType": "json"
+                                                },
+                                                "debug": false
+                                            }],
+                                            "title": "新增数据",
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消",
+                                                    "id": "u:8b2734a66b9c"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary",
+                                                    "id": "u:04b69e1c3abb"
+                                                }
+                                            ],
+                                            "actionType": "dialog",
+                                            "id": "u:a1e98b1e5d4e",
+                                            "showCloseButton": true,
+                                            "closeOnOutside": false,
+                                            "closeOnEsc": false,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "draggable": false,
+                                            "allowFullscreen": false,
+                                            "data": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "dataMap": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "withDefaultData": false,
+                                            "dataMapSwitch": true
+                                        }
+                                    }]
+                                }
+                            },
+                            "id": "u:857f0cc1b39b"
+                        },
+                        {
+                            "type": "button",
+                            "label": "批量删除",
+                            "behavior": "BulkDelete",
+                            "level": "danger",
+                            "className": "m-r-xs",
+                            "confirmText": "确认要批量删除数据「${JOIN(ARRAYMAP(selectedItems, item => item.roleName), ',')}」",
+                            "disabledOn": "${selectedItems != null && selectedItems.length < 1}",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                            "actionType": "ajax",
+                                            "ignoreError": false,
+                                            "outputVar": "responseResult",
+                                            "options": {},
+                                            "api": {
+                                                "url": "/api/roles",
+                                                "method": "delete",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "data": {
+                                                    "ids": "${ids}"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "actionType": "search",
+                                            "groupType": "component",
+                                            "componentId": "u:2b93067cfdc7"
+                                        }
+                                    ]
+                                }
+                            },
+                            "id": "u:95bbcd9a7eee",
+                            "disabledOnAction": false
+                        }
+                    ],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:5f7639331e17"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "behavior": [
+                        "FuzzyQuery"
+                    ],
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:05f914833b10"
+                }
+            ],
+            "id": "u:32c2ddc2707e"
+        }],
+        "footerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:109427adec04"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "body": [{
+                        "type": "pagination",
+                        "behavior": "Pagination",
+                        "layout": [
+                            "total",
+                            "perPage",
+                            "pager"
+                        ],
+                        "perPage": 10,
+                        "perPageAvailable": [
+                            10,
+                            20,
+                            50,
+                            100
+                        ],
+                        "align": "right",
+                        "id": "u:7bc8f89cc11c"
+                    }],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:76b797fef56e"
+                }
+            ],
+            "id": "u:cd655ce55ba3"
+        }],
+        "columns": [{
+                "type": "tpl",
+                "title": "创建人",
+                "name": "createBy",
+                "id": "u:076f28b6f47b"
+            },
+            {
+                "type": "tpl",
+                "title": "创建时间",
+                "name": "createTime",
+                "id": "u:691e368bbe77"
+            },
+            {
+                "type": "tpl",
+                "title": "角色名称",
+                "name": "roleName",
+                "id": "u:5667b713f38c"
+            },
+            {
+                "type": "tpl",
+                "title": "角色描述",
+                "name": "roleDescription",
+                "id": "u:a96dae018ba8"
+            },
+            {
+                "type": "tpl",
+                "title": "更新人",
+                "name": "updateBy",
+                "id": "u:7039d18d72a8"
+            },
+            {
+                "type": "tpl",
+                "title": "更新时间",
+                "name": "updateTime",
+                "id": "u:66181576cd30"
+            },
+            {
+                "type": "operation",
+                "title": "操作",
+                "buttons": [{
+                        "type": "button",
+                        "label": "查看",
+                        "level": "link",
+                        "behavior": "View",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:beae2ea9d19b",
+                                            "type": "form",
+                                            "title": "查看数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "View",
+                                            "body": [{
+                                                    "name": "createBy",
+                                                    "label": "创建人",
+                                                    "type": "input-text",
+                                                    "id": "u:b349f42e8c73"
+                                                },
+                                                {
+                                                    "name": "updateBy",
+                                                    "label": "更新人",
+                                                    "type": "input-text",
+                                                    "id": "u:9b2d394b3063"
+                                                },
+                                                {
+                                                    "name": "roleName",
+                                                    "label": "角色名称",
+                                                    "type": "input-text",
+                                                    "id": "u:91310bcc8003"
+                                                },
+                                                {
+                                                    "type": "textarea",
+                                                    "label": "角色描述",
+                                                    "name": "roleDescription",
+                                                    "id": "u:90f2617a47a2",
+                                                    "minRows": 3,
+                                                    "maxRows": 20
+                                                },
+                                                {
+                                                    "name": "createTime",
+                                                    "label": "创建时间",
+                                                    "type": "input-text",
+                                                    "id": "u:6cafcaf24b07"
+                                                },
+                                                {
+                                                    "name": "updateTime",
+                                                    "label": "更新时间",
+                                                    "type": "input-text",
+                                                    "id": "u:2c66fd7379f0"
+                                                }
+                                            ],
+                                            "static": true,
+                                            "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "关闭"
+                                            }],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:2b93067cfdc7"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/roles/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "查看数据",
+                                        "actions": [{
+                                            "type": "button",
+                                            "actionType": "cancel",
+                                            "label": "关闭",
+                                            "id": "u:3a286f3dce56"
+                                        }],
+                                        "actionType": "dialog",
+                                        "id": "u:d3962ff19079",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:7804b3f14fe6"
+                    },
+                    {
+                        "type": "button",
+                        "label": "编辑",
+                        "level": "link",
+                        "behavior": "Edit",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:a63612a39e9c",
+                                            "type": "form",
+                                            "title": "编辑数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "Edit",
+                                            "body": [{
+                                                    "name": "id",
+                                                    "label": "id",
+                                                    "type": "input-text",
+                                                    "id": "u:8ac8a099639c",
+                                                    "hidden": true
+                                                },
+                                                {
+                                                    "name": "roleName",
+                                                    "label": "角色名称",
+                                                    "type": "input-text",
+                                                    "id": "u:27369c0c1b2d",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "type": "textarea",
+                                                    "label": "角色描述",
+                                                    "name": "roleDescription",
+                                                    "id": "u:b1f9b41bc90b",
+                                                    "minRows": 3,
+                                                    "maxRows": 20
+                                                }
+                                            ],
+                                            "resetAfterSubmit": true,
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary"
+                                                }
+                                            ],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:2b93067cfdc7"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/roles/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            },
+                                            "api": {
+                                                "url": "/api/roles/${id}",
+                                                "method": "put",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "编辑数据",
+                                        "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "取消",
+                                                "id": "u:8292542a803a"
+                                            },
+                                            {
+                                                "type": "button",
+                                                "actionType": "submit",
+                                                "label": "提交",
+                                                "level": "primary",
+                                                "id": "u:0b173b8f7f90"
+                                            }
+                                        ],
+                                        "actionType": "dialog",
+                                        "id": "u:a7094fb2ddca",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:600b25397913"
+                    },
+                    {
+                        "type": "button",
+                        "label": "删除",
+                        "behavior": "Delete",
+                        "className": "m-r-xs text-danger",
+                        "level": "link",
+                        "confirmText": "确认要删除数据",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                        "actionType": "ajax",
+                                        "ignoreError": false,
+                                        "outputVar": "responseResult",
+                                        "options": {},
+                                        "api": {
+                                            "url": "/api/roles/${id}",
+                                            "method": "delete",
+                                            "requestAdaptor": "",
+                                            "adaptor": "",
+                                            "messages": {}
+                                        }
+                                    },
+                                    {
+                                        "actionType": "search",
+                                        "groupType": "component",
+                                        "componentId": "u:2b93067cfdc7"
+                                    }
+                                ]
+                            }
+                        },
+                        "id": "u:d37e63b6cc24",
+                        "disabledOnAction": false
+                    }
+                ],
+                "id": "u:35744b476008"
+            }
+        ],
+        "editorSetting": {
+            "mock": {
+                "enable": true,
+                "maxDisplayRows": 5
+            }
+        }
+    }],
+    "definitions": {},
+    "regions": [
+        "body"
+    ]
+}

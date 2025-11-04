@@ -1,0 +1,649 @@
+{
+    "type": "page",
+    "id": "u:1c29e972bcee",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "body": [{
+        "type": "crud2",
+        "id": "u:05bbe19ab4bc",
+        "mode": "table2",
+        "dsType": "api",
+        "syncLocation": true,
+        "selectable": true,
+        "multiple": true,
+        "primaryField": "id",
+        "loadType": "pagination",
+        "api": {
+            "url": "/api/pages/page",
+            "method": "get",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "messages": {},
+            "dataType": "json",
+            "data": {
+                "projectId": "${params.projectId}"
+            }
+        },
+        "filter": {
+            "type": "form",
+            "title": "",
+            "mode": "inline",
+            "clearValueOnHidden": true,
+            "behavior": [
+                "SimpleQuery"
+            ],
+            "body": [{
+                    "name": "pageName",
+                    "label": "页面名称",
+                    "type": "input-text",
+                    "size": "sm",
+                    "required": false,
+                    "behavior": "SimpleQuery",
+                    "id": "u:0c159bfe50ea"
+                },
+                {
+                    "type": "reset",
+                    "label": "重置",
+                    "id": "u:0f79d36e2e45",
+                    "disabledOnAction": false
+                },
+                {
+                    "type": "submit",
+                    "label": "查询",
+                    "level": "primary",
+                    "id": "u:ad89fb93caf4",
+                    "disabledOnAction": false
+                }
+            ],
+            "actions": [],
+            "id": "u:e3a0582e2991",
+            "feat": "Insert",
+            "wrapWithPanel": false,
+            "labelAlign": "left"
+        },
+        "headerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "behavior": [
+                        "Insert",
+                        "BulkEdit",
+                        "BulkDelete",
+                        "Export"
+                    ],
+                    "body": [{
+                            "type": "button",
+                            "label": "新增",
+                            "level": "primary",
+                            "className": "m-r-xs",
+                            "behavior": "Insert",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                        "actionType": "dialog",
+                                        "dialog": {
+                                            "type": "dialog",
+                                            "body": [{
+                                                "id": "u:040c42338e49",
+                                                "type": "form",
+                                                "title": "新增",
+                                                "mode": "horizontal",
+                                                "labelAlign": "left",
+                                                "dsType": "api",
+                                                "feat": "Insert",
+                                                "body": [{
+                                                        "name": "projectId",
+                                                        "label": "项目id",
+                                                        "type": "input-text",
+                                                        "id": "u:68b8e77b3a7c",
+                                                        "hidden": true
+                                                    },
+                                                    {
+                                                        "name": "pageName",
+                                                        "label": "页面名称",
+                                                        "type": "input-text",
+                                                        "id": "u:eb1171181e64",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "type": "textarea",
+                                                        "label": "页面描述",
+                                                        "name": "pageDescription",
+                                                        "id": "u:8321ee4d7e4f",
+                                                        "minRows": 3,
+                                                        "maxRows": 20
+                                                    }
+                                                ],
+                                                "resetAfterSubmit": true,
+                                                "actions": [{
+                                                        "type": "button",
+                                                        "actionType": "cancel",
+                                                        "label": "取消"
+                                                    },
+                                                    {
+                                                        "type": "button",
+                                                        "actionType": "submit",
+                                                        "label": "提交",
+                                                        "level": "primary"
+                                                    }
+                                                ],
+                                                "onEvent": {
+                                                    "submitSucc": {
+                                                        "actions": [{
+                                                            "actionType": "search",
+                                                            "groupType": "component",
+                                                            "componentId": "u:05bbe19ab4bc"
+                                                        }]
+                                                    }
+                                                },
+                                                "api": {
+                                                    "url": "/api/pages",
+                                                    "method": "post",
+                                                    "requestAdaptor": "",
+                                                    "adaptor": "",
+                                                    "messages": {},
+                                                    "dataType": "json"
+                                                }
+                                            }],
+                                            "title": "新增数据",
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消",
+                                                    "id": "u:b867a0be7a53"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary",
+                                                    "id": "u:133d257c0638"
+                                                }
+                                            ],
+                                            "actionType": "dialog",
+                                            "id": "u:7c6e89d8ec4d",
+                                            "showCloseButton": true,
+                                            "closeOnOutside": false,
+                                            "closeOnEsc": false,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "draggable": false,
+                                            "allowFullscreen": false,
+                                            "data": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "dataMap": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "withDefaultData": false,
+                                            "dataMapSwitch": true
+                                        }
+                                    }]
+                                }
+                            },
+                            "id": "u:94a015686e62",
+                            "disabledOnAction": false
+                        },
+                        {
+                            "type": "button",
+                            "label": "批量删除",
+                            "behavior": "BulkDelete",
+                            "level": "danger",
+                            "className": "m-r-xs",
+                            "confirmText": "确认要批量删除数据「${JOIN(ARRAYMAP(selectedItems, item => item.pageName), ',')}」",
+                            "disabledOn": "${selectedItems != null && selectedItems.length < 1}",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                            "actionType": "ajax",
+                                            "outputVar": "responseResult",
+                                            "options": {},
+                                            "api": {
+                                                "url": "/api/pages",
+                                                "method": "delete",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "data": {
+                                                    "ids": "${ids}"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "actionType": "search",
+                                            "groupType": "component",
+                                            "componentId": "u:05bbe19ab4bc"
+                                        }
+                                    ]
+                                }
+                            },
+                            "id": "u:ed719df15e0a",
+                            "disabledOnAction": false
+                        }
+                    ],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:a75e9ad2015e"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "behavior": [
+                        "FuzzyQuery"
+                    ],
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:8553bb58fde2"
+                }
+            ],
+            "id": "u:55f542f74c57"
+        }],
+        "footerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:4a0f62d74c9c"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "body": [{
+                        "type": "pagination",
+                        "behavior": "Pagination",
+                        "layout": [
+                            "total",
+                            "perPage",
+                            "pager"
+                        ],
+                        "perPage": 10,
+                        "perPageAvailable": [
+                            10,
+                            20,
+                            50,
+                            100
+                        ],
+                        "align": "right",
+                        "id": "u:f0e7018020da",
+                        "size": ""
+                    }],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:ae9c902370a1"
+                }
+            ],
+            "id": "u:1ee83f02c7d1"
+        }],
+        "columns": [{
+                "type": "tpl",
+                "title": "创建人",
+                "name": "createBy",
+                "id": "u:c0cc60a14f6e"
+            },
+            {
+                "type": "tpl",
+                "title": "创建时间",
+                "name": "createTime",
+                "id": "u:35faca5571c1"
+            },
+            {
+                "type": "tpl",
+                "title": "页面名称",
+                "name": "pageName",
+                "id": "u:3a6134cd20c9"
+            },
+            {
+                "type": "tpl",
+                "title": "更新人",
+                "name": "updateBy",
+                "id": "u:227543b079a5"
+            },
+            {
+                "type": "tpl",
+                "title": "更新时间",
+                "name": "updateTime",
+                "id": "u:dfbbd858dee6"
+            },
+            {
+                "type": "operation",
+                "title": "操作",
+                "buttons": [{
+                        "type": "button",
+                        "label": "设计",
+                        "level": "link",
+                        "behavior": "View",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "ignoreError": false,
+                                    "actionType": "url",
+                                    "args": {
+                                        "url": "/editor/${id}/edit"
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:fbbab9193af9",
+                        "disabledOnAction": false
+                    },
+                    {
+                        "type": "button",
+                        "label": "查看",
+                        "level": "link",
+                        "behavior": "View",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:a3b4765f1d95",
+                                            "type": "form",
+                                            "title": "查看数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "View",
+                                            "body": [{
+                                                    "name": "createBy",
+                                                    "label": "创建人",
+                                                    "type": "input-text",
+                                                    "id": "u:88395d098def"
+                                                },
+                                                {
+                                                    "name": "createTime",
+                                                    "label": "创建时间",
+                                                    "type": "input-text",
+                                                    "id": "u:f4f423121348"
+                                                },
+                                                {
+                                                    "name": "pageName",
+                                                    "label": "页面名称",
+                                                    "type": "input-text",
+                                                    "id": "u:9f303d58c01a"
+                                                },
+                                                {
+                                                    "name": "pageDescription",
+                                                    "label": "页面描述",
+                                                    "type": "input-text",
+                                                    "id": "u:8e07a357c613"
+                                                },
+                                                {
+                                                    "name": "updateTime",
+                                                    "label": "更新时间",
+                                                    "type": "input-text",
+                                                    "id": "u:400e71c4cb49"
+                                                },
+                                                {
+                                                    "name": "updateBy",
+                                                    "label": "更新人",
+                                                    "type": "input-text",
+                                                    "id": "u:fb8cc4583856"
+                                                }
+                                            ],
+                                            "static": true,
+                                            "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "关闭"
+                                            }],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:05bbe19ab4bc"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/pages/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "查看数据",
+                                        "actions": [{
+                                            "type": "button",
+                                            "actionType": "cancel",
+                                            "label": "关闭",
+                                            "id": "u:30742632cbe7"
+                                        }],
+                                        "actionType": "dialog",
+                                        "id": "u:676f326ed658",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:3eae36349286",
+                        "disabledOnAction": false
+                    },
+                    {
+                        "type": "button",
+                        "label": "编辑",
+                        "level": "link",
+                        "behavior": "Edit",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:84149c81748b",
+                                            "type": "form",
+                                            "title": "编辑数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "Edit",
+                                            "body": [{
+                                                    "name": "id",
+                                                    "label": "id",
+                                                    "type": "input-text",
+                                                    "id": "u:4f02f3c67553",
+                                                    "hidden": true
+                                                },
+                                                {
+                                                    "name": "pageName",
+                                                    "label": "页面名称",
+                                                    "type": "input-text",
+                                                    "id": "u:d9e29d39ea52",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "type": "textarea",
+                                                    "label": "页面描述",
+                                                    "name": "pageDescription",
+                                                    "id": "u:cad9baa95321",
+                                                    "minRows": 3,
+                                                    "maxRows": 20
+                                                }
+                                            ],
+                                            "resetAfterSubmit": true,
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary"
+                                                }
+                                            ],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:05bbe19ab4bc"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/pages/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            },
+                                            "api": {
+                                                "url": "/api/pages/${id}",
+                                                "method": "put",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "编辑数据",
+                                        "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "取消",
+                                                "id": "u:e69b9ee20830"
+                                            },
+                                            {
+                                                "type": "button",
+                                                "actionType": "submit",
+                                                "label": "提交",
+                                                "level": "primary",
+                                                "id": "u:3a8367375b46"
+                                            }
+                                        ],
+                                        "actionType": "dialog",
+                                        "id": "u:19251c3642b6",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:f8ab9dec3912"
+                    },
+                    {
+                        "type": "button",
+                        "label": "删除",
+                        "behavior": "Delete",
+                        "className": "m-r-xs text-danger",
+                        "level": "link",
+                        "confirmText": "确认要删除数据",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                        "actionType": "ajax",
+                                        "outputVar": "responseResult",
+                                        "options": {},
+                                        "api": {
+                                            "url": "/api/pages/${id}",
+                                            "method": "delete",
+                                            "requestAdaptor": "",
+                                            "adaptor": "",
+                                            "messages": {}
+                                        }
+                                    },
+                                    {
+                                        "actionType": "search",
+                                        "groupType": "component",
+                                        "componentId": "u:05bbe19ab4bc"
+                                    }
+                                ]
+                            }
+                        },
+                        "id": "u:645e7272bd8d",
+                        "disabledOnAction": false
+                    }
+                ],
+                "id": "u:692ffd853d8c"
+            }
+        ],
+        "editorSetting": {
+            "mock": {
+                "enable": true,
+                "maxDisplayRows": 5
+            }
+        }
+    }],
+    "regions": [
+        "body"
+    ],
+    "definitions": {}
+}

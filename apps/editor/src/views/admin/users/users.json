@@ -1,0 +1,780 @@
+{
+    "type": "page",
+    "id": "u:a0b4b9f5ad6e",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "regions": [
+        "body"
+    ],
+    "body": [{
+        "id": "u:353711be4dde",
+        "type": "crud2",
+        "mode": "table2",
+        "dsType": "api",
+        "syncLocation": true,
+        "selectable": true,
+        "multiple": true,
+        "primaryField": "id",
+        "loadType": "pagination",
+        "api": {
+            "url": "/api/users/page",
+            "method": "get",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "messages": {},
+            "dataType": "json",
+            "data": {
+                "projectId": "${params.projectId}",
+                "username": "${username}"
+            }
+        },
+        "filter": {
+            "type": "form",
+            "title": "",
+            "mode": "inline",
+            "clearValueOnHidden": true,
+            "behavior": [
+                "SimpleQuery"
+            ],
+            "body": [{
+                    "name": "username",
+                    "label": "用户名称",
+                    "type": "input-text",
+                    "size": "sm",
+                    "required": false,
+                    "behavior": "SimpleQuery",
+                    "id": "u:2f31f3242054"
+                },
+                {
+                    "type": "reset",
+                    "label": "重置",
+                    "id": "u:fc6b04288825",
+                    "disabledOnAction": false,
+                    "name": "username"
+                },
+                {
+                    "type": "submit",
+                    "label": "查询",
+                    "level": "primary",
+                    "id": "u:37baed5e7859",
+                    "disabledOnAction": false,
+                    "name": "username"
+                }
+            ],
+            "actions": [],
+            "id": "u:c63b7c3ee71c",
+            "feat": "Insert",
+            "wrapWithPanel": false
+        },
+        "headerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "behavior": [
+                        "Insert",
+                        "BulkEdit",
+                        "BulkDelete",
+                        "Export"
+                    ],
+                    "body": [{
+                            "type": "button",
+                            "label": "新增",
+                            "level": "primary",
+                            "className": "m-r-xs",
+                            "behavior": "Insert",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                        "actionType": "dialog",
+                                        "dialog": {
+                                            "type": "dialog",
+                                            "body": [{
+                                                "id": "u:e56b3a56a66a",
+                                                "type": "form",
+                                                "title": "新增数据",
+                                                "mode": "horizontal",
+                                                "labelAlign": "left",
+                                                "dsType": "api",
+                                                "feat": "Insert",
+                                                "body": [{
+                                                        "type": "input-text",
+                                                        "label": "项目id",
+                                                        "name": "projectId",
+                                                        "id": "u:ceb152ecafc4",
+                                                        "multiple": false,
+                                                        "hidden": true
+                                                    },
+                                                    {
+                                                        "type": "select",
+                                                        "label": "用户",
+                                                        "name": "userId",
+                                                        "id": "u:115f9a4e1660",
+                                                        "multiple": false,
+                                                        "source": {
+                                                            "method": "get",
+                                                            "url": "/api/users/list",
+                                                            "requestAdaptor": "",
+                                                            "adaptor": "",
+                                                            "messages": {},
+                                                            "dataType": "json"
+                                                        },
+                                                        "labelField": "username",
+                                                        "valueField": "id",
+                                                        "searchable": true
+                                                    },
+                                                    {
+                                                        "type": "radios",
+                                                        "label": "用户类型",
+                                                        "name": "userType",
+                                                        "options": [{
+                                                                "label": "管理员",
+                                                                "value": "admin"
+                                                            },
+                                                            {
+                                                                "label": "普通用户",
+                                                                "value": "user"
+                                                            }
+                                                        ],
+                                                        "id": "u:598071810f40",
+                                                        "optionType": "default",
+                                                        "value": "admin"
+                                                    },
+                                                    {
+                                                        "name": "roles",
+                                                        "label": "角色列表",
+                                                        "type": "select",
+                                                        "id": "u:b0c2c8de1278",
+                                                        "multiple": true,
+                                                        "source": {
+                                                            "method": "get",
+                                                            "url": "/api/roles/list",
+                                                            "requestAdaptor": "",
+                                                            "adaptor": "",
+                                                            "messages": {},
+                                                            "dataType": "json",
+                                                            "data": {
+                                                                "projectId": "${params.projectId}"
+                                                            }
+                                                        },
+                                                        "labelField": "roleName",
+                                                        "valueField": "id",
+                                                        "visibleOn": {
+                                                            "conjunction": "and",
+                                                            "children": [{
+                                                                "id": "ce5be0a74466",
+                                                                "left": {
+                                                                    "type": "field",
+                                                                    "field": "userType"
+                                                                },
+                                                                "op": "equal",
+                                                                "right": "user"
+                                                            }],
+                                                            "id": "5e90418a5db5"
+                                                        },
+                                                        "checkAll": false
+                                                    }
+                                                ],
+                                                "resetAfterSubmit": true,
+                                                "actions": [{
+                                                        "type": "button",
+                                                        "actionType": "cancel",
+                                                        "label": "取消"
+                                                    },
+                                                    {
+                                                        "type": "button",
+                                                        "actionType": "submit",
+                                                        "label": "提交",
+                                                        "level": "primary"
+                                                    }
+                                                ],
+                                                "onEvent": {
+                                                    "submitSucc": {
+                                                        "actions": [{
+                                                            "actionType": "search",
+                                                            "groupType": "component",
+                                                            "componentId": "u:353711be4dde"
+                                                        }]
+                                                    }
+                                                },
+                                                "api": {
+                                                    "url": "/api/users",
+                                                    "method": "post",
+                                                    "requestAdaptor": "",
+                                                    "adaptor": "",
+                                                    "messages": {},
+                                                    "dataType": "json"
+                                                }
+                                            }],
+                                            "title": "新增数据",
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消",
+                                                    "id": "u:1997ae0b661a"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary",
+                                                    "id": "u:4377f23b2a16"
+                                                }
+                                            ],
+                                            "actionType": "dialog",
+                                            "id": "u:f318fbd428cb",
+                                            "showCloseButton": true,
+                                            "closeOnOutside": false,
+                                            "closeOnEsc": false,
+                                            "showErrorMsg": true,
+                                            "showLoading": true,
+                                            "draggable": false,
+                                            "allowFullscreen": false,
+                                            "data": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "dataMap": {
+                                                "projectId": "${params.projectId}"
+                                            },
+                                            "withDefaultData": false,
+                                            "dataMapSwitch": true
+                                        }
+                                    }]
+                                }
+                            },
+                            "id": "u:f0bd2e7af846",
+                            "disabledOnAction": false
+                        },
+                        {
+                            "type": "button",
+                            "label": "批量删除",
+                            "behavior": "BulkDelete",
+                            "level": "danger",
+                            "className": "m-r-xs",
+                            "confirmText": "确认要批量删除数据「${JOIN(ARRAYMAP(selectedItems, item => item.id), ',')}」",
+                            "disabledOn": "${selectedItems != null && selectedItems.length < 1}",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [{
+                                            "actionType": "ajax",
+                                            "outputVar": "responseResult",
+                                            "options": {},
+                                            "api": {
+                                                "url": "/api/users",
+                                                "method": "delete",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "data": {
+                                                    "ids": "${ids}"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "actionType": "search",
+                                            "groupType": "component",
+                                            "componentId": "u:353711be4dde"
+                                        }
+                                    ]
+                                }
+                            },
+                            "id": "u:b1910185fefd",
+                            "disabledOnAction": false
+                        }
+                    ],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:5bdb157b0413"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "behavior": [
+                        "FuzzyQuery"
+                    ],
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:0307f834fdfc"
+                }
+            ],
+            "id": "u:f7e994f3029e"
+        }],
+        "footerToolbar": [{
+            "type": "flex",
+            "direction": "row",
+            "justify": "flex-start",
+            "alignItems": "stretch",
+            "style": {
+                "position": "static"
+            },
+            "items": [{
+                    "type": "container",
+                    "align": "left",
+                    "body": [],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-start"
+                    },
+                    "id": "u:85f3d8076511"
+                },
+                {
+                    "type": "container",
+                    "align": "right",
+                    "body": [{
+                        "type": "pagination",
+                        "behavior": "Pagination",
+                        "layout": [
+                            "total",
+                            "perPage",
+                            "pager"
+                        ],
+                        "perPage": 10,
+                        "perPageAvailable": [
+                            10,
+                            20,
+                            50,
+                            100
+                        ],
+                        "align": "right",
+                        "id": "u:4e47ae08d8cb",
+                        "size": ""
+                    }],
+                    "wrapperBody": false,
+                    "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                    },
+                    "id": "u:74e1894f4968"
+                }
+            ],
+            "id": "u:3c4518dfcc4d"
+        }],
+        "columns": [{
+                "type": "tpl",
+                "title": "用户名称",
+                "name": "username",
+                "id": "u:31b1b0aaf543"
+            },
+            {
+                "type": "mapping",
+                "map": {
+                    "admin": "管理员",
+                    "user": "普通用户"
+                },
+                "name": "userType",
+                "title": "用户类型",
+                "id": "u:c9c29d90a663"
+            },
+            {
+                "type": "tpl",
+                "title": "角色列表",
+                "name": "roleNames",
+                "id": "u:cf0269fdb218"
+            },
+            {
+                "type": "tpl",
+                "title": "创建时间",
+                "name": "createTime",
+                "id": "u:8c4d1952238b"
+            },
+            {
+                "type": "operation",
+                "title": "操作",
+                "buttons": [{
+                        "type": "button",
+                        "label": "查看",
+                        "level": "link",
+                        "behavior": "View",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:d9938fe8619d",
+                                            "type": "form",
+                                            "title": "查看数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "View",
+                                            "body": [{
+                                                    "name": "userId",
+                                                    "label": "用户",
+                                                    "type": "select",
+                                                    "id": "u:e6bd60362c08",
+                                                    "multiple": false,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/users/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json"
+                                                    },
+                                                    "labelField": "username",
+                                                    "valueField": "id",
+                                                    "searchable": true
+                                                },
+                                                {
+                                                    "name": "userType",
+                                                    "label": "用户类型",
+                                                    "type": "radios",
+                                                    "id": "u:14f43aede60a",
+                                                    "options": [{
+                                                            "label": "管理员",
+                                                            "value": "admin"
+                                                        },
+                                                        {
+                                                            "label": "普通用户",
+                                                            "value": "user"
+                                                        }
+                                                    ],
+                                                    "optionType": "default",
+                                                    "value": "admin"
+                                                },
+                                                {
+                                                    "name": "roles",
+                                                    "label": "角色列表",
+                                                    "type": "select",
+                                                    "id": "u:a36ac5fdee74",
+                                                    "multiple": true,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/roles/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json",
+                                                        "data": {
+                                                            "projectId": "${params.projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "roleName",
+                                                    "valueField": "id",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "ce5be0a74466",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "userType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "user"
+                                                        }],
+                                                        "id": "5e90418a5db5"
+                                                    },
+                                                    "checkAll": false
+                                                },
+                                                {
+                                                    "name": "createTime",
+                                                    "label": "创建时间",
+                                                    "type": "input-text",
+                                                    "id": "u:2e3c09f4df3a"
+                                                }
+                                            ],
+                                            "static": true,
+                                            "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "关闭"
+                                            }],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:353711be4dde"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/users/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "查看数据",
+                                        "actions": [{
+                                            "type": "button",
+                                            "actionType": "cancel",
+                                            "label": "关闭",
+                                            "id": "u:7009e62e559d"
+                                        }],
+                                        "actionType": "dialog",
+                                        "id": "u:106ba9182fc1",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:b0905f4caa0c"
+                    },
+                    {
+                        "type": "button",
+                        "label": "编辑",
+                        "level": "link",
+                        "behavior": "Edit",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "body": [{
+                                            "id": "u:7801cc2fa662",
+                                            "type": "form",
+                                            "title": "编辑数据",
+                                            "mode": "horizontal",
+                                            "labelAlign": "left",
+                                            "dsType": "api",
+                                            "feat": "Edit",
+                                            "body": [{
+                                                    "name": "id",
+                                                    "label": "id",
+                                                    "type": "input-text",
+                                                    "id": "u:e5342797b124",
+                                                    "hidden": true
+                                                },
+                                                {
+                                                    "name": "userId",
+                                                    "label": "用户",
+                                                    "type": "select",
+                                                    "id": "u:d32dcb986a16",
+                                                    "multiple": false,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/users/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json"
+                                                    },
+                                                    "labelField": "username",
+                                                    "valueField": "id",
+                                                    "searchable": true,
+                                                    "disabled": true
+                                                },
+                                                {
+                                                    "type": "radios",
+                                                    "label": "用户类型",
+                                                    "name": "userType",
+                                                    "options": [{
+                                                            "label": "管理员",
+                                                            "value": "admin"
+                                                        },
+                                                        {
+                                                            "label": "普通用户",
+                                                            "value": "user"
+                                                        }
+                                                    ],
+                                                    "id": "u:1d8a5b4faebd",
+                                                    "optionType": "default",
+                                                    "value": "admin"
+                                                },
+                                                {
+                                                    "name": "roles",
+                                                    "label": "角色列表",
+                                                    "type": "select",
+                                                    "id": "u:61dd232d8138",
+                                                    "multiple": true,
+                                                    "source": {
+                                                        "method": "get",
+                                                        "url": "/api/roles/list",
+                                                        "requestAdaptor": "",
+                                                        "adaptor": "",
+                                                        "messages": {},
+                                                        "dataType": "json",
+                                                        "data": {
+                                                            "projectId": "${params.projectId}"
+                                                        }
+                                                    },
+                                                    "labelField": "roleName",
+                                                    "valueField": "id",
+                                                    "visibleOn": {
+                                                        "conjunction": "and",
+                                                        "children": [{
+                                                            "id": "ce5be0a74466",
+                                                            "left": {
+                                                                "type": "field",
+                                                                "field": "userType"
+                                                            },
+                                                            "op": "equal",
+                                                            "right": "user"
+                                                        }],
+                                                        "id": "5e90418a5db5"
+                                                    },
+                                                    "checkAll": false
+                                                }
+                                            ],
+                                            "resetAfterSubmit": true,
+                                            "actions": [{
+                                                    "type": "button",
+                                                    "actionType": "cancel",
+                                                    "label": "取消"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "actionType": "submit",
+                                                    "label": "提交",
+                                                    "level": "primary"
+                                                }
+                                            ],
+                                            "onEvent": {
+                                                "submitSucc": {
+                                                    "actions": [{
+                                                        "actionType": "search",
+                                                        "groupType": "component",
+                                                        "componentId": "u:353711be4dde"
+                                                    }]
+                                                }
+                                            },
+                                            "initApi": {
+                                                "url": "/api/users/${id}",
+                                                "method": "get",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            },
+                                            "api": {
+                                                "url": "/api/users/${id}",
+                                                "method": "put",
+                                                "requestAdaptor": "",
+                                                "adaptor": "",
+                                                "messages": {},
+                                                "dataType": "json"
+                                            }
+                                        }],
+                                        "title": "编辑数据",
+                                        "actions": [{
+                                                "type": "button",
+                                                "actionType": "cancel",
+                                                "label": "取消",
+                                                "id": "u:ef19938db5d4"
+                                            },
+                                            {
+                                                "type": "button",
+                                                "actionType": "submit",
+                                                "label": "提交",
+                                                "level": "primary",
+                                                "id": "u:db64e24b41b6"
+                                            }
+                                        ],
+                                        "actionType": "dialog",
+                                        "id": "u:b9834b7e0e51",
+                                        "showCloseButton": true,
+                                        "closeOnOutside": false,
+                                        "closeOnEsc": false,
+                                        "showErrorMsg": true,
+                                        "showLoading": true,
+                                        "draggable": false,
+                                        "allowFullscreen": false
+                                    }
+                                }]
+                            }
+                        },
+                        "id": "u:ab9516e55065"
+                    },
+                    {
+                        "type": "button",
+                        "label": "删除",
+                        "behavior": "Delete",
+                        "className": "m-r-xs text-danger",
+                        "level": "link",
+                        "confirmText": "确认要删除数据",
+                        "onEvent": {
+                            "click": {
+                                "actions": [{
+                                        "actionType": "ajax",
+                                        "outputVar": "responseResult",
+                                        "options": {},
+                                        "api": {
+                                            "url": "/api/users/${id}",
+                                            "method": "delete",
+                                            "requestAdaptor": "",
+                                            "adaptor": "",
+                                            "messages": {}
+                                        }
+                                    },
+                                    {
+                                        "actionType": "search",
+                                        "groupType": "component",
+                                        "componentId": "u:353711be4dde"
+                                    }
+                                ]
+                            }
+                        },
+                        "id": "u:d266bd9aae90",
+                        "disabledOnAction": false
+                    }
+                ],
+                "id": "u:b442a655c49d"
+            }
+        ],
+        "editorSetting": {
+            "mock": {
+                "enable": true,
+                "maxDisplayRows": 5
+            }
+        },
+        "showHeader": true,
+        "keepItemSelectionOnPageChange": false
+    }],
+    "definitions": {}
+}

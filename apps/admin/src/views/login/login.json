@@ -1,0 +1,131 @@
+{
+    "type": "page",
+    "id": "u:20ff6f70e1eb",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "regions": [
+        "body"
+    ],
+    "body": [{
+        "type": "container",
+        "body": [{
+            "id": "u:18b2481d2428",
+            "type": "form",
+            "title": "",
+            "mode": "horizontal",
+            "labelAlign": "left",
+            "dsType": "api",
+            "feat": "Insert",
+            "body": [{
+                    "type": "tpl",
+                    "tpl": "欢迎回来",
+                    "inline": true,
+                    "wrapperComponent": "h1",
+                    "id": "u:6c6033ba02ba",
+                    "showtype": "image"
+                },
+                {
+                    "name": "username",
+                    "label": false,
+                    "type": "input-text",
+                    "id": "u:a9718c228701",
+                    "labelAlign": "right",
+                    "mode": "horizontal",
+                    "size": "lg",
+                    "addOn": {
+                        "label": "",
+                        "type": "text",
+                        "id": "u:3d63b1c4203a",
+                        "position": "left",
+                        "icon": "fa fa-user"
+                    },
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "label": false,
+                    "type": "input-password",
+                    "id": "u:67eed5605108",
+                    "size": "lg",
+                    "labelAlign": "right",
+                    "mode": "horizontal",
+                    "showCounter": false,
+                    "required": true,
+                    "addOn": {
+                        "label": "",
+                        "type": "text",
+                        "id": "u:f27b1c2b376f",
+                        "position": "left",
+                        "icon": "fa fa-key"
+                    }
+                },
+                {
+                    "type": "button",
+                    "label": "登录",
+                    "onEvent": {
+                        "click": {
+                            "actions": [{
+                                "actionType": "submit",
+                                "componentId": "u:18b2481d2428",
+                                "outputVar": "submitResult",
+                                "args": {}
+                            }]
+                        }
+                    },
+                    "level": "primary",
+                    "id": "u:2e2849dd272e",
+                    "disabledOnAction": false,
+                    "block": true
+                }
+            ],
+            "api": {
+                "url": "/api/auth/login",
+                "method": "post",
+                "requestAdaptor": "",
+                "adaptor": "// 存储 accessToken\r\nlocalStorage.setItem(\"accessToken\", payload.data.accessToken);\r\nreturn payload;",
+                "messages": {},
+                "dataType": "json"
+            },
+            "actions": [],
+            "resetAfterSubmit": true,
+            "name": "text",
+            "wrapWithPanel": true,
+            "onEvent": {
+                "submitSucc": {
+                    "weight": 0,
+                    "actions": [{
+                        "ignoreError": false,
+                        "actionType": "url",
+                        "args": {
+                            "url": "/projects"
+                        }
+                    }]
+                }
+            }
+        }],
+        "style": {
+            "position": "relative",
+            "display": "flex",
+            "inset": "auto",
+            "flexWrap": "nowrap",
+            "flexDirection": "column",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "overflowY": "visible",
+            "height": "100vh"
+        },
+        "size": "none",
+        "wrapperBody": false,
+        "id": "u:2489ac11692d",
+        "isFixedHeight": true,
+        "isFixedWidth": false
+    }],
+    "themeCss": {
+        "baseControlClassName": {}
+    },
+    "wrapperCustomStyle": {
+        "root": {}
+    }
+}

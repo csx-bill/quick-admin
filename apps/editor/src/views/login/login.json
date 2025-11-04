@@ -1,0 +1,147 @@
+{
+    "type": "page",
+    "id": "u:20ff6f70e1eb",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "body": [{
+        "type": "container",
+        "id": "u:2489ac11692d",
+        "body": [{
+            "id": "u:18b2481d2428",
+            "type": "form",
+            "title": "",
+            "mode": "horizontal",
+            "labelAlign": "left",
+            "dsType": "api",
+            "feat": "Insert",
+            "body": [{
+                    "type": "tpl",
+                    "tpl": "欢迎回来",
+                    "inline": true,
+                    "wrapperComponent": "h1",
+                    "id": "u:6c6033ba02ba",
+                    "className": "text-center font-bold text-2xl mb-6 text-gray-800"
+                },
+                {
+                    "name": "username",
+                    "label": false,
+                    "type": "input-text",
+                    "id": "u:a9718c228701",
+                    "addOn": {
+                        "label": "",
+                        "type": "text",
+                        "id": "u:3d63b1c4203a",
+                        "position": "left",
+                        "icon": "fa fa-user"
+                    },
+                    "required": true,
+                    "labelAlign": "right",
+                    "mode": "horizontal"
+                },
+                {
+                    "name": "password",
+                    "label": false,
+                    "type": "input-password",
+                    "id": "u:67eed5605108",
+                    "showCounter": false,
+                    "required": true,
+                    "addOn": {
+                        "label": "",
+                        "type": "text",
+                        "id": "u:f27b1c2b376f",
+                        "position": "left",
+                        "icon": "fa fa-key"
+                    },
+                    "labelAlign": "right",
+                    "mode": "horizontal"
+                },
+                {
+                    "type": "button",
+                    "label": "登录",
+                    "onEvent": {
+                        "click": {
+                            "actions": [{
+                                "actionType": "submit",
+                                "componentId": "u:18b2481d2428",
+                                "outputVar": "submitResult",
+                                "args": {}
+                            }]
+                        }
+                    },
+                    "level": "primary",
+                    "id": "u:2e2849dd272e",
+                    "disabledOnAction": false,
+                    "block": true,
+                    "className": "shadow-lg hover:shadow-xl transition-all"
+                }
+            ],
+            "api": {
+                "url": "/api/auth/login",
+                "method": "post",
+                "requestAdaptor": "",
+                "adaptor": "// accessToken\r\nlocalStorage.setItem(\"accessToken\", payload.data.accessToken);\r\n// 用户信息\r\nlocalStorage.setItem('userInfo', JSON.stringify(payload.data));\r\nreturn payload;",
+                "messages": {},
+                "dataType": "json"
+            },
+            "actions": [],
+            "resetAfterSubmit": true,
+            "name": "text",
+            "wrapWithPanel": true,
+            "onEvent": {
+                "submitSucc": {
+                    "weight": 0,
+                    "actions": [{
+                        "ignoreError": false,
+                        "actionType": "url",
+                        "args": {
+                            "url": "/"
+                        }
+                    }]
+                }
+            },
+            "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md"
+        }],
+        "style": {
+            "position": "relative",
+            "display": "flex",
+            "inset": "auto",
+            "flexWrap": "nowrap",
+            "flexDirection": "column",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "overflowY": "visible",
+            "height": "100vh"
+        },
+        "size": "none",
+        "wrapperBody": false,
+        "isFixedHeight": true,
+        "isFixedWidth": false,
+        "themeCss": {
+            "baseControlClassName": {}
+        }
+    }],
+    "regions": [
+        "body"
+    ],
+    "themeCss": {
+        "baseControlClassName": {
+            "input:focus": {
+                "borderColor": "#3b82f6",
+                "boxShadow": "0 0 0 3px rgba(59, 130, 246, 0.3)"
+            },
+            "button": {
+                "transition": "all 0.3s ease"
+            }
+        },
+        "loginPanel": {
+            "boxShadow": "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
+        }
+    },
+    "wrapperCustomStyle": {
+        "root": {}
+    },
+    "dsType": "api",
+    "labelAlign": "left"
+}

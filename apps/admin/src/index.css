@@ -1,0 +1,87 @@
+/* 头样式 */
+
+
+/* .cxd-Layout .cxd-Layout-header {
+    background: var(--colors-neutral-text-11);
+    border-bottom: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+}
+
+.cxd-Tabs--simple>.cxd-Tabs-linksContainer-wrapper {
+    border-bottom: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+}
+
+.cxd-Layout-brandBar {
+    background: unset;
+}
+
+.cxd-Layout-brand {
+    color: var(--colors-neutral-text-2);
+} */
+
+
+/* 页签样式 */
+
+#tabsLayout {
+    padding: 10px;
+}
+
+
+/* 左侧菜单样式 */
+
+#tabsAsideNav [class*="-AsideNav-item"] a {
+    font-size: var(--body-size) !important;
+}
+
+
+/* .cxd-Layout-aside {
+    background: var(--colors-neutral-text-11);
+    border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+}
+
+.cxd-AsideNav-subList {
+    background: var(--colors-neutral-text-11);
+}
+
+.cxd-AsideNav-item.is-active>a {
+    background: var(--colors-neutral-text-11);
+}
+
+.cxd-AsideNav-item a {
+    color: var(--colors-neutral-text-2);
+    font-size: var(--body-size);
+    border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+}
+
+.cxd-AsideNav-item.is-active>a {
+    color: var(--colors-brand-5);
+    background: var(--colors-brand-8);
+}
+
+.cxd-AsideNav-item.is-active>a:hover {
+    background: var(--colors-brand-8);
+}
+
+.cxd-AsideNav-item a:hover {
+    background: var(--colors-neutral-text-6);
+}
+
+.cxd-Layout--asideFixed.cxd-Layout--folded .cxd-Layout-asideInner {
+    padding-right: unset;
+}
+
+ */
+
+
+/* 头像样式 */
+
+
+/* 下拉卡片容器 */
+
+.dropdown-card-wrapper {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+    width: 240px;
+    z-index: 1000;
+}

@@ -1,0 +1,116 @@
+{
+    "type": "page",
+    "id": "u:fb568c9b0b59",
+    "asideResizor": false,
+    "pullRefresh": {
+        "disabled": true
+    },
+    "regions": [
+        "body"
+    ],
+    "body": [{
+            "id": "u:bab12b492a0a",
+            "type": "form",
+            "title": "",
+            "mode": "horizontal",
+            "labelAlign": "left",
+            "dsType": "api",
+            "feat": "Edit",
+            "body": [{
+                "type": "panel",
+                "title": "基础配置",
+                "body": [{
+                        "type": "input-text",
+                        "label": "项目名称",
+                        "name": "projectName",
+                        "id": "u:cecf90dc8709",
+                        "size": "lg"
+                    },
+                    {
+                        "type": "textarea",
+                        "label": "项目描述",
+                        "name": "projectDescription",
+                        "id": "u:b7b617a26785",
+                        "minRows": 3,
+                        "maxRows": 20,
+                        "labelAlign": "left",
+                        "mode": "horizontal",
+                        "size": "lg"
+                    }
+                ],
+                "id": "u:bb4d25dd6470",
+                "affixFooter": false,
+                "name": "text"
+            }],
+            "actions": [{
+                "type": "button",
+                "label": "提交",
+                "onEvent": {
+                    "click": {
+                        "actions": [{
+                            "actionType": "submit",
+                            "componentId": "u:bab12b492a0a"
+                        }]
+                    }
+                },
+                "level": "primary",
+                "id": "u:d5463b0c291f",
+                "disabledOnAction": false
+            }],
+            "resetAfterSubmit": true,
+            "initApi": "/api/projects/${params.projectId}",
+            "wrapWithPanel": true,
+            "api": {
+                "url": "/api/projects/${params.projectId}",
+                "method": "put",
+                "requestAdaptor": "",
+                "adaptor": "",
+                "messages": {}
+            }
+        },
+        {
+            "type": "panel",
+            "title": "危险区域",
+            "body": [{
+                "type": "button",
+                "label": "删除项目",
+                "onEvent": {
+                    "click": {
+                        "actions": [{
+                                "ignoreError": false,
+                                "actionType": "ajax",
+                                "outputVar": "responseResult",
+                                "options": {},
+                                "api": {
+                                    "url": "/api/projects/${params.projectId}",
+                                    "method": "delete",
+                                    "requestAdaptor": "",
+                                    "adaptor": "",
+                                    "messages": {}
+                                }
+                            },
+                            {
+                                "ignoreError": false,
+                                "actionType": "url",
+                                "args": {
+                                    "url": "/projects"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "name": "projectName",
+                "id": "u:6386efc17934",
+                "disabledOnAction": false,
+                "level": "danger",
+                "confirmText": "确认要删除"
+            }],
+            "id": "u:96e59c2a46f9",
+            "affixFooter": false,
+            "name": "text",
+            "themeCss": {
+                "headerControlClassName": {}
+            }
+        }
+    ]
+}
