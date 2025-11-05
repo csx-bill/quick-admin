@@ -8,10 +8,9 @@
   ],
   "description": "",
   "scripts": {
-    "dev": "pnpm --filter @quick-admin/editor dev",
+    "dev": "pnpm --recursive --parallel dev",
     "dev:editor": "pnpm --filter @quick-admin/editor dev",
     "dev:admin": "pnpm --filter @quick-admin/admin dev",
-    "dev:all": "pnpm --recursive --parallel dev",
     "build": "pnpm --recursive build",
     "build:editor": "pnpm --filter @quick-admin/editor build",
     "build:admin": "pnpm --filter @quick-admin/admin build",
