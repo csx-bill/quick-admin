@@ -11,8 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+pnpm-lock.yaml
 
 # Editor directories and files
+.idea
 .vscode/*
 !.vscode/extensions.json
 .idea

@@ -1,0 +1,25 @@
+{
+  "name": "quick-admin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "description": "",
+  "scripts": {
+    "dev": "pnpm --filter @quick-admin/editor dev",
+    "dev:editor": "pnpm --filter @quick-admin/editor dev",
+    "dev:admin": "pnpm --filter @quick-admin/admin dev",
+    "dev:all": "pnpm --recursive --parallel dev",
+    "build": "pnpm --recursive build",
+    "build:editor": "pnpm --filter @quick-admin/editor build",
+    "build:admin": "pnpm --filter @quick-admin/admin build",
+    "clean": "pnpm --recursive clean",
+    "install:all": "pnpm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0"
+}
