@@ -1,147 +1,242 @@
 {
-    "type": "page",
-    "id": "u:20ff6f70e1eb",
-    "asideResizor": false,
-    "pullRefresh": {
-        "disabled": true
-    },
-    "body": [{
-        "type": "container",
-        "id": "u:2489ac11692d",
-        "body": [{
-            "id": "u:18b2481d2428",
-            "type": "form",
-            "title": "",
-            "mode": "horizontal",
-            "labelAlign": "left",
-            "dsType": "api",
-            "feat": "Insert",
-            "body": [{
-                    "type": "tpl",
-                    "tpl": "欢迎回来",
-                    "inline": true,
-                    "wrapperComponent": "h1",
-                    "id": "u:6c6033ba02ba",
-                    "className": "text-center font-bold text-2xl mb-6 text-gray-800"
-                },
-                {
-                    "name": "username",
-                    "label": false,
-                    "type": "input-text",
-                    "id": "u:a9718c228701",
-                    "addOn": {
-                        "label": "",
-                        "type": "text",
-                        "id": "u:3d63b1c4203a",
-                        "position": "left",
-                        "icon": "fa fa-user"
-                    },
-                    "required": true,
-                    "labelAlign": "right",
-                    "mode": "horizontal"
-                },
-                {
-                    "name": "password",
-                    "label": false,
-                    "type": "input-password",
-                    "id": "u:67eed5605108",
-                    "showCounter": false,
-                    "required": true,
-                    "addOn": {
-                        "label": "",
-                        "type": "text",
-                        "id": "u:f27b1c2b376f",
-                        "position": "left",
-                        "icon": "fa fa-key"
-                    },
-                    "labelAlign": "right",
-                    "mode": "horizontal"
-                },
-                {
-                    "type": "button",
-                    "label": "登录",
-                    "onEvent": {
-                        "click": {
-                            "actions": [{
-                                "actionType": "submit",
-                                "componentId": "u:18b2481d2428",
-                                "outputVar": "submitResult",
-                                "args": {}
-                            }]
-                        }
-                    },
-                    "level": "primary",
-                    "id": "u:2e2849dd272e",
-                    "disabledOnAction": false,
-                    "block": true,
-                    "className": "shadow-lg hover:shadow-xl transition-all"
+  "type": "page",
+  "id": "u:20ff6f70e1eb",
+  "asideResizor": false,
+  "pullRefresh": {
+    "disabled": true
+  },
+  "body": [
+    {
+      "type": "flex",
+      "items": [
+        {
+          "type": "container",
+          "body": [
+            {
+              "type": "container",
+              "body": [],
+              "id": "u:background-blur",
+              "wrapperCustomStyle": {
+                "root": {
+                  "position": "absolute",
+                  "top": "0",
+                  "left": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "background": "linear-gradient(154deg, #07070915 30%, var(--primary) 30%, #07070915 64%)",
+                  "filter": "blur(100px)",
+                  "clip-path": "polygon(-100px 0%, calc(100% - 0px) 0%, calc(100% - 0px) 100%, -100px 100%)",
+                  "z-index": "1"
                 }
-            ],
-            "api": {
+              }
+            },
+            {
+              "type": "container",
+              "body": [
+                {
+                  "type": "tpl",
+                  "tpl": "Quick Admin",
+                  "inline": true,
+                  "wrapperComponent": "h1",
+                  "id": "u:678745db8e00",
+                  "className": "text-center font-bold text-2xl mb-6 text-gray-800",
+                  "themeCss": {
+                    "baseControlClassName": {
+                      "padding-and-margin:default": {
+                        "marginLeft": "0.75rem"
+                      }
+                    }
+                  }
+                }
+              ],
+              "style": {
+                "position": "relative",
+                "z-index": "2",
+                "display": "flex",
+                "alignItems": "flex-start",
+                "justifyContent": "flex-start",
+                "height": "100%",
+                "flexWrap": "nowrap",
+                "flex": "0 0 auto",
+                "inset": "auto"
+              },
+              "id": "u:eed855ea353a",
+              "isFixedHeight": false
+            }
+          ],
+          "id": "u:51ad1de27e65",
+          "size": "none",
+          "style": {
+            "position": "relative",
+            "display": "flex",
+            "flex": "1 1 auto",
+            "flexGrow": 2,
+            "flexBasis": "0px",
+            "flexWrap": "nowrap",
+            "alignItems": "flex-start",
+            "justifyContent": "flex-start",
+            "minHeight": "100vh",
+            "inset": "auto"
+          },
+          "isFixedHeight": false
+        },
+        {
+          "type": "container",
+          "body": [
+            {
+              "id": "u:feae10fa4a44",
+              "type": "form",
+              "title": "",
+              "mode": "horizontal",
+              "labelAlign": "left",
+              "dsType": "api",
+              "feat": "Insert",
+              "body": [
+                {
+                  "type": "tpl",
+                  "tpl": "欢迎回来",
+                  "inline": true,
+                  "wrapperComponent": "h1",
+                  "id": "u:d9ce0c49c457",
+                  "className": "text-center font-bold text-2xl mb-6 text-gray-800"
+                },
+                {
+                  "name": "username",
+                  "label": false,
+                  "type": "input-text",
+                  "id": "u:fa95f721ed01",
+                  "addOn": {
+                    "label": "",
+                    "type": "text",
+                    "id": "u:f8d67c83f4a0",
+                    "position": "left",
+                    "icon": "fa fa-user"
+                  },
+                  "required": true,
+                  "labelAlign": "right",
+                  "mode": "horizontal"
+                },
+                {
+                  "name": "password",
+                  "label": false,
+                  "type": "input-password",
+                  "id": "u:04899b3f77e7",
+                  "showCounter": false,
+                  "required": true,
+                  "addOn": {
+                    "label": "",
+                    "type": "text",
+                    "id": "u:104f6e18a8bb",
+                    "position": "left",
+                    "icon": "fa fa-key"
+                  },
+                  "labelAlign": "right",
+                  "mode": "horizontal"
+                },
+                {
+                  "type": "button",
+                  "label": "登录",
+                  "onEvent": {
+                    "click": {
+                      "actions": [
+                        {
+                          "actionType": "submit",
+                          "componentId": "u:feae10fa4a44",
+                          "outputVar": "submitResult",
+                          "args": {}
+                        }
+                      ]
+                    }
+                  },
+                  "level": "primary",
+                  "id": "u:43d22a27ac56",
+                  "disabledOnAction": false,
+                  "block": true,
+                  "className": "shadow-lg hover:shadow-xl transition-all"
+                }
+              ],
+              "api": {
                 "url": "/api/auth/login",
                 "method": "post",
                 "requestAdaptor": "",
                 "adaptor": "// accessToken\r\nlocalStorage.setItem(\"accessToken\", payload.data.accessToken);\r\n// 用户信息\r\nlocalStorage.setItem('userInfo', JSON.stringify(payload.data));\r\nreturn payload;",
                 "messages": {},
                 "dataType": "json"
-            },
-            "actions": [],
-            "resetAfterSubmit": true,
-            "name": "text",
-            "wrapWithPanel": true,
-            "onEvent": {
+              },
+              "actions": [],
+              "resetAfterSubmit": true,
+              "name": "text",
+              "wrapWithPanel": true,
+              "onEvent": {
                 "submitSucc": {
-                    "weight": 0,
-                    "actions": [{
-                        "ignoreError": false,
-                        "actionType": "url",
-                        "args": {
-                            "url": "/"
-                        }
-                    }]
+                  "weight": 0,
+                  "actions": [
+                    {
+                      "ignoreError": false,
+                      "actionType": "url",
+                      "args": {
+                        "url": "/"
+                      }
+                    }
+                  ]
                 }
-            },
-            "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md"
-        }],
-        "style": {
-            "position": "relative",
-            "display": "flex",
-            "inset": "auto",
-            "flexWrap": "nowrap",
-            "flexDirection": "column",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "overflowY": "visible",
-            "height": "100vh"
-        },
-        "size": "none",
-        "wrapperBody": false,
-        "isFixedHeight": true,
-        "isFixedWidth": false,
-        "themeCss": {
-            "baseControlClassName": {}
-        }
-    }],
-    "regions": [
-        "body"
-    ],
-    "themeCss": {
-        "baseControlClassName": {
-            "input:focus": {
-                "borderColor": "#3b82f6",
-                "boxShadow": "0 0 0 3px rgba(59, 130, 246, 0.3)"
-            },
-            "button": {
-                "transition": "all 0.3s ease"
+              },
+              "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md",
+              "style": {
+                "display": "block",
+                "position": "static"
+              },
+              "isFixedHeight": false,
+              "isFixedWidth": false
             }
-        },
-        "loginPanel": {
-            "boxShadow": "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
+          ],
+          "id": "u:d0af06ab18f0",
+          "themeCss": {
+            "baseControlClassName": {}
+          },
+          "wrapperCustomStyle": {
+            "root": {
+              "z-index": "10000"
+            }
+          },
+          "size": "none",
+          "style": {
+            "position": "static",
+            "display": "flex",
+            "flex": "1 1 auto",
+            "flexGrow": 1,
+            "flexBasis": "0px",
+            "flexWrap": "nowrap",
+            "alignItems": "center",
+            "justifyContent": "center"
+          },
+          "wrapperBody": false,
+          "isFixedHeight": false,
+          "isFixedWidth": false
         }
-    },
-    "wrapperCustomStyle": {
-        "root": {}
-    },
-    "dsType": "api",
-    "labelAlign": "left"
+      ],
+      "style": {
+        "position": "relative",
+        "rowGap": "10px",
+        "columnGap": "10px",
+        "flexWrap": "nowrap",
+        "inset": "auto",
+        "height": "100%",
+        "overflowY": "visible"
+      },
+      "id": "u:ed7c31aad725",
+      "isFixedHeight": true,
+      "isFixedWidth": false,
+      "wrapperCustomStyle": {
+        "root": {
+          "margin": "calc(-1 * var(--Page-body-padding, 0))",
+          "width": "calc(100% + 2 * var(--Page-body-padding, 0))",
+          "height": "calc(100% + 2 * var(--Page-body-padding, 0))"
+        }
+      }
+    }
+  ],
+  "regions": [
+    "body"
+  ]
 }

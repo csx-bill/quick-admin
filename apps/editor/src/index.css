@@ -1,3 +1,9 @@
+#root{
+    height: 100%;
+}
+[class*="-Page"] {
+    height: 100%;
+}
 /* 头样式 */
 
 #header [class*="-Layout-brandBar"] {

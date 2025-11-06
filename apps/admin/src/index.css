@@ -1,22 +1,19 @@
+#root{
+    height: 100%;
+}
+[class*="-Page"] {
+    height: 100%;
+}
 /* 头样式 */
 
+#header [class*="-Layout-brandBar"] {
+    background: unset !important;
+}
 
-/* .cxd-Layout .cxd-Layout-header {
-    background: var(--colors-neutral-text-11);
+[class*="-Layout-header"] {
     border-bottom: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+    background: unset !important;
 }
-
-.cxd-Tabs--simple>.cxd-Tabs-linksContainer-wrapper {
-    border-bottom: var(--Divider-width) var(--Divider-style) var(--Divider-color);
-}
-
-.cxd-Layout-brandBar {
-    background: unset;
-}
-
-.cxd-Layout-brand {
-    color: var(--colors-neutral-text-2);
-} */
 
 
 /* 页签样式 */
@@ -28,54 +25,29 @@
 
 /* 左侧菜单样式 */
 
+[class*="-Layout-aside"] {
+    background: unset !important;
+}
+
+#asideInner {
+    border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
+}
+
 #tabsAsideNav [class*="-AsideNav-item"] a {
     font-size: var(--body-size) !important;
+    color: var(--text-color);
+}
+
+#tabsAsideNav [class*="-AsideNav-item"].is-active>a {
+    background: var(--primary-onHover);
+}
+
+#tabsAsideNav [class*="-AsideNav-item"] a:hover {
+    background: var(--secondary-onHover);
 }
 
 
-/* .cxd-Layout-aside {
-    background: var(--colors-neutral-text-11);
-    border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
-}
-
-.cxd-AsideNav-subList {
-    background: var(--colors-neutral-text-11);
-}
-
-.cxd-AsideNav-item.is-active>a {
-    background: var(--colors-neutral-text-11);
-}
-
-.cxd-AsideNav-item a {
-    color: var(--colors-neutral-text-2);
-    font-size: var(--body-size);
-    border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
-}
-
-.cxd-AsideNav-item.is-active>a {
-    color: var(--colors-brand-5);
-    background: var(--colors-brand-8);
-}
-
-.cxd-AsideNav-item.is-active>a:hover {
-    background: var(--colors-brand-8);
-}
-
-.cxd-AsideNav-item a:hover {
-    background: var(--colors-neutral-text-6);
-}
-
-.cxd-Layout--asideFixed.cxd-Layout--folded .cxd-Layout-asideInner {
-    padding-right: unset;
-}
-
- */
-
-
-/* 头像样式 */
-
-
-/* 下拉卡片容器 */
+/* 头像样式 下拉卡片容器 */
 
 .dropdown-card-wrapper {
     position: absolute;

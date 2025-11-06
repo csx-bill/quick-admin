@@ -12,6 +12,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "catalog:",
         "amis": "catalog:",
+        "amis-core": "catalog:",
         "amis-ui": "catalog:",
         "axios": "catalog:",
         "copy-to-clipboard": "catalog:",
