@@ -5,6 +5,10 @@
     height: 100%;
 }
 /* 头样式 */
+#header [class*="-Layout-brand"] {
+    color: var(--body-color);
+    font-size: var(--fonts-size-5);
+}
 
 #header [class*="-Layout-brandBar"] {
     background: unset !important;

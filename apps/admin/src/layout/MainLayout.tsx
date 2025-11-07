@@ -14,6 +14,8 @@ import { inject, observer } from "mobx-react";
 import type { IMainStore } from "@/store";
 import { routes } from "@/routes";
 
+import logoUrl from '@/assets/logo.webp';
+
 // 导航项类型定义
 interface NavItem {
   id: string;
@@ -213,12 +215,12 @@ const MainLayout: React.FC<Props> = inject("store")(
             method: "get",
           });
           store.brandName = res?.data?.data?.projectName;
-          store.logo = res?.data?.data?.logo;
+          store.logo = res.data.data.logo || logoUrl;
         };
         fetchData();
       } else {
-        store.brandName = "品牌名称";
-        store.logo = "logo.png";
+        store.brandName = "Quick Admin";
+        store.logo = logoUrl;
       }
     }, [layoutSettings.isTabsLayout, projectId]);
 

@@ -17,6 +17,8 @@ import type { IMainStore } from "@/store";
 import { routes } from "@/routes";
 import { fetcher } from "@/api";
 
+import logoUrl from '@/assets/logo.webp';
+
 // 导航项类型定义
 interface NavItem {
   id: string;
@@ -98,14 +100,14 @@ const MainLayout: React.FC<Props> = inject("store")(
             url: `/api/projects/${projectId}`,
             method: "get",
           });
-          setLogo(res.data.data.logo);
+          setLogo(res.data.data.logo || logoUrl);
           setBrandName(res.data.data.projectName);
         };
 
         fetchData();
       } else {
-        setLogo("品牌名称");
-        setBrandName("logo.png");
+        setLogo(logoUrl);
+        setBrandName("Quick Admin");
       }
     }, [projectId]);
 

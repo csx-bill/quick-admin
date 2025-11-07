@@ -42,7 +42,7 @@ const Header = (props: {
                 {brandName?.substring(0, 1)}
               </span>
             )}
-            <span className="hidden-folded m-l-sm">{brandName}</span>
+            <span className="hidden-folded m-l-sm font-semibold">{brandName}</span>
           </div>
         </div>
       </div>
