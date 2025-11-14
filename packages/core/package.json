@@ -1,16 +1,19 @@
 {
-    "name": "@quick-admin/editor",
+    "name": "@quick-admin-core",
     "private": true,
     "version": "0.0.0",
     "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "tsc -b && vite build",
-        "lint": "eslint .",
-        "preview": "vite preview"
+    "main": "./src/index.ts",
+    "module": "./src/index.ts", 
+    "types": "./src/index.ts",
+    "exports": {
+        ".": {
+        "types": "./src/index.ts",
+        "import": "./src/index.ts",
+        "style": "./src/styles/index.css"
+        }
     },
     "dependencies": {
-        "@quick-admin-core": "workspace:*",
         "@fortawesome/fontawesome-free": "catalog:",
         "amis": "catalog:",
         "amis-core": "catalog:",

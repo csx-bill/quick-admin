@@ -8,9 +8,7 @@ import {
   matchRoutes,
 } from "react-router-dom";
 import { Layout, Tabs, Tab, Button } from "amis-ui";
-import Header from "./Header";
-import Footer from "./Footer";
-import Aside from "./Aside";
+import { Header,Footer,Aside } from "@quick-admin-core";
 import navRoutes from "@/routes/navRoutes";
 import { inject, observer } from "mobx-react";
 import type { IMainStore } from "@/store";

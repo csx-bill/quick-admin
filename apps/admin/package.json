@@ -10,12 +10,14 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@quick-admin-core": "workspace:*",
         "@fortawesome/fontawesome-free": "catalog:",
         "amis": "catalog:",
         "amis-core": "catalog:",
         "amis-ui": "catalog:",
         "axios": "catalog:",
         "copy-to-clipboard": "catalog:",
+        "i18n-runtime": "catalog:",
         "mobx": "catalog:",
         "mobx-react": "catalog:",
         "mobx-state-tree": "catalog:",

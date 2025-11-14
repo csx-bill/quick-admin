@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import { ProtectedRoute } from "@quick-admin-core";
 import MainLayout from "@/layout/MainLayout";
 import Config from "@/views/admin/config";
 import Pages from "@/views/admin/pages";

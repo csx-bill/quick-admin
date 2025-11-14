@@ -1,7 +1,6 @@
 import { themeable } from "amis-core";
-import AmisRenderer from "@/components/AmisRenderer";
+import { AmisRenderer,Footer } from "@quick-admin-core";
 import schema from "./login.json";
-import Footer from "@/layout/Footer";
 
 const Login = (props: { classnames: any }) => {
   return (

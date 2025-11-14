@@ -10,6 +10,7 @@
     font-size: var(--fonts-size-5);
 }
 
+
 #header [class*="-Layout-brandBar"] {
     background: unset !important;
 }
@@ -33,6 +34,7 @@
     background: unset !important;
 }
 
+
 #asideInner {
     border-right: var(--Divider-width) var(--Divider-style) var(--Divider-color);
 }
@@ -48,6 +50,10 @@
 
 #tabsAsideNav [class*="-AsideNav-item"] a:hover {
     background: var(--secondary-onHover);
+}
+
+#tabsAsideNav [class*="-AsideNav-subList"] {
+    background: unset !important;
 }
 
 

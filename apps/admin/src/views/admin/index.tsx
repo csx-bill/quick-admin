@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { themeable } from "amis-core";
-import AmisRenderer from "@/components/AmisRenderer";
+import { AmisRenderer } from "@quick-admin-core";
 import { fetcher } from "@/api";
 
 const Admin = (props: { classnames: any }) => {

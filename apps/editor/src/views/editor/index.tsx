@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { themeable } from "amis-core";
 import { Icon, Button } from "amis-ui";
-import AmisEditor from "@/components/AmisEditor";
+import { AmisEditor } from "@quick-admin-core";
 import "./editor.css";
 import type { IMainStore } from "@/store";
 
