@@ -3,20 +3,19 @@ import {
   useLocation,
   useNavigate,
   useParams,
-  generatePath,
   Outlet,
   matchRoutes,
 } from "react-router-dom";
 import { Layout, Tabs, Tab, Button } from "amis-ui";
-import Header from "./Header";
-import Footer from "./Footer";
-import Aside from "./Aside";
+import { Header,Footer,Aside } from "@quick-admin-core";
 import { inject, observer } from "mobx-react";
 import type { IMainStore } from "@/store";
 import { routes } from "@/routes";
 
+import logoUrl from '@/assets/logo.webp';
+
 // 导航项类型定义
-export interface NavItem {
+interface NavItem {
   id: string;
   label: string;
   icon: string;
@@ -26,37 +25,12 @@ export interface NavItem {
 }
 
 // 页签类型定义
-export interface TabItem {
+interface TabItem {
   key: string;
   label: string;
   path: string;
   icon: string;
   projectId: string;
-}
-
-// 项目信息类型定义
-export interface ProjectInfo {
-  logo?: string;
-  brandName: string;
-}
-
-// 布局配置类型定义
-export interface LayoutSettings {
-  isTabsLayout: boolean;
-  showAside: boolean;
-}
-
-// 公共组件 Props 类型定义
-export interface MainLayoutProps {
-  store?: IMainStore;
-  classnames?: any;
-  
-  // 新增的公共 props
-  navItems: NavItem[]; // 导航项数组
-  projectInfo: ProjectInfo; // 项目信息
-  layoutSettings: LayoutSettings; // 布局配置
-  onProjectChange?: (projectId: string) => void; // 项目变化回调
-  onNavItemsGenerate?: (items: NavItem[], params: any) => NavItem[]; // 导航项生成回调
 }
 
 // 递归查找导航项
@@ -73,15 +47,28 @@ const findNavItemByPath = (items: NavItem[], path: string): NavItem | null => {
   return null;
 };
 
-const MainLayout: React.FC<MainLayoutProps> = inject("store")(
-  observer(({ 
-    store, 
-    navItems, 
-    projectInfo, 
-    layoutSettings: externalLayoutSettings,
-    onProjectChange,
-    onNavItemsGenerate 
-  }) => {
+// 项目信息接口
+export interface ProjectInfo {
+  id: string;
+  name: string;
+  logo?: string;
+}
+
+interface Props {
+  store?: IMainStore;
+  classnames?: any;
+  // 项目信息配置
+  projectInfo?: ProjectInfo | null;
+  // 项目信息加载函数
+  onLoadProjectInfo?: (projectId: string) => Promise<ProjectInfo>;
+  // 导航配置
+  navItems?: NavItem[] | null;
+  // 导航加载函数
+  onLoadNavItems?: (projectId?: string) => Promise<NavItem[]>;
+}
+
+const MainLayout: React.FC<Props> = inject("store")(
+  observer(({ store, projectInfo, onLoadProjectInfo, navItems: propNavItems,onLoadNavItems}) => {
     if (!store) return null;
 
     const location = useLocation();
@@ -93,73 +80,81 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
     const [tabs, setTabs] = useState<TabItem[]>([]);
     const [activeTab, setActiveTab] = useState<string | null>(null);
     const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set());
+    // 项目信息状态
+    const [currentProjectInfo, setCurrentProjectInfo] = useState<ProjectInfo | null>(projectInfo || null);
+    // 导航状态
+    const [currentNavItems, setCurrentNavItems] = useState<NavItem[]>([]);
 
-    // 根据路由配置确定布局设置（可被外部传入的设置覆盖）
-    const computedLayoutSettings = useMemo(() => {
-      // 如果外部传入了布局设置，优先使用外部的
-      if (externalLayoutSettings) {
-        return externalLayoutSettings;
-      }
-      
-      // 否则使用原有的逻辑计算布局设置
+    // 根据路由配置确定布局设置
+    const layoutSettings = useMemo(() => {
       const matchedRoutes = matchRoutes(routes, location.pathname) || [];
+
+      // 查找是否有标记为 tabs: true 的路由
       const isTabsLayout = matchedRoutes.some(
         ({ route }) => route.tabs === true
       );
+
+      // 查找是否有标记为 aside: true 的路由
       const showAside = matchedRoutes.some(({ route }) => route.aside === true);
 
       return {
         isTabsLayout,
         showAside,
       };
-    }, [location.pathname, externalLayoutSettings]);
+    }, [location.pathname]);
 
-    // 处理项目变化
+    // 设置项目信息 - 支持多种方式
     useEffect(() => {
-      if (projectId && onProjectChange) {
-        onProjectChange(projectId);
-      }
-    }, [projectId, onProjectChange]);
+      const setupProjectInfo = async () => {
+        // 优先级 1: 直接传入的 projectInfo
+        if (projectInfo) {
+          setCurrentProjectInfo(projectInfo);
+          return;
+        }
 
-    // 动态生成导航项（使用外部传入的生成函数或默认实现）
-    const generatedNavItems = useMemo(() => {
-      if (onNavItemsGenerate) {
-        return onNavItemsGenerate(navItems, params);
-      }
-      
-      // 默认的导航项生成逻辑
-      const generateNavItems = (items: NavItem[]): NavItem[] => {
-        return items.map((item) => {
-          const newItem = { ...item };
-
-          if (newItem.children) {
-            newItem.children = generateNavItems(newItem.children);
-          }
-
-          if (newItem.path && projectId) {
-            try {
-              newItem.path = generatePath(newItem.path, { ...params });
-            } catch (error) {
-              console.error(
-                `Failed to generate path for ${newItem.path}:`,
-                error
-              );
-            }
-          }
-
-          return newItem;
+        // 优先级 2: 通过 onLoadProjectInfo 函数加载
+        if (onLoadProjectInfo && projectId) {
+            const info = await onLoadProjectInfo(projectId);
+            setCurrentProjectInfo(info);
+          return;
+        }
+        // 默认值
+        setCurrentProjectInfo({
+          id: projectId || 'default',
+          name: 'Quick Admin',
+          logo: logoUrl,
         });
       };
 
-      return generateNavItems(navItems);
-    }, [navItems, projectId, params, onNavItemsGenerate]);
+      setupProjectInfo();
+    }, [projectInfo, onLoadProjectInfo, projectId]);
+
+    // 设置导航菜单（与项目信息逻辑保持一致）
+    useEffect(() => {
+      const setupNavItems = async () => {
+        // 优先级 1: 直接传入的 navItems
+        if (propNavItems) {
+          setCurrentNavItems(propNavItems);
+          return;
+        }
+
+        // 优先级 2: 通过 onLoadNavItems 函数加载
+        if (onLoadNavItems && projectId) {
+            const items = await onLoadNavItems(projectId);
+            setCurrentNavItems(items);
+          return;
+        }
+      };
+
+      setupNavItems();
+    }, [propNavItems, onLoadNavItems, projectId]);
 
     // 处理页签逻辑
     useEffect(() => {
-      if (!computedLayoutSettings.isTabsLayout || !projectId) return;
+      if (!layoutSettings.isTabsLayout || !projectId) return;
 
       const path = location.pathname;
-      const navItem = findNavItemByPath(generatedNavItems, path);
+      const navItem = findNavItemByPath(currentNavItems, path);
 
       if (navItem) {
         const tabKey = navItem.path;
@@ -202,8 +197,8 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
       }
     }, [
       location.pathname,
-      computedLayoutSettings.isTabsLayout,
-      generatedNavItems,
+      layoutSettings.isTabsLayout,
+      currentNavItems,
       tabs,
       expandedPaths,
       projectId,
@@ -211,11 +206,11 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
 
     // 当项目ID变化时，清除项目的页签
     useEffect(() => {
-      if (computedLayoutSettings.isTabsLayout && projectId) {
+      if (layoutSettings.isTabsLayout && projectId) {
         setTabs([]);
         setActiveTab(null);
       }
-    }, [projectId, computedLayoutSettings.isTabsLayout]);
+    }, [projectId, layoutSettings.isTabsLayout]);
 
     // 关闭页签
     const handleTabClose = (key: string) => {
@@ -255,14 +250,13 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
         header={
           <Header
             store={store}
-            navItems={generatedNavItems}
-            logo={projectInfo?.logo}
-            brandName={projectInfo?.brandName}
+            logo={currentProjectInfo?.logo || logoUrl}
+            brandName={currentProjectInfo?.name || 'Quick Admin'}
           />
         }
         aside={
-          computedLayoutSettings.showAside ? (
-            <Aside store={store} navItems={generatedNavItems} />
+          layoutSettings.showAside ? (
+            <Aside store={store} navItems={currentNavItems} />
           ) : null
         }
         folded={store.asideFolded}
@@ -270,7 +264,7 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
         footer={<Footer />}
       >
         {/* 页签区域 */}
-        {computedLayoutSettings.isTabsLayout && tabs.length > 0 && (
+        {layoutSettings.isTabsLayout && tabs.length > 0 && (
           <div id="tabsLayout">
             <Tabs
               mode="line"
@@ -295,10 +289,10 @@ const MainLayout: React.FC<MainLayoutProps> = inject("store")(
         )}
 
         {/* 非 tabs 内容区域 */}
-        {!computedLayoutSettings.isTabsLayout && <Outlet />}
+        {!layoutSettings.isTabsLayout && <Outlet />}
 
         {/* 返回按钮 */}
-        {computedLayoutSettings.isTabsLayout && (
+        {layoutSettings.isTabsLayout && (
           <div className="fixed bottom-3/4 right-2 z-1000">
             <Button level="primary" onClick={() => navigate("/projects")}>
               返回
