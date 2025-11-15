@@ -121,7 +121,7 @@ const MainLayout: React.FC<Props> = inject("store")(
         // 默认值
         setCurrentProjectInfo({
           id: projectId || 'default',
-          name: 'Quick Admin',
+          name: import.meta.env.VITE_APP_TITLE,
           logo: logoUrl,
         });
       };

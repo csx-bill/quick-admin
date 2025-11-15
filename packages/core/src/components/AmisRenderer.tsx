@@ -35,6 +35,9 @@ const AmisRenderer: React.FC<Props> = inject("store")(
             data: {
               // 全局上下文数据
               params: params,
+              // 应用 admin 访问地址
+              ADMIN_URL: import.meta.env.VITE_ADMIN_URL,
+              APP_TITLE: import.meta.env.VITE_APP_TITLE
             },
           },
           {
@@ -51,20 +54,18 @@ const AmisRenderer: React.FC<Props> = inject("store")(
               location: string /*目标地址*/,
               action: any /* action对象*/
             ) => {
+              
               // 用来实现页面跳转, actionType:link、url 都会进来。
               if (
                 action &&
-                action.actionType === "url" &&
                 action.blank === false
               ) {
                 navigate(location);
                 return;
-              } else if (action && action.blank) {
-                // hash 路由 新窗口打开
-                window.open(`#${location}`, "_blank");
-                return;
               } else {
-                navigate(location);
+                // hash 路由 新窗口打开
+                window.open(`${location}`, "_blank");
+                return;
               }
             },
 
