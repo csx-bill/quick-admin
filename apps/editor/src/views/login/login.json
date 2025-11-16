@@ -162,7 +162,7 @@
                     "rowGap": "10px",
                     "columnGap": "10px",
                     "flexWrap": "nowrap",
-                    "inset": "auto",
+                    "inset": "auto auto auto 50px",
                     "height": "100%",
                     "overflowY": "visible",
                     "flex": "0 0 auto",
@@ -179,7 +179,7 @@
               "style": {
                 "position": "fixed",
                 "display": "flex",
-                "inset": "50px auto auto 50px",
+                "inset": "15px auto auto 30px",
                 "flexWrap": "nowrap",
                 "flexDirection": "column",
                 "alignItems": "flex-start",
