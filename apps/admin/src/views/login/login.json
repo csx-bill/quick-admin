@@ -1,10 +1,5 @@
 {
   "type": "page",
-  "id": "u:20ff6f70e1eb",
-  "asideResizor": false,
-  "pullRefresh": {
-    "disabled": true
-  },
   "body": [
     {
       "type": "flex",
@@ -15,7 +10,20 @@
             {
               "type": "container",
               "body": [],
-              "id": "u:background-blur",
+              "style": {
+                "position": "relative",
+                "display": "flex",
+                "inset": "auto",
+                "flexWrap": "nowrap",
+                "flexDirection": "row",
+                "height": "100%",
+                "overflowY": "visible"
+              },
+              "size": "none",
+              "wrapperBody": false,
+              "id": "u:769f38df4fa1",
+              "isFixedHeight": true,
+              "isFixedWidth": false,
               "wrapperCustomStyle": {
                 "root": {
                   "position": "absolute",
@@ -23,10 +31,10 @@
                   "left": "0",
                   "right": "0",
                   "bottom": "0",
+                  "zIndex": "1",
                   "background": "linear-gradient(154deg, #07070915 30%, var(--primary) 30%, #07070915 64%)",
                   "filter": "blur(100px)",
-                  "clip-path": "polygon(-100px 0%, calc(100% - 0px) 0%, calc(100% - 0px) 100%, -100px 100%)",
-                  "z-index": "1"
+                  "clip-path": "polygon(-100px 0%, calc(100% - 0px) 0%, calc(100% - 0px) 100%, -100px 100%)"
                 }
               }
             },
@@ -34,58 +42,184 @@
               "type": "container",
               "body": [
                 {
-                  "type": "tpl",
-                  "tpl": "Quick Admin",
-                  "inline": true,
-                  "wrapperComponent": "h1",
-                  "id": "u:678745db8e00",
-                  "className": "text-center font-bold text-2xl mb-6 text-gray-800",
-                  "themeCss": {
-                    "baseControlClassName": {
-                      "padding-and-margin:default": {
-                        "marginLeft": "0.75rem"
-                      }
+                  "type": "flex",
+                  "items": [
+                    {
+                      "type": "container",
+                      "body": [
+                        {
+                          "type": "image",
+                          "id": "u:8196fc9c4f06",
+                          "enlargeAble": false,
+                          "maxScale": 200,
+                          "minScale": 50,
+                          "style": {
+                            "display": "inline-block"
+                          },
+                          "src": "${APP_LOGO}",
+                          "themeCss": {
+                            "imageContentClassName": {
+                              "size:default": {
+                                "width": "",
+                                "height": "2.5rem",
+                                "minWidth": ""
+                              }
+                            },
+                            "imageControlClassName": {
+                              "border:default": {}
+                            }
+                          },
+                          "wrapperCustomStyle": {
+                            "root": {
+                              "[class*='-Image']": {
+                                "border": "unset !important"
+                              }
+                            }
+                          },
+                          "imageMode": "original",
+                          "visibleOn": "${IF(logo,false,true)}"
+                        },
+                        {
+                          "type": "tpl",
+                          "tpl": "${APP_TITLE}",
+                          "inline": true,
+                          "wrapperComponent": "h1",
+                          "id": "u:860e40efc518",
+                          "className": "text-center font-bold text-2xl mb-6 text-gray-800",
+                          "themeCss": {
+                            "baseControlClassName": {
+                              "font:default": {}
+                            }
+                          }
+                        }
+                      ],
+                      "size": "none",
+                      "style": {
+                        "position": "static",
+                        "display": "flex",
+                        "flex": "1 1 auto",
+                        "flexGrow": 1,
+                        "flexWrap": "nowrap",
+                        "alignItems": "center"
+                      },
+                      "wrapperBody": false,
+                      "isFixedHeight": false,
+                      "isFixedWidth": false,
+                      "id": "u:da4fe826e3be"
                     }
-                  }
+                  ],
+                  "style": {
+                    "position": "relative",
+                    "flexWrap": "nowrap",
+                    "inset": "auto",
+                    "rowGap": "10px",
+                    "columnGap": "10px",
+                    "flex": "0 0 auto",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                  },
+                  "id": "u:768d7022c82d",
+                  "isFixedHeight": false,
+                  "isFixedWidth": false,
+                  "name": "text"
+                },
+                {
+                  "type": "flex",
+                  "items": [
+                    {
+                      "type": "container",
+                      "body": [
+                        {
+                          "type": "tpl",
+                          "tpl": "基于AMIS前端框架 + Spring Boot后端框架构建的企业级低代码开发平台，旨在通过可视化配置方式大幅提升业务系统开发效率，降低技术门槛，实现快速应用交付。",
+                          "inline": true,
+                          "wrapperComponent": "",
+                          "id": "u:f38efd648a5c"
+                        }
+                      ],
+                      "size": "none",
+                      "style": {
+                        "position": "static",
+                        "display": "flex",
+                        "flex": "1 1 auto",
+                        "height": "500px",
+                        "flexWrap": "nowrap",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "flexDirection": "row",
+                        "flexGrow": 1,
+                        "overflowY": "visible"
+                      },
+                      "wrapperBody": false,
+                      "isFixedHeight": true,
+                      "isFixedWidth": false,
+                      "id": "u:3a4a48bd661c"
+                    }
+                  ],
+                  "style": {
+                    "position": "relative",
+                    "rowGap": "10px",
+                    "columnGap": "10px",
+                    "flexWrap": "nowrap",
+                    "inset": "auto",
+                    "height": "100%",
+                    "overflowY": "visible",
+                    "flex": "0 0 auto",
+                    "justifyContent": "flex-start",
+                    "width": "50%",
+                    "overflowX": "auto"
+                  },
+                  "id": "u:83a76892c988",
+                  "isFixedHeight": true,
+                  "isFixedWidth": true,
+                  "name": "text"
                 }
               ],
               "style": {
-                "position": "relative",
-                "z-index": "2",
+                "position": "fixed",
                 "display": "flex",
-                "alignItems": "flex-start",
-                "justifyContent": "flex-start",
-                "height": "100%",
+                "inset": "50px auto auto 50px",
                 "flexWrap": "nowrap",
-                "flex": "0 0 auto",
-                "inset": "auto"
+                "flexDirection": "column",
+                "alignItems": "flex-start",
+                "zIndex": 1
               },
-              "id": "u:eed855ea353a",
-              "isFixedHeight": false
+              "size": "none",
+              "wrapperBody": false,
+              "id": "u:a9b6f011875e",
+              "isFixedHeight": false,
+              "isFixedWidth": false,
+              "wrapperCustomStyle": {},
+              "originPosition": "left-top"
             }
           ],
-          "id": "u:51ad1de27e65",
-          "size": "none",
           "style": {
-            "position": "relative",
-            "display": "flex",
+            "position": "static",
+            "display": "block",
             "flex": "1 1 auto",
             "flexGrow": 2,
-            "flexBasis": "0px",
-            "flexWrap": "nowrap",
-            "alignItems": "flex-start",
-            "justifyContent": "flex-start",
-            "minHeight": "100vh",
-            "inset": "auto"
+            "flexBasis": "0px"
           },
-          "isFixedHeight": false
+          "size": "none",
+          "wrapperBody": false,
+          "id": "u:bc71cb1d1b70",
+          "isFixedHeight": false,
+          "wrapperCustomStyle": {},
+          "isFixedWidth": false
         },
         {
           "type": "container",
           "body": [
             {
-              "id": "u:feae10fa4a44",
               "type": "form",
+              "style": {
+                "position": "static",
+                "display": "block"
+              },
+              "id": "u:bb96ba2d0f93",
+              "isFixedHeight": false,
+              "isFixedWidth": false,
               "title": "",
               "mode": "horizontal",
               "labelAlign": "left",
@@ -97,18 +231,18 @@
                   "tpl": "欢迎回来",
                   "inline": true,
                   "wrapperComponent": "h1",
-                  "id": "u:d9ce0c49c457",
+                  "id": "u:c4d830067b62",
                   "className": "text-center font-bold text-2xl mb-6 text-gray-800"
                 },
                 {
                   "name": "username",
                   "label": false,
                   "type": "input-text",
-                  "id": "u:fa95f721ed01",
+                  "id": "u:500f62edcf8c",
                   "addOn": {
                     "label": "",
                     "type": "text",
-                    "id": "u:f8d67c83f4a0",
+                    "id": "u:e51009d5c1f4",
                     "position": "left",
                     "icon": "fa fa-user"
                   },
@@ -120,13 +254,13 @@
                   "name": "password",
                   "label": false,
                   "type": "input-password",
-                  "id": "u:04899b3f77e7",
+                  "id": "u:28a2d567d29e",
                   "showCounter": false,
                   "required": true,
                   "addOn": {
                     "label": "",
                     "type": "text",
-                    "id": "u:104f6e18a8bb",
+                    "id": "u:667ec03841cb",
                     "position": "left",
                     "icon": "fa fa-key"
                   },
@@ -141,7 +275,7 @@
                       "actions": [
                         {
                           "actionType": "submit",
-                          "componentId": "u:feae10fa4a44",
+                          "componentId": "u:bb96ba2d0f93",
                           "outputVar": "submitResult",
                           "args": {}
                         }
@@ -149,7 +283,7 @@
                     }
                   },
                   "level": "primary",
-                  "id": "u:43d22a27ac56",
+                  "id": "u:75403071d208",
                   "disabledOnAction": false,
                   "block": true,
                   "className": "shadow-lg hover:shadow-xl transition-all"
@@ -181,24 +315,9 @@
                   ]
                 }
               },
-              "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md",
-              "style": {
-                "display": "block",
-                "position": "static"
-              },
-              "isFixedHeight": false,
-              "isFixedWidth": false
+              "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md"
             }
           ],
-          "id": "u:d0af06ab18f0",
-          "themeCss": {
-            "baseControlClassName": {}
-          },
-          "wrapperCustomStyle": {
-            "root": {
-              "z-index": "10000"
-            }
-          },
           "size": "none",
           "style": {
             "position": "static",
@@ -212,31 +331,36 @@
           },
           "wrapperBody": false,
           "isFixedHeight": false,
-          "isFixedWidth": false
+          "isFixedWidth": false,
+          "id": "u:2cce3e1f7c1e"
         }
       ],
       "style": {
         "position": "relative",
-        "rowGap": "10px",
-        "columnGap": "10px",
         "flexWrap": "nowrap",
         "inset": "auto",
         "height": "100%",
         "overflowY": "visible"
       },
-      "id": "u:ed7c31aad725",
+      "id": "u:1cdb6d8a3d7c",
       "isFixedHeight": true,
-      "isFixedWidth": false,
-      "wrapperCustomStyle": {
-        "root": {
-          "margin": "calc(-1 * var(--Page-body-padding, 0))",
-          "width": "calc(100% + 2 * var(--Page-body-padding, 0))",
-          "height": "calc(100% + 2 * var(--Page-body-padding, 0))"
-        }
-      }
+      "isFixedWidth": false
     }
   ],
+  "id": "u:20ff6f70e1eb",
+  "asideResizor": false,
+  "pullRefresh": {
+    "disabled": true
+  },
   "regions": [
     "body"
-  ]
+  ],
+  "wrapperCustomStyle": {
+    ".cxd-Page-body": {},
+    "root": {
+      "[class*='-Page-body']": {
+        "padding": "0"
+      }
+    }
+  }
 }

@@ -5,6 +5,7 @@ import axios from "axios";
 import { render as renderAmis } from "amis";
 import type { IMainStore } from "@/store";
 import { fetcher } from "@/api";
+import logoUrl from '@/assets/logo.webp';
 
 interface Props {
   store?: IMainStore;
@@ -37,7 +38,8 @@ const AmisRenderer: React.FC<Props> = inject("store")(
               params: params,
               // 应用 admin 访问地址
               ADMIN_URL: import.meta.env.VITE_ADMIN_URL,
-              APP_TITLE: import.meta.env.VITE_APP_TITLE
+              APP_TITLE: import.meta.env.VITE_APP_TITLE,
+              APP_LOGO: logoUrl
             },
           },
           {

@@ -6,6 +6,7 @@ import { Icon, Button } from "amis-ui";
 import { AmisEditor } from "@quick-admin-core";
 import "./editor.css";
 import type { IMainStore } from "@/store";
+import logoUrl from '@/assets/logo.webp';
 
 interface EditorProps {
   store?: IMainStore;
@@ -116,6 +117,10 @@ const Editor: React.FC<EditorProps> = inject("store")(
             alert,
             copy,
           }}
+          data={{              // 应用 admin 访问地址
+              ADMIN_URL: import.meta.env.VITE_ADMIN_URL,
+              APP_TITLE: import.meta.env.VITE_APP_TITLE,
+              APP_LOGO: logoUrl}}
         />
       </div>
     );

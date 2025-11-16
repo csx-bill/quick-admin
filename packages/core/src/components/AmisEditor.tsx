@@ -18,6 +18,7 @@ interface AmisEditorProps {
     copy: any;
     confirm?: any;
   };
+  data:any;
 }
 
 const AmisEditor = (props: AmisEditorProps) => {
@@ -30,6 +31,7 @@ const AmisEditor = (props: AmisEditorProps) => {
     onSave,
     setPreview,
     amisEnv,
+    data
   } = props;
 
   // 动态加载CSS
@@ -48,6 +50,7 @@ const AmisEditor = (props: AmisEditorProps) => {
       onSave={onSave}
       showCustomRenderersPanel={true}
       amisEnv={amisEnv}
+      data={data}
     />
   );
 };

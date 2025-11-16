@@ -5,6 +5,9 @@
   "pullRefresh": {
     "disabled": true
   },
+  "regions": [
+    "body"
+  ],
   "body": [
     {
       "type": "crud",
@@ -231,18 +234,68 @@
             "id": "u:baab209f3f1f",
             "body": [
               {
-                "type": "avatar",
-                "showtype": "image",
-                "icon": "",
-                "fit": "cover",
+                "type": "image",
+                "id": "u:6cb3c0746cc6",
+                "enlargeAble": false,
+                "maxScale": 200,
+                "minScale": 50,
                 "style": {
-                  "width": 40,
-                  "height": 40,
-                  "borderRadius": 20,
-                  "fontFamily": "",
-                  "fontSize": 12
+                  "display": "inline-block"
                 },
-                "id": "u:527803d292c7"
+                "themeCss": {
+                  "imageControlClassName": {
+                    "border:default": {}
+                  },
+                  "imageContentClassName": {
+                    "size:default": {
+                      "width": "",
+                      "height": "2.5rem",
+                      "minWidth": ""
+                    }
+                  }
+                },
+                "wrapperCustomStyle": {
+                  "root": {
+                    "[class*='-Image']": {
+                      "border": "unset !important"
+                    }
+                  }
+                },
+                "imageMode": "original",
+                "visibleOn": "${IF(logo,true,false)}",
+                "src": "${logo}"
+              },
+              {
+                "type": "image",
+                "id": "u:78987050ac8c",
+                "enlargeAble": false,
+                "maxScale": 200,
+                "minScale": 50,
+                "style": {
+                  "display": "inline-block"
+                },
+                "themeCss": {
+                  "imageControlClassName": {
+                    "border:default": {}
+                  },
+                  "imageContentClassName": {
+                    "size:default": {
+                      "width": "",
+                      "height": "2.5rem",
+                      "minWidth": ""
+                    }
+                  }
+                },
+                "wrapperCustomStyle": {
+                  "root": {
+                    "[class*='-Image']": {
+                      "border": "unset !important"
+                    }
+                  }
+                },
+                "imageMode": "original",
+                "visibleOn": "${IF(logo,false,true)}",
+                "src": "${APP_LOGO}"
               },
               {
                 "type": "tpl",
@@ -285,14 +338,13 @@
                     "ignoreError": false,
                     "actionType": "url",
                     "args": {
-                      "url": "/project/${id}",
-                      "blank": false
+                      "url": "${ADMIN_URL}/project/${id}"
                     }
                   }
                 ]
               }
             },
-            "id": "u:fe76f68ac8eb",
+            "id": "u:a1f497722370",
             "disabledOnAction": false,
             "level": "link"
           }
@@ -313,8 +365,5 @@
         }
       ]
     }
-  ],
-  "regions": [
-    "body"
   ]
 }
