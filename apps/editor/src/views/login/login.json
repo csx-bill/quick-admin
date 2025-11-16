@@ -179,7 +179,7 @@
               "style": {
                 "position": "fixed",
                 "display": "flex",
-                "inset": "15px auto auto 30px",
+                "inset": "-10px auto auto 20px",
                 "flexWrap": "nowrap",
                 "flexDirection": "column",
                 "alignItems": "flex-start",
