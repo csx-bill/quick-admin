@@ -153,7 +153,20 @@
                           "feat": "Insert",
                           "dsType": "api",
                           "labelAlign": "left",
-                          "mode": "horizontal"
+                          "mode": "horizontal",
+                          "onEvent": {
+                            "submitSucc": {
+                              "weight": 0,
+                              "actions": [
+                                {
+                                  "componentId": "u:e7225c3d9bac",
+                                  "ignoreError": false,
+                                  "actionType": "reload"
+                                }
+                              ]
+                            }
+                          },
+                          "canAccessSuperData": false
                         }
                       ],
                       "actionType": "dialog",
@@ -171,7 +184,13 @@
                           "label": "确定",
                           "primary": true,
                           "id": "u:fbab2b7a2bbd",
-                          "disabledOnAction": false
+                          "disabledOnAction": false,
+                          "onEvent": {
+                            "click": {
+                              "weight": 0,
+                              "actions": []
+                            }
+                          }
                         }
                       ],
                       "showCloseButton": true,
@@ -180,7 +199,9 @@
                       "showErrorMsg": true,
                       "showLoading": true,
                       "draggable": false,
-                      "allowFullscreen": false
+                      "allowFullscreen": false,
+                      "withDefaultData": false,
+                      "dataMapSwitch": false
                     },
                     "id": "u:242d31ed929a",
                     "disabledOnAction": false,
