@@ -25,11 +25,11 @@
         "requestAdaptor": "",
         "adaptor": "",
         "messages": {},
-        "dataType": "json",
         "data": {
           "projectId": "${params.projectId}",
-          "username": "${username}"
-        }
+          "&": "$$"
+        },
+        "dataType": "json"
       },
       "filter": {
         "type": "form",
@@ -114,12 +114,12 @@
                                 "feat": "Insert",
                                 "body": [
                                   {
-                                    "type": "input-text",
-                                    "label": "项目id",
                                     "name": "projectId",
+                                    "label": "项目id",
+                                    "type": "input-text",
                                     "id": "u:ceb152ecafc4",
-                                    "multiple": false,
-                                    "hidden": true
+                                    "hidden": true,
+                                    "multiple": false
                                   },
                                   {
                                     "type": "select",
@@ -146,6 +146,7 @@
                                     "type": "radios",
                                     "label": "用户类型",
                                     "name": "userType",
+                                    "id": "u:598071810f40",
                                     "options": [
                                       {
                                         "label": "管理员",
@@ -156,7 +157,6 @@
                                         "value": "user"
                                       }
                                     ],
-                                    "id": "u:598071810f40",
                                     "optionType": "default",
                                     "value": "admin"
                                   },
@@ -286,18 +286,18 @@
                       "actions": [
                         {
                           "actionType": "ajax",
-                          "outputVar": "responseResult",
-                          "options": {},
                           "api": {
-                            "url": "/api/users",
                             "method": "delete",
+                            "url": "/api/users",
                             "requestAdaptor": "",
                             "adaptor": "",
                             "messages": {},
                             "data": {
                               "ids": "${ids}"
                             }
-                          }
+                          },
+                          "outputVar": "responseResult",
+                          "options": {}
                         },
                         {
                           "actionType": "search",
@@ -338,11 +338,11 @@
                 "flex": "1 1 auto",
                 "position": "static",
                 "display": "flex",
-                "flexBasis": "auto",
                 "flexDirection": "row",
                 "flexWrap": "nowrap",
                 "alignItems": "stretch",
-                "justifyContent": "flex-end"
+                "justifyContent": "flex-end",
+                "flexBasis": "auto"
               },
               "id": "u:0307f834fdfc"
             }
@@ -439,19 +439,20 @@
         },
         {
           "type": "tpl",
-          "title": "角色列表",
           "name": "roleNames",
+          "title": "角色列表",
           "id": "u:cf0269fdb218"
         },
         {
           "type": "tpl",
-          "title": "创建时间",
           "name": "createTime",
+          "title": "创建时间",
           "id": "u:8c4d1952238b"
         },
         {
           "type": "operation",
           "title": "操作",
+          "id": "u:b442a655c49d",
           "buttons": [
             {
               "type": "button",
@@ -819,8 +820,7 @@
               "id": "u:d266bd9aae90",
               "disabledOnAction": false
             }
-          ],
-          "id": "u:b442a655c49d"
+          ]
         }
       ],
       "editorSetting": {

@@ -5,6 +5,9 @@
   "pullRefresh": {
     "disabled": true
   },
+  "regions": [
+    "body"
+  ],
   "body": [
     {
       "id": "u:2b93067cfdc7",
@@ -24,7 +27,7 @@
         "messages": {},
         "data": {
           "projectId": "${params.projectId}",
-          "roleName": "${roleName}"
+          "&": "$$"
         }
       },
       "filter": {
@@ -111,17 +114,17 @@
                                 "feat": "Insert",
                                 "body": [
                                   {
-                                    "name": "projectId",
-                                    "label": "项目id",
                                     "type": "input-text",
+                                    "label": "项目id",
+                                    "name": "projectId",
                                     "id": "u:371bf9a0d1d2",
                                     "hidden": true,
                                     "value": ""
                                   },
                                   {
-                                    "name": "roleName",
-                                    "label": "角色名称",
                                     "type": "input-text",
+                                    "label": "角色名称",
+                                    "name": "roleName",
                                     "id": "u:cec25bfe289f",
                                     "required": true
                                   },
@@ -223,7 +226,6 @@
                       "actions": [
                         {
                           "actionType": "ajax",
-                          "ignoreError": false,
                           "outputVar": "responseResult",
                           "options": {},
                           "api": {
@@ -235,7 +237,8 @@
                             "data": {
                               "ids": "${ids}"
                             }
-                          }
+                          },
+                          "ignoreError": false
                         },
                         {
                           "actionType": "search",
@@ -366,8 +369,8 @@
         },
         {
           "type": "tpl",
-          "title": "创建时间",
           "name": "createTime",
+          "title": "创建时间",
           "id": "u:691e368bbe77"
         },
         {
@@ -385,8 +388,8 @@
         {
           "type": "tpl",
           "title": "更新人",
-          "name": "updateBy",
-          "id": "u:7039d18d72a8"
+          "id": "u:7039d18d72a8",
+          "name": "updateBy"
         },
         {
           "type": "tpl",
@@ -698,9 +701,6 @@
         }
       }
     }
-  ],
-  "regions": [
-    "body"
   ],
   "definitions": {
     "modal-ref-1": {
