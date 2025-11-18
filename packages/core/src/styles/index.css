@@ -67,3 +67,10 @@
     width: 240px;
     z-index: 1000;
 }
+
+
+/* 提高权重 CRUD toolbar 按钮间隔 */
+body .m-r-xs,
+html .m-r-xs {
+    margin-right: 5px;
+}
