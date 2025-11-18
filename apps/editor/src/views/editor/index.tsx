@@ -53,6 +53,7 @@ const Editor: React.FC<EditorProps> = inject("store")(
         style={{ height: "100vh", display: "flex", flexDirection: "column" }}
       >
         <div
+          id="header"
           className="flex justify-between items-center"
           style={{
             borderBottom:
@@ -65,7 +66,7 @@ const Editor: React.FC<EditorProps> = inject("store")(
             </div>
           </div>
 
-          <div className="Editor-view-mode-group-container ">
+          <div>
             <div className="Editor-view-mode-group">
               <div
                 className={`Editor-view-mode-btn editor-header-icon ${
@@ -92,13 +93,13 @@ const Editor: React.FC<EditorProps> = inject("store")(
 
           <div className={cx("Layout-headerBar")}>
             <div>
-              <Button level="primary" onClick={() => handleSave()}>
+              <Button level="primary" onClick={() => handleSave()} className="m-r-xs">
                 保存
               </Button>
-              <Button level="primary" onClick={() => setPreview(!preview)}>
+              <Button level="primary" onClick={() => setPreview(!preview)} className="m-r-xs">
                 {preview ? "编辑" : "预览"}
               </Button>
-              <Button level="warning">退出</Button>
+              <Button level="warning" onClick={()=>{window.close();}}>退出</Button>
             </div>
           </div>
         </div>

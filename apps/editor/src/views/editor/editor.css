@@ -1,158 +1,16 @@
-.ae-Editor {
-    height: 100%;
-}
-
-.Editor-header {
-    flex: 0 0 48px;
-    position: relative;
-    background: #fff;
-    // box-shadow: 0 2px 7px 0 rgba(232,232,232,0.50);
-    display: flex;
-    border-bottom: 1px solid $editor-border-color;
-    box-sizing: border-box;
-    z-index: 1000;
-    .editor-header-icon svg,
-    .shortcut-icon-btn svg {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-    }
-    .Editor-title {
-        flex: 1 1 565px;
-        padding: 0 15px;
-        font-family: PingFangSC-Medium;
-        font-size: 16px;
-        font-weight: 500;
-        letter-spacing: 0;
-        user-select: none;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-    .Editor-header-actions {
-        flex: 1 1 565px;
-        padding: 0 24px;
-        font-size: 12px;
-        white-space: nowrap;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        .header-action-item {
-            margin-left: 18px;
-            user-select: none;
-            cursor: pointer;
-            transition: transform ease-out 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            >svg {
-                width: 16px;
-                fill: $editor-default-color;
-            }
-            &:hover>svg {
-                fill: $editor-active-color;
-            }
-            &.disabled {
-                cursor: not-allowed;
-                >svg {
-                    fill: $disabled-color;
-                }
-            }
-            // 历史记录icon单独处理
-            >svg.icon-editor-history {
-                color: $editor-default-color;
-                &:hover {
-                    color: $editor-active-color;
-                }
-                &.disabled,
-                &.disabled:hover {
-                    cursor: not-allowed;
-                    color: $disabled-color;
-                }
-            }
-        }
-        .header-action-btn {
-            margin-left: 8px;
-            user-select: none;
-            cursor: pointer;
-            padding: 0 16px;
-            min-width: 72px;
-            height: 32px;
-            font-family: PingFangSC-Regular;
-            font-size: 12px;
-            line-height: 20px;
-            color: #fff;
-            font-weight: 400;
-            background: $editor-active-color;
-            border-color: 1px solid $editor-active-color;
-            border-radius: 4px;
-            transition: transform ease-out 0.2s;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            &.preview-btn {
-                color: #151a26;
-                border: 1px solid #dadbdd;
-                background: #fff;
-                border-radius: 4px;
-                &:hover {
-                    color: $editor-active-color;
-                    border-color: $editor-active-color;
-                    background: #fff;
-                }
-            }
-            &:hover {
-                color: #fff;
-                background: $editor-hover-color;
-                border-color: $editor-hover-color;
-            }
-            &.disabled {
-                cursor: not-allowed;
-                color: $disabled-color;
-                background-color: $disabled-bg-color;
-                border-color: $disabled-bg-color;
-            }
-            &.exit-btn {
-                background-color: #fff;
-                border: 1px solid #ccc;
-                color: #332e2e;
-                &:hover {
-                    color: #fff;
-                    background: #fa541c;
-                    border-color: #fa541c;
-                }
-            }
-        }
-        .margin-left-space {
-            margin-left: 30px;
-        }
-    }
-}
-
-.Editor-view-mode-group-container {
-    /* flex: 0 1 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
+[class*="-Page-body"] {
+    padding: var(--Page-body-padding) !important;
 }
 
 .Editor-view-mode-group {
-    font-size: 14px;
-    font-family: PingFangSC-Regular;
-    letter-spacing: 0;
-    text-align: center;
     width: 100px;
     height: 32px;
     border-radius: 4px;
-    font-weight: 400;
-    background-color: #f2f2f4;
+    background-color: var(--secondary-onHover);
     display: flex;
     justify-content: center;
     align-items: center;
     .Editor-view-mode-btn {
-        user-select: none;
-        padding: 0;
         border-radius: 4px;
         width: 40px;
         height: 24px;
@@ -161,22 +19,16 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        svg {
-            color: $editor-default-color;
-        }
         &:first-child {
             margin-right: 12px;
         }
-        &:hover>svg {
-            color: $editor-active-color;
-        }
         &.is-active {
-            background: $editor-active-color;
+            background: var(--primary);
             svg {
                 color: #fff;
             }
             &:hover {
-                background: #5086f5;
+                background: var(--primary);
             }
         }
     }

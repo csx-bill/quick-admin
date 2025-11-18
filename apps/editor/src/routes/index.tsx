@@ -117,11 +117,12 @@ export const routes: RouteConfig[] = [
           },
         ],
       },
-      {
-        path: "/editor/:pageId/edit",
-        element: <Editor />,
-      },
+
     ],
+  },
+  {
+    path: "/editor/:pageId/edit",
+    element: <Editor />,
   },
   {
     path: "*",
