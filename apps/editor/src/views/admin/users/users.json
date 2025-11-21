@@ -140,7 +140,8 @@
                                     },
                                     "labelField": "username",
                                     "valueField": "id",
-                                    "searchable": true
+                                    "searchable": true,
+                                    "required": true
                                   },
                                   {
                                     "type": "radios",
@@ -194,7 +195,8 @@
                                       ],
                                       "id": "5e90418a5db5"
                                     },
-                                    "checkAll": false
+                                    "checkAll": false,
+                                    "required": true
                                   }
                                 ],
                                 "resetAfterSubmit": true,
@@ -429,13 +431,13 @@
         },
         {
           "type": "mapping",
+          "name": "userType",
+          "title": "用户类型",
+          "id": "u:c9c29d90a663",
           "map": {
             "admin": "管理员",
             "user": "普通用户"
-          },
-          "name": "userType",
-          "title": "用户类型",
-          "id": "u:c9c29d90a663"
+          }
         },
         {
           "type": "tpl",
@@ -709,7 +711,8 @@
                                   ],
                                   "id": "5e90418a5db5"
                                 },
-                                "checkAll": false
+                                "checkAll": false,
+                                "required": true
                               }
                             ],
                             "resetAfterSubmit": true,
