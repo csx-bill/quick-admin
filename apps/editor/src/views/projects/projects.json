@@ -368,7 +368,8 @@
             },
             "id": "u:fe76f68ac8eb",
             "disabledOnAction": false,
-            "level": "link"
+            "level": "link",
+            "visibleOn": "${IF(userType=='admin',true,false)}"
           },
           {
             "type": "button",
