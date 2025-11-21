@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { themeable } from "amis-core";
-import { AmisRenderer } from "@quick-admin-core";
-import { fetcher } from "@/api";
+import { AmisRenderer,fetcher } from "@quick-admin-core";
 
 const Admin = (props: { classnames: any }) => {
   const [schema, setSchema] = useState<any>({});

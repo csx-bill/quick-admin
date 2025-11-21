@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { ProtectedRoute,MainLayout } from "@quick-admin-core";
 import Admin from "@/views/admin";
 import { NotFound } from "amis-ui";
-import { fetcher } from "@/api";
+import { fetcher } from "@quick-admin-core";
 
 const Login = React.lazy(() => import("@/views/login"));
 const Projects = React.lazy(() => import("@/views/projects"));
@@ -71,6 +71,8 @@ export const routes: RouteConfig[] = [
           };
         return transformMenuToNavItems(res?.data?.data);
         }}
+        // 路由
+        getAppRoutes={() => routes}
         />
       </ProtectedRoute>
     ),

@@ -6,5 +6,8 @@ export { default as MainLayout } from './layout/MainLayout'
 export { default as ProtectedRoute } from './components/ProtectedRoute'
 export { default as AmisEditor } from './components/AmisEditor'
 export { default as AmisRenderer } from './components/AmisRenderer'
+export { fetcher } from './api'
+export { MainStore } from './store'
 
+import './store/userService'
 import './styles/index.css';

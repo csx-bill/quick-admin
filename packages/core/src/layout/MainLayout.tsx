@@ -10,7 +10,7 @@ import { Layout, Tabs, Tab, Button } from "amis-ui";
 import { Header,Footer,Aside } from "@quick-admin-core";
 import { inject, observer } from "mobx-react";
 import type { IMainStore } from "@/store";
-import { routes } from "@/routes";
+//import { routes } from "@/routes";
 
 import logoUrl from '@/assets/logo.webp';
 
@@ -65,10 +65,12 @@ interface Props {
   navItems?: NavItem[] | null;
   // 导航加载函数
   onLoadNavItems?: (projectId?: string) => Promise<NavItem[]>;
+  // 使用函数方式延迟获取路由配置
+  getAppRoutes?: () => any[];
 }
 
 const MainLayout: React.FC<Props> = inject("store")(
-  observer(({ store, projectInfo, onLoadProjectInfo, navItems: propNavItems,onLoadNavItems}) => {
+  observer(({ store, projectInfo, onLoadProjectInfo, navItems: propNavItems,onLoadNavItems,getAppRoutes}) => {
     if (!store) return null;
 
     const location = useLocation();
@@ -87,7 +89,13 @@ const MainLayout: React.FC<Props> = inject("store")(
 
     // 根据路由配置确定布局设置
     const layoutSettings = useMemo(() => {
-      const matchedRoutes = matchRoutes(routes, location.pathname) || [];
+      if (!getAppRoutes) {
+        return { isTabsLayout: false, showAside: false };
+      }
+
+      // 延迟获取路由配置
+      const appRoutes = getAppRoutes();
+      const matchedRoutes = matchRoutes(appRoutes, location.pathname) || [];
 
       // 查找是否有标记为 tabs: true 的路由
       const isTabsLayout = matchedRoutes.some(
@@ -101,7 +109,7 @@ const MainLayout: React.FC<Props> = inject("store")(
         isTabsLayout,
         showAside,
       };
-    }, [location.pathname]);
+    }, [location.pathname,getAppRoutes]);
 
     // 设置项目信息 - 支持多种方式
     useEffect(() => {

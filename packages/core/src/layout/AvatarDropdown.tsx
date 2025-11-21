@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Card, Button } from "amis-ui";
 import { themeable } from "amis-core";
-import { fetcher } from "@/api";
-import UserService from "@/store/userService";
+import { fetcher } from "../api";
+import UserService from "../store/userService";
 
 /**
  * 头像下拉菜单组件

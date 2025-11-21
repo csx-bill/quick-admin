@@ -237,7 +237,8 @@
                     "ignoreError": false,
                     "actionType": "url",
                     "args": {
-                      "url": "${ADMIN_URL}/project/${id}"
+                      "url": "${ADMIN_URL}/project/${id}",
+                      "blank": false
                     }
                   }
                 ]

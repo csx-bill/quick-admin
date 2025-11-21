@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import UserService from "@/store/userService";
+import UserService from "../store/userService";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,

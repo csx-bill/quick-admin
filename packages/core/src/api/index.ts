@@ -1,5 +1,5 @@
 import axios from "axios";
-import UserService from "@/store/userService";
+import UserService from "../store/userService";
 
 export const fetcher = ({
     url, // 接口地址

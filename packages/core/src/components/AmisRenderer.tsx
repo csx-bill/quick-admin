@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import axios from "axios";
 import { render as renderAmis } from "amis";
-import type { IMainStore } from "@/store";
-import { fetcher } from "@/api";
+import type { IMainStore } from "../store";
+import { fetcher } from "../api";
 import logoUrl from '@/assets/logo.webp';
 
 interface Props {
