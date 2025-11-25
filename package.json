@@ -14,6 +14,7 @@
     "build": "pnpm --recursive build",
     "build:editor": "pnpm --filter @quick-admin/editor build",
     "build:admin": "pnpm --filter @quick-admin/admin build",
+    "build:docker": "pnpm --filter @quick-admin/editor build --outDir ../../docker/dist/editor && pnpm --filter @quick-admin/admin build --outDir ../../docker/dist/admin",
     "clean": "pnpm --recursive clean",
     "install:all": "pnpm install"
   },
