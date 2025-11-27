@@ -11,10 +11,10 @@
     "dev": "pnpm --recursive --parallel dev",
     "dev:editor": "pnpm --filter @quick-admin/editor dev",
     "dev:admin": "pnpm --filter @quick-admin/admin dev",
-    "build": "pnpm --recursive build",
     "build:editor": "pnpm --filter @quick-admin/editor build",
     "build:admin": "pnpm --filter @quick-admin/admin build",
-    "build:docker": "pnpm --filter @quick-admin/editor build --outDir ../../docker/dist/editor && pnpm --filter @quick-admin/admin build --outDir ../../docker/dist/admin",
+    "build:dev": "pnpm --recursive build:dev",
+    "build:prod": "pnpm --recursive build:prod",
     "clean": "pnpm --recursive clean",
     "install:all": "pnpm install"
   },
