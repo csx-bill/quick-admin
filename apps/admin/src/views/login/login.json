@@ -293,28 +293,12 @@
                 "url": "/api/auth/login",
                 "method": "post",
                 "requestAdaptor": "",
-                "adaptor": "// accessToken\r\nlocalStorage.setItem(\"accessToken\", payload.data.accessToken);\r\n// 用户信息\r\nlocalStorage.setItem('userInfo', JSON.stringify(payload.data));\r\nreturn payload;",
+                "adaptor": "if (payload.status == 0) {\r\nlocalStorage.setItem('accessToken', payload.data.accessToken);\r\nlocalStorage.setItem('userInfo', JSON.stringify(payload.data));\r\nlocation.href = '/projects';}\r\nreturn payload;",
                 "messages": {},
                 "dataType": "json"
               },
-              "actions": [],
-              "resetAfterSubmit": true,
               "name": "text",
               "wrapWithPanel": true,
-              "onEvent": {
-                "submitSucc": {
-                  "weight": 0,
-                  "actions": [
-                    {
-                      "ignoreError": false,
-                      "actionType": "url",
-                      "args": {
-                        "url": "/"
-                      }
-                    }
-                  ]
-                }
-              },
               "panelClassName": "bg-white rounded-xl shadow-lg p-8 w-full max-w-md"
             }
           ],

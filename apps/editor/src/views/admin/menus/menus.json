@@ -203,7 +203,7 @@
                                     "value": "1"
                                   },
                                   {
-                                    "type": "input-text",
+                                    "type": "icon-picker",
                                     "label": "图标",
                                     "name": "icon",
                                     "id": "u:94bb89baf181",
@@ -526,7 +526,7 @@
           "name": "icon",
           "title": "图标",
           "id": "u:52e216edb37c",
-          "icon": "",
+          "icon": "$icon",
           "vendor": "",
           "value": 1,
           "placeholder": ""
@@ -667,7 +667,7 @@
                               {
                                 "name": "icon",
                                 "label": "图标",
-                                "type": "input-text",
+                                "type": "icon-picker",
                                 "id": "u:4b3a24439f17",
                                 "visibleOn": {
                                   "conjunction": "and",
@@ -923,7 +923,7 @@
                               {
                                 "name": "icon",
                                 "label": "图标",
-                                "type": "input-text",
+                                "type": "icon-picker",
                                 "id": "u:4cc9e052f249",
                                 "visibleOn": {
                                   "conjunction": "and",
