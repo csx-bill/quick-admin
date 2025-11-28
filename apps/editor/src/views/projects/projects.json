@@ -124,7 +124,8 @@
                               "crop": {
                                 "viewMode": 1
                               },
-                              "cropQuality": 0.7
+                              "cropQuality": 0.7,
+                              "receiver": "/api/file/upload"
                             },
                             {
                               "type": "input-text",
