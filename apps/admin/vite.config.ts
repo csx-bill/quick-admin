@@ -20,6 +20,10 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_BASE,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
+        },
+        '/files': {
+          target: env.VITE_BASE,
+          changeOrigin: true
         }
       }
     }
