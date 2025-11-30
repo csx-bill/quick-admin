@@ -9,8 +9,8 @@ import {
 import { Layout, Tabs, Tab, Button } from "amis-ui";
 import { Header,Footer,Aside } from "@quick-admin-core";
 import { inject, observer } from "mobx-react";
-import type { IMainStore } from "@/store";
-//import { routes } from "@/routes";
+import type { IMainStore } from "../store";
+import ProjectService from "../store/projectService";
 
 import logoUrl from '@/assets/logo.webp';
 
@@ -128,7 +128,7 @@ const MainLayout: React.FC<Props> = inject("store")(
         }
         // 默认值
         setCurrentProjectInfo({
-          id: projectId || 'default',
+          id: projectId || '',
           name: import.meta.env.VITE_APP_TITLE,
           logo: logoUrl,
         });
@@ -136,6 +136,15 @@ const MainLayout: React.FC<Props> = inject("store")(
 
       setupProjectInfo();
     }, [projectInfo, onLoadProjectInfo, projectId]);
+
+    // 设置项目ID到服务中，支持多标签页
+    useEffect(() => {
+      if (projectId) {
+        ProjectService.setCurrentProjectId(projectId);
+      } else {
+        ProjectService.clearCurrentProjectId();
+      }
+    }, [projectId]);
 
     // 设置导航菜单（与项目信息逻辑保持一致）
     useEffect(() => {

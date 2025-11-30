@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { themeable } from "amis-core";
 import { Icon, Button } from "amis-ui";
-import { AmisEditor } from "@quick-admin-core";
+import { AmisEditor,ProjectService } from "@quick-admin-core";
 import "./editor.css";
-import type { IMainStore } from "@/store";
+import type { IMainStore } from "@quick-admin-core";
 import logoUrl from '@/assets/logo.webp';
 
 interface EditorProps {
@@ -15,7 +15,7 @@ interface EditorProps {
 
 const Editor: React.FC<EditorProps> = inject("store")(
   observer(({ store, classnames: cx }) => {
-    const { pageId } = useParams();
+    const { projectId,pageId } = useParams();
 
     if (!store) return null;
 
@@ -34,6 +34,15 @@ const Editor: React.FC<EditorProps> = inject("store")(
       };
       saveSchema();
     };
+
+    // 设置项目ID到服务中，支持多标签页
+    useEffect(() => {
+      if (projectId) {
+        ProjectService.setCurrentProjectId(projectId);
+      } else {
+        ProjectService.clearCurrentProjectId();
+      }
+    }, [projectId]);
 
     // 初始化 schema
     useEffect(() => {

@@ -8,6 +8,8 @@ export { default as AmisEditor } from './components/AmisEditor'
 export { default as AmisRenderer } from './components/AmisRenderer'
 export { fetcher } from './api'
 export { MainStore } from './store'
+export type { IMainStore } from './store'
 
-import './store/userService'
+export { default as UserService } from './store/userService';
+export { default as ProjectService } from './store/projectService';
 import './styles/index.css';

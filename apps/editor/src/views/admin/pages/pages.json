@@ -25,11 +25,7 @@
         "requestAdaptor": "",
         "adaptor": "",
         "messages": {},
-        "dataType": "json",
-        "data": {
-          "projectId": "${params.projectId}",
-          "&": "$$"
-        }
+        "dataType": "json"
       },
       "filter": {
         "type": "form",
@@ -114,13 +110,6 @@
                                 "body": [
                                   {
                                     "type": "input-text",
-                                    "label": "项目id",
-                                    "name": "projectId",
-                                    "id": "u:68b8e77b3a7c",
-                                    "hidden": true
-                                  },
-                                  {
-                                    "type": "input-text",
                                     "label": "页面名称",
                                     "name": "pageName",
                                     "id": "u:eb1171181e64",
@@ -195,14 +184,8 @@
                             "showLoading": true,
                             "draggable": false,
                             "allowFullscreen": false,
-                            "data": {
-                              "projectId": "${params.projectId}"
-                            },
-                            "dataMap": {
-                              "projectId": "${params.projectId}"
-                            },
                             "withDefaultData": false,
-                            "dataMapSwitch": true
+                            "dataMapSwitch": false
                           }
                         }
                       ]
@@ -405,7 +388,7 @@
                       "ignoreError": false,
                       "actionType": "url",
                       "args": {
-                        "url": "/editor/${id}/edit"
+                        "url": "/editor/${projectId}/${id}/edit"
                       }
                     }
                   ]

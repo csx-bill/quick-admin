@@ -25,10 +25,6 @@
         "requestAdaptor": "",
         "adaptor": "",
         "messages": {},
-        "data": {
-          "projectId": "${params.projectId}",
-          "&": "$$"
-        },
         "dataType": "json"
       },
       "filter": {
@@ -113,14 +109,6 @@
                                 "dsType": "api",
                                 "feat": "Insert",
                                 "body": [
-                                  {
-                                    "name": "projectId",
-                                    "label": "项目id",
-                                    "type": "input-text",
-                                    "id": "u:ceb152ecafc4",
-                                    "hidden": true,
-                                    "multiple": false
-                                  },
                                   {
                                     "type": "select",
                                     "label": "用户",

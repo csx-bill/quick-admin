@@ -115,14 +115,6 @@
                                 "body": [
                                   {
                                     "type": "input-text",
-                                    "label": "项目id",
-                                    "name": "projectId",
-                                    "id": "u:371bf9a0d1d2",
-                                    "hidden": true,
-                                    "value": ""
-                                  },
-                                  {
-                                    "type": "input-text",
                                     "label": "角色名称",
                                     "name": "roleName",
                                     "id": "u:cec25bfe289f",
@@ -198,14 +190,8 @@
                             "showLoading": true,
                             "draggable": false,
                             "allowFullscreen": false,
-                            "data": {
-                              "projectId": "${params.projectId}"
-                            },
-                            "dataMap": {
-                              "projectId": "${params.projectId}"
-                            },
                             "withDefaultData": false,
-                            "dataMapSwitch": true
+                            "dataMapSwitch": false
                           }
                         }
                       ]
@@ -705,6 +691,7 @@
   "definitions": {
     "modal-ref-1": {
       "type": "dialog",
+      "title": "授权数据",
       "body": [
         {
           "id": "u:f23af9ca4638",
@@ -744,10 +731,7 @@
                 "method": "get",
                 "requestAdaptor": "",
                 "adaptor": "",
-                "messages": {},
-                "data": {
-                  "projectId": "${projectId}"
-                }
+                "messages": {}
               },
               "labelField": "name",
               "valueField": "id",
@@ -755,9 +739,9 @@
               "autoCheckChildren": true,
               "onlyChildren": false,
               "withChildren": true,
-              "enableNodePath": false,
               "cascade": true,
-              "autoCancelParent": true
+              "autoCancelParent": false,
+              "enableNodePath": false
             }
           ],
           "actions": [
@@ -803,7 +787,6 @@
           }
         }
       ],
-      "title": "授权数据",
       "actions": [
         {
           "type": "button",

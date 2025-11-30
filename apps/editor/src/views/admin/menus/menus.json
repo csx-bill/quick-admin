@@ -26,7 +26,6 @@
         "adaptor": "",
         "messages": {},
         "data": {
-          "projectId": "${params.projectId}",
           "name": "${name}"
         }
       },
@@ -113,13 +112,6 @@
                                 "dsType": "api",
                                 "feat": "Insert",
                                 "body": [
-                                  {
-                                    "name": "projectId",
-                                    "label": "项目id",
-                                    "type": "input-text",
-                                    "id": "u:207cec3e8797",
-                                    "hidden": true
-                                  },
                                   {
                                     "type": "radios",
                                     "label": "菜单类型",
@@ -272,8 +264,8 @@
                                             "type": "field",
                                             "field": "menuType"
                                           },
-                                          "op": "equal",
-                                          "right": "button"
+                                          "op": "not_equal",
+                                          "right": "dir"
                                         }
                                       ],
                                       "id": "031440ac4e57"
@@ -349,20 +341,15 @@
                             "showLoading": true,
                             "draggable": false,
                             "allowFullscreen": false,
-                            "data": {
-                              "projectId": "${params.projectId}"
-                            },
-                            "dataMap": {
-                              "projectId": "${params.projectId}"
-                            },
                             "withDefaultData": false,
-                            "dataMapSwitch": true
+                            "dataMapSwitch": false
                           }
                         }
                       ]
                     }
                   },
-                  "id": "u:52da8f1d1e1f"
+                  "id": "u:52da8f1d1e1f",
+                  "disabledOnAction": false
                 },
                 {
                   "type": "button",
@@ -734,8 +721,8 @@
                                         "type": "field",
                                         "field": "menuType"
                                       },
-                                      "op": "equal",
-                                      "right": "button"
+                                      "op": "not_equal",
+                                      "right": "dir"
                                     }
                                   ],
                                   "id": "e69d55cbd535"
@@ -990,8 +977,8 @@
                                         "type": "field",
                                         "field": "menuType"
                                       },
-                                      "op": "equal",
-                                      "right": "button"
+                                      "op": "not_equal",
+                                      "right": "dir"
                                     }
                                   ],
                                   "id": "5467a53854a4"

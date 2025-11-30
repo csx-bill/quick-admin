@@ -1,5 +1,6 @@
 import axios from "axios";
 import UserService from "../store/userService";
+import ProjectService from "../store/projectService";
 
 export const fetcher = ({
     url, // 接口地址
@@ -23,7 +24,13 @@ export const fetcher = ({
     config.headers = headers || {};
     config.headers['Content-Type'] = 'application/json';
     // accessToken
-    config.headers["access-token"] = UserService.getAccessToken();
+    config.headers["X-Access-Token"] = UserService.getAccessToken();
+
+    // 每次请求实时从SessionStorage读取projectId
+    const currentProjectId = ProjectService.getCurrentProjectId();
+    if (currentProjectId) {
+      config.headers["X-Project-Id"] = currentProjectId;
+    }
 
     let requestPromise: Promise<any>;
 
