@@ -125,7 +125,10 @@
                                 "viewMode": 1
                               },
                               "cropQuality": 0.7,
-                              "receiver": "/api/file/upload"
+                              "receiver": "/api/files/upload",
+                              "autoFill": {
+                                "logo": "${url}"
+                              }
                             },
                             {
                               "type": "input-text",
